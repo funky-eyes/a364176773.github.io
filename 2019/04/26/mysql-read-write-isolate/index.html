@@ -6,28 +6,41 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2019 | funkye</title>
+  <title>Docker部署mysql5.6读写分离 | funkye</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="funkye">
-<meta property="og:url" content="http://yoursite.com/archives/2019/index.html">
+  <meta name="description" content="本文讲述Docker部署mysql5.6读写分离">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker部署mysql5.6读写分离">
+<meta property="og:url" content="http://yoursite.com/2019/04/26/mysql-read-write-isolate/index.html">
 <meta property="og:site_name" content="funkye">
+<meta property="og:description" content="本文讲述Docker部署mysql5.6读写分离">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==">
+<meta property="og:image" content="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190426095808185.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1NzIxMjg3,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==">
+<meta property="og:image" content="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190426102340233.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1NzIxMjg3,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==">
+<meta property="og:image" content="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2019042610185961.png">
+<meta property="og:image" content="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==">
+<meta property="og:image" content="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190426102701896.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1NzIxMjg3,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==">
+<meta property="og:image" content="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190426103137761.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1NzIxMjg3,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==">
+<meta property="article:published_time" content="2019-04-25T16:00:00.000Z">
+<meta property="article:modified_time" content="2019-12-31T04:56:53.813Z">
 <meta property="article:author" content="FUNKYE">
-<meta property="article:tag" content="开发者">
-<meta property="article:tag" content="程序猿">
-<meta property="article:tag" content="程序媛">
-<meta property="article:tag" content="极客">
-<meta property="article:tag" content="编程">
-<meta property="article:tag" content="代码">
-<meta property="article:tag" content="开源">
-<meta property="article:tag" content="IT网站">
-<meta property="article:tag" content="陈健斌">
-<meta property="article:tag" content="funkye">
-<meta property="article:tag" content="java">
-<meta property="article:tag" content="java后端">
-<meta property="article:tag" content="java开发">
+<meta property="article:tag" content="tx-lcn">
+<meta property="article:tag" content="分布式事务">
+<meta property="article:tag" content="spring">
+<meta property="article:tag" content="mybatis">
+<meta property="article:tag" content="msql">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==">
   
     <link rel="alternative" href="/atom.xml" title="funkye" type="application/atom+xml">
   
@@ -167,292 +180,193 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-mysql-read-write-isolate" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/12/23/seata-spring-boot-aop-aspectj/" class="archive-article-date">
-  	<time datetime="2019-12-22T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-23</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/12/23/seata-spring-boot-aop-aspectj/">通过AOP动态创建/关闭Seata分布式事务</a>
+    <h1 class="article-title" itemprop="name">
+      Docker部署mysql5.6读写分离
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/12/17/seata-optimize/" class="archive-article-date">
-  	<time datetime="2019-12-16T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-17</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/12/17/seata-optimize/">Seata分布式事务大并发下容易出现timeout的情况优化使用</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/12/10/seata-mp-reflect/" class="archive-article-date">
-  	<time datetime="2019-12-09T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-10</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/12/10/seata-mp-reflect/">修改Mybatis-Plus源码利用反射支持Seata代理数据源</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/12/03/seata-nacos-docker/" class="archive-article-date">
-  	<time datetime="2019-12-02T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-03</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/12/03/seata-nacos-docker/">Docker部署Seata与Nacos整合</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/11/30/seata-mybatisplus-analysis/" class="archive-article-date">
-  	<time datetime="2019-11-29T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-30</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/11/30/seata-mybatisplus-analysis/">透过源码解决SeataAT模式整合Mybatis-Plus失去MP特性的问题</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/11/29/springboot-dubbo-mybatisplus-seata/" class="archive-article-date">
-  	<time datetime="2019-11-28T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-29</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/11/29/springboot-dubbo-mybatisplus-seata/">SpringBoot+Dubbo+MybatisPlus整合seata分布式事务</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/29/tx-lcn-rollback/" class="archive-article-date">
-  	<time datetime="2019-10-28T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-29</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/29/tx-lcn-rollback/">分布式事务tx-lcn下lcn模式时spring手动事务回滚失效的解决方案</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/17/redis-queue/" class="archive-article-date">
-  	<time datetime="2019-10-16T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-17</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/17/redis-queue/">Java实现redis消息订阅/发布（PubSub）</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/12/multithreading/" class="archive-article-date">
-  	<time datetime="2019-10-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/12/multithreading/">java多线程理解总结</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/04/26/mysql-read-write-isolate/" class="archive-article-date">
+        
+        <a href="/2019/04/26/mysql-read-write-isolate/" class="archive-article-date">
   	<time datetime="2019-04-25T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-26</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/04/26/mysql-read-write-isolate/">Docker部署mysql5.6读写分离</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Docker部署mysql5-6读写分离"><a href="#Docker部署mysql5-6读写分离" class="headerlink" title="Docker部署mysql5.6读写分离"></a>Docker部署mysql5.6读写分离</h1><p>本文作者：FUNKYE(陈健斌),杭州某互联网公司主程。</p>
+<p>首先说下为什么要使用docker,因为在你没有资金买更多的服务器的时候,docker就可以让你实现一台机子进行装无数相同的程序.所以就可以在一台服务器上轻松装2个mysql,然后进行主从配置.</p>
+<p>docker安装文章可以直接百度,<a href="https://www.cnblogs.com/rookie404/p/5965518.html" target="_blank" rel="noopener">https://www.cnblogs.com/rookie404/p/5965518.html</a></p>
+ <a id="more"></a> 
 
-        <div class="article-info info-on-right">
-          
-          
+<h1 id="1-安装docker及对应容器"><a href="#1-安装docker及对应容器" class="headerlink" title="1.安装docker及对应容器"></a>1.安装docker及对应容器</h1><p>首先安装好docker直接启动,docker会自己拉去对应的mysql版本,33306:3306代表把容器里的3306映射到宿主机的3306,为了不跟宿主机原来的mysql3306冲突,所以换为33306.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -p 33306:3306 -v &#x2F;home&#x2F;mysql:&#x2F;home --name mysql -e MYSQL_ROOT_PASSWORD&#x3D;123456 mysql:5.6 --character-set-server&#x3D;utf8mb4 --collation-server&#x3D;utf8mb4_unicode_ci</span><br></pre></td></tr></table></figure>
 
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p>因为docker的mysql5.6安装后会有字符集的问题所以要做以下操作,进入到容器内部</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it mysql &#x2F;bin&#x2F;bash</span><br><span class="line">#进入容器后</span><br><span class="line">mysql -uroot -p12346</span><br><span class="line">SHOW VARIABLES LIKE &#39;character_set_%&#39;; #查看字符集</span><br><span class="line">SET NAMES &#39;utf8&#39;; #先解决外部访问乱码的问题</span><br><span class="line">#输完命令后,按ctrl d退出</span><br><span class="line">#在容器里安装完vim(跟Ubuntu一样的安装流程)</span><br><span class="line">vim etc&#x2F;mysql&#x2F;mysql.conf.d&#x2F;mysqld.cnf </span><br><span class="line">#接下来配置成如下图这样</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p><img src="https://img-blog.csdnimg.cn/20190426095808185.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1NzIxMjg3,size_16,color_FFFFFF,t_70" alt="img">)<img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<h1 id="2-进行主库配置"><a href="#2-进行主库配置" class="headerlink" title="2.进行主库配置"></a>2.进行主库配置</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">#配置完毕后</span><br><span class="line">docker restart mysql; #重启mysql容器</span><br><span class="line">#再通过上面的一些流程,进入mysql,然后查看字符集是否正常.</span><br><span class="line">#然后退出容器后,在宿主机操作   docker commit  容器名称  要保存成的镜像名称</span><br><span class="line">docker commit mysql mysql2</span><br><span class="line">#保存完了之后,直接创建另一个容器,因为是上一个容器的复刻所以不需要再配置字符集;</span><br><span class="line">docker run -d --name mysql2 -p 33307:3306 mysql2</span><br><span class="line">#接下来配置读写分离,首先进入主库</span><br><span class="line">docker exec -it mysql &#x2F;bin&#x2F;bash</span><br><span class="line">vim etc&#x2F;mysql&#x2F;mysql.conf.d&#x2F;mysqld.cnf </span><br><span class="line">#在[mysqlld]进行配置</span><br><span class="line">[mysqld]  </span><br><span class="line">#[必须]服务器唯一ID，默认是1，一般取IP最后一段  </span><br><span class="line">server_id &#x3D; 1  </span><br><span class="line">#[必须]启用二进制日志  </span><br><span class="line">log_bin&#x3D;mysql-bin  </span><br><span class="line">#需要同步的数据库名  多个库以逗号分隔  </span><br><span class="line">binlog-do-db &#x3D;udbname</span><br><span class="line">#若涉及及同步函数或者存储过程需要配置，否则主备会产生异常不能同步  </span><br><span class="line">log_bin_trust_function_creators&#x3D;TRUE  </span><br><span class="line"></span><br><span class="line">操作完成保存退出,看看是否类似下图</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p><img src="https://img-blog.csdnimg.cn/20190426102340233.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1NzIxMjg3,size_16,color_FFFFFF,t_70" alt="img">)<img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p>完成后,退出容器ctrl d(确认自己是退出容器,而不是只退出了mysql),然后docker restart mysql 进行重启</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">接下来继续进入主库容器</span><br><span class="line">docker exec -it mysql /bin/bash</span><br><span class="line">mysql -uroot -p123456</span><br><span class="line">show master status;  #查看配置情况类似下图即为成功配置</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p><img src="https://img-blog.csdnimg.cn/2019042610185961.png" alt="img">)<img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<h1 id="3-从库配置"><a href="#3-从库配置" class="headerlink" title="3.从库配置"></a>3.从库配置</h1><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it mysql2 /bin/bash #进入容器</span><br><span class="line">mysql -uroot -p123456</span><br><span class="line">stop slave;  #关闭slave;</span><br><span class="line">#ctrl d  退出mysql</span><br><span class="line">vim etc/mysql/mysql.conf.d/mysqld.cnf #接着编辑</span><br><span class="line">[mysqld]</span><br><span class="line">server-id=2</span><br><span class="line">#log_bin=/var/log/mysqlslave-bin.log  #这里的log_bin和下面的log-bin是一个意思，配置其一就好了</span><br><span class="line">log-bin=mysql-bin</span><br><span class="line">#你要复制的数据库(因为主库负责插入,所以需要复制主库的数据)</span><br><span class="line">replicate-do-db=udbname</span><br><span class="line">replicate-ignore-db=mysql</span><br><span class="line">replicate-ignore-db=infomation_schema</span><br><span class="line"></span><br><span class="line">#配置完毕后看下是否与下图类似</span><br><span class="line">#如果类似,就退出容器到宿主机</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p><img src="https://img-blog.csdnimg.cn/20190426102701896.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1NzIxMjg3,size_16,color_FFFFFF,t_70" alt="img">)<img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p>接下来重启从库容器 </p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">docker restart mysql2  #重启从库容器</span><br><span class="line">docker exec -it mysql  /bin/bash #进入容器准备配置主从复制时的帐号密码(我这边用的root,当然你可以创建为别的)</span><br><span class="line">mysql -uroot -p123465</span><br><span class="line">change master to master_host='172.17.0.1', master_port=33306, master_user='root', master_password='123456',master_log_file='mysql_bin.000002',master_log_pos=120;</span><br><span class="line"></span><br><span class="line">#aster_log_pos分别对应主库show master status; 中查询出来的 File和Position</span><br><span class="line">#操作完毕后</span><br><span class="line">start slave;  #启动slave</span><br><span class="line"></span><br><span class="line">查询结果中的以下两项都为yes，则说明配置成功。</span><br><span class="line">Slave_IO_Running: Yes</span><br><span class="line"></span><br><span class="line">Slave_SQL_Running: Yes</span><br><span class="line">#参考下图</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p><img src="https://img-blog.csdnimg.cn/20190426103137761.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1NzIxMjg3,size_16,color_FFFFFF,t_70" alt="img">)<img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p>到这里就全部配置好了,你可以去主库进行对你设置需要同步的数据库增删改,然后去从库看看是否也变得跟主库操作后一样的结果.</p>
+<p>之后有空会把spring boot mybatis plus+dubbo的读写分离配置写上来.</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/04/26/mysql-read-write-isolate/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2019/10/12/multithreading/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          java多线程理解总结
+        
+      </div>
+    </a>
   
   
-    </div></section>
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -475,8 +389,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

@@ -236,6 +236,210 @@
 
 
   
+    <article id="post-seata-optimize" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/17/seata-optimize/">Seata分布式事务大并发下容易出现timeout的情况优化使用</a>
+    </h1>
+  
+
+        
+        <a href="/2019/12/17/seata-optimize/" class="archive-article-date">
+  	<time datetime="2019-12-16T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Seata分布式事务大并发下容易出现timeout的情况优化使用"><a href="#Seata分布式事务大并发下容易出现timeout的情况优化使用" class="headerlink" title="Seata分布式事务大并发下容易出现timeout的情况优化使用"></a>Seata分布式事务大并发下容易出现timeout的情况优化使用</h1><p>本文作者：FUNKYE(陈健斌),杭州某互联网公司主程。</p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>Seata 是一款开源的分布式事务解决方案，致力于在微服务架构下提供高性能和简单易用的分布式事务服务。</p>
+<p>Seata AT 模式:</p>
+<p>一阶段：业务数据和回滚日志记录在同一个本地事务中提交，释放本地锁和连接资源。</p>
+<p>二阶段：提交异步化，非常快速地完成。回滚通过一阶段的回滚日志进行反向补偿 </p>
+<p>Seata 官网使用介绍:<br><img src="/img/blog/20191231114643.png" alt="20191231114643"></p>
+        
+          <a class="article-more-a" href="/2019/12/17/seata-optimize/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/12/17/seata-optimize/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-seata-mp-reflect" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/10/seata-mp-reflect/">修改Mybatis-Plus源码利用反射支持Seata代理数据源</a>
+    </h1>
+  
+
+        
+        <a href="/2019/12/10/seata-mp-reflect/" class="archive-article-date">
+  	<time datetime="2019-12-09T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="修改Mybatis-Plus源码利用反射支持Seata代理数据源"><a href="#修改Mybatis-Plus源码利用反射支持Seata代理数据源" class="headerlink" title="修改Mybatis-Plus源码利用反射支持Seata代理数据源"></a>修改Mybatis-Plus源码利用反射支持Seata代理数据源</h1><h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><p> 1.拉取mybatisplus项目源码 </p>
+        
+          <a class="article-more-a" href="/2019/12/10/seata-mp-reflect/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/12/10/seata-mp-reflect/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-seata-nacos-docker" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/03/seata-nacos-docker/">Docker部署Seata与Nacos整合</a>
+    </h1>
+  
+
+        
+        <a href="/2019/12/03/seata-nacos-docker/" class="archive-article-date">
+  	<time datetime="2019-12-02T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Docker部署Seata与Nacos整合"><a href="#Docker部署Seata与Nacos整合" class="headerlink" title="Docker部署Seata与Nacos整合"></a>Docker部署Seata与Nacos整合</h1><p>运行所使用的demo<a href="https://gitee.com/itCjb/springboot-dubbo-mybatisplus-seata" target="_blank" rel="noopener">项目地址</a></p>
+<p>本文作者：FUNKYE(陈健斌),杭州某互联网公司主程。</p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>直连方式的Seata配置<a href="http://seata.io/zh-cn/blog/springboot-dubbo-mybatisplus-seata.html" target="_blank" rel="noopener">博客</a></p>
+<p>Seata整合Nacos配置<a href="http://seata.io/zh-cn/blog/seata-nacos-analysis.html" target="_blank" rel="noopener">博客</a></p>
+<p>我们接着前几篇篇的基础上去配置nacos做配置中心跟dubbo注册中心.</p>
+        
+          <a class="article-more-a" href="/2019/12/03/seata-nacos-docker/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/12/03/seata-nacos-docker/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-seata-mybatisplus-analysis" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -354,6 +558,271 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2019/11/29/springboot-dubbo-mybatisplus-seata/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-tx-lcn-rollback" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/10/29/tx-lcn-rollback/">分布式事务tx-lcn下lcn模式时spring手动事务回滚失效的解决方案</a>
+    </h1>
+  
+
+        
+        <a href="/2019/10/29/tx-lcn-rollback/" class="archive-article-date">
+  	<time datetime="2019-10-28T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="分布式事务tx-lcn下lcn模式时spring手动事务回滚失效的解决方案"><a href="#分布式事务tx-lcn下lcn模式时spring手动事务回滚失效的解决方案" class="headerlink" title="分布式事务tx-lcn下lcn模式时spring手动事务回滚失效的解决方案"></a>分布式事务tx-lcn下lcn模式时spring手动事务回滚失效的解决方案</h1><p>本文作者：FUNKYE(陈健斌),杭州某互联网公司主程。</p>
+<h1 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h1><p> 先上错误demo </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@LcnTransaction</span></span><br><span class="line"><span class="meta">@Transactional</span>(rollbackFor = &#123;Exception<span class="class">.<span class="keyword">class</span>&#125;)</span></span><br><span class="line"><span class="class"><span class="title">public</span> <span class="title">boolean</span> <span class="title">test</span>() </span>&#123;</span><br><span class="line">    B_file b = <span class="keyword">new</span> B_file();</span><br><span class="line">    b.setUrl(<span class="string">"515645646"</span>);</span><br><span class="line">    b.setCategory(<span class="string">"0"</span>);</span><br><span class="line">    <span class="comment">// 发出sql</span></span><br><span class="line">    save(b);</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">1</span> / <span class="number">0</span>;<span class="comment">// 异常</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        <span class="comment">// 事务回滚</span></span><br><span class="line">        System.out.println(<span class="string">"事务回滚"</span>);</span><br><span class="line">        <span class="comment">// 其实这个模式下,下面这句会失效,导致数据库被正常插入</span></span><br><span class="line">        TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();<span class="comment">// 关键</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2019/10/29/tx-lcn-rollback/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/10/29/tx-lcn-rollback/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-redis-queue" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/10/17/redis-queue/">Java实现redis消息订阅/发布（PubSub）</a>
+    </h1>
+  
+
+        
+        <a href="/2019/10/17/redis-queue/" class="archive-article-date">
+  	<time datetime="2019-10-16T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="引入依赖"><a href="#引入依赖" class="headerlink" title="引入依赖"></a>引入依赖</h1><p>首先在你的java项目中引入</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">	&lt;groupId&gt;redis.clients&lt;/groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;jedis&lt;/artifactId&gt;</span><br><span class="line">	&lt;version&gt;2.9.2&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2019/10/17/redis-queue/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/10/17/redis-queue/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-multithreading" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/10/12/multithreading/">java多线程理解总结</a>
+    </h1>
+  
+
+        
+        <a href="/2019/10/12/multithreading/" class="archive-article-date">
+  	<time datetime="2019-10-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="java多线程理解总结："><a href="#java多线程理解总结：" class="headerlink" title="java多线程理解总结："></a>java多线程理解总结：</h1><p>进程等于在运行的java程序<br>而线程是进程下的一个子任务，与进程共享内存空间，文件句柄等<br>线程是进程的组件，是java代码的最小单位<br>线程分为守护线程与用户线程 </p>
+        
+          <a class="article-more-a" href="/2019/10/12/multithreading/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/10/12/multithreading/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-mysql-read-write-isolate" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/26/mysql-read-write-isolate/">Docker部署mysql5.6读写分离</a>
+    </h1>
+  
+
+        
+        <a href="/2019/04/26/mysql-read-write-isolate/" class="archive-article-date">
+  	<time datetime="2019-04-25T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Docker部署mysql5-6读写分离"><a href="#Docker部署mysql5-6读写分离" class="headerlink" title="Docker部署mysql5.6读写分离"></a>Docker部署mysql5.6读写分离</h1><p>本文作者：FUNKYE(陈健斌),杭州某互联网公司主程。</p>
+<p>首先说下为什么要使用docker,因为在你没有资金买更多的服务器的时候,docker就可以让你实现一台机子进行装无数相同的程序.所以就可以在一台服务器上轻松装2个mysql,然后进行主从配置.</p>
+<p>docker安装文章可以直接百度,<a href="https://www.cnblogs.com/rookie404/p/5965518.html" target="_blank" rel="noopener">https://www.cnblogs.com/rookie404/p/5965518.html</a></p>
+        
+          <a class="article-more-a" href="/2019/04/26/mysql-read-write-isolate/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/04/26/mysql-read-write-isolate/">展开全文 >></a>
         </p>
       
 
