@@ -6,14 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Hexo</title>
+  <title>透过源码解决SeataAT模式整合Mybatis-Plus失去MP特性的问题 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="本文讲述如何透过源码解决Seata整合Mybatis-Plus失去MP特性的问题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="透过源码解决SeataAT模式整合Mybatis-Plus失去MP特性的问题">
+<meta property="og:url" content="http://yoursite.com/2019/11/30/seata-mybatisplus-analysis/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="本文讲述如何透过源码解决Seata整合Mybatis-Plus失去MP特性的问题">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-11-29T16:00:00.000Z">
+<meta property="article:modified_time" content="2019-12-18T06:41:31.437Z">
 <meta property="article:author" content="FUNKYE">
+<meta property="article:tag" content="Seata">
+<meta property="article:tag" content="Mybatis-Plus">
+<meta property="article:tag" content="分布式事务">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -154,109 +161,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-seata-spring-boot-aop-aspectj" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-seata-mybatisplus-analysis" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/23/seata-spring-boot-aop-aspectj/">通过AOP动态创建/关闭Seata分布式事务</a>
-    </h1>
-  
-
-        
-        <a href="/2019/12/23/seata-spring-boot-aop-aspectj/" class="archive-article-date">
-  	<time datetime="2019-12-22T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="通过AOP动态管理Seata分布式事务"><a href="#通过AOP动态管理Seata分布式事务" class="headerlink" title="通过AOP动态管理Seata分布式事务"></a>通过AOP动态管理Seata分布式事务</h1><p>本文作者：FUNKYE(陈健斌),杭州某互联网公司主程。</p>
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>通过GA大会上滴滴出行的高级研发工程陈鹏志的在滴滴两轮车业务中的实践,发现动态降级的必要性是非常的高,所以这边简单利用spring boot aop来简单的处理降级相关的处理,这边非常感谢陈鹏志的分享!</p>
-<p>可利用次demo<a href="https://gitee.com/itCjb/springboot-dubbo-mybatisplus-seata" target="_blank" rel="noopener">项目地址</a></p>
-<p>通过以下代码改造实践.</p>
-<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>​    1.创建测试用的TestAspect:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> org.test.config;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Method; </span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.commons.lang3.StringUtils;</span><br><span class="line"><span class="keyword">import</span> org.aspectj.lang.JoinPoint;</span><br><span class="line"><span class="keyword">import</span> org.aspectj.lang.annotation.AfterReturning;</span><br><span class="line"><span class="keyword">import</span> org.aspectj.lang.annotation.AfterThrowing;</span><br><span class="line"><span class="keyword">import</span> org.aspectj.lang.annotation.Aspect;</span><br><span class="line"><span class="keyword">import</span> org.aspectj.lang.annotation.Before;</span><br><span class="line"><span class="keyword">import</span> org.aspectj.lang.reflect.MethodSignature;</span><br><span class="line"><span class="keyword">import</span> org.slf4j.Logger;</span><br><span class="line"><span class="keyword">import</span> org.slf4j.LoggerFactory;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> io.seata.core.context.RootContext;</span><br><span class="line"><span class="keyword">import</span> io.seata.core.exception.TransactionException;</span><br><span class="line"><span class="keyword">import</span> io.seata.tm.api.GlobalTransaction;</span><br><span class="line"><span class="keyword">import</span> io.seata.tm.api.GlobalTransactionContext;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Aspect</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestAspect</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> Logger logger = LoggerFactory.getLogger(TestAspect<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Before</span>(<span class="string">"execution(* org.test.service.*.*(..))"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">before</span><span class="params">(JoinPoint joinPoint)</span> <span class="keyword">throws</span> TransactionException </span>&#123;</span><br><span class="line">        MethodSignature signature = (MethodSignature)joinPoint.getSignature();</span><br><span class="line">        Method method = signature.getMethod();</span><br><span class="line">        logger.info(<span class="string">"拦截到需要分布式事务的方法,"</span> + method.getName());</span><br><span class="line">        <span class="comment">// 此处可用redis或者定时任务来获取一个key判断是否需要关闭分布式事务</span></span><br><span class="line">        <span class="comment">// 模拟动态关闭分布式事务</span></span><br><span class="line">        <span class="keyword">if</span> ((<span class="keyword">int</span>)(Math.random() * <span class="number">100</span>) % <span class="number">2</span> == <span class="number">0</span>) &#123;</span><br><span class="line">            GlobalTransaction tx = GlobalTransactionContext.getCurrentOrCreate();</span><br><span class="line">            tx.begin(<span class="number">300000</span>, <span class="string">"test-client"</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            logger.info(<span class="string">"关闭分布式事务"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@AfterThrowing</span>(throwing = <span class="string">"e"</span>, pointcut = <span class="string">"execution(* org.test.service.*.*(..))"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doRecoveryActions</span><span class="params">(Throwable e)</span> <span class="keyword">throws</span> TransactionException </span>&#123;</span><br><span class="line">        logger.info(<span class="string">"方法执行异常:&#123;&#125;"</span>, e.getMessage());</span><br><span class="line">        <span class="keyword">if</span> (!StringUtils.isBlank(RootContext.getXID()))</span><br><span class="line">            GlobalTransactionContext.reload(RootContext.getXID()).rollback();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@AfterReturning</span>(value = <span class="string">"execution(* org.test.service.*.*(..))"</span>, returning = <span class="string">"result"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">afterReturning</span><span class="params">(JoinPoint point, Object result)</span> <span class="keyword">throws</span> TransactionException </span>&#123;</span><br><span class="line">        logger.info(<span class="string">"方法执行结束:&#123;&#125;"</span>, result);</span><br><span class="line">        <span class="keyword">if</span> ((Boolean)result) &#123;</span><br><span class="line">            <span class="keyword">if</span> (!StringUtils.isBlank(RootContext.getXID())) &#123;</span><br><span class="line">                logger.info(<span class="string">"分布式事务Id:&#123;&#125;"</span>, RootContext.getXID());</span><br><span class="line">                GlobalTransactionContext.reload(RootContext.getXID()).commit();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>请注意上面的包名可改为你自己的service包名:</p>
-<p>​    2.改动service代码:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">seataCommit</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    testService.Commit();</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>因为异常跟返回结果我们都会拦截,所以这边可以trycatch或者直接让他抛异常来拦截也行,或者直接判断返回结果,比如你的业务代码code=200为成功,那么就commit,反之在拦截返回值那段代码加上rollback;</p>
-<h1 id="进行调试"><a href="#进行调试" class="headerlink" title="进行调试"></a>进行调试</h1><p>​    1.更改代码主动抛出异常</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">seataCommit</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        testService.Commit();</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">1</span> / <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        <span class="comment">// <span class="doctag">TODO:</span> handle exception</span></span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>​    查看日志:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2019</span>-<span class="number">12</span>-<span class="number">23</span> <span class="number">11</span>:<span class="number">57</span>:<span class="number">55.386</span>  INFO <span class="number">23952</span> --- [.<span class="number">0</span>-<span class="number">28888</span>-exec-<span class="number">7</span>] org.test.controller.TestController       : 拦截到需要分布式事务的方法,seataCommit</span><br><span class="line"><span class="number">2019</span>-<span class="number">12</span>-<span class="number">23</span> <span class="number">11</span>:<span class="number">57</span>:<span class="number">55.489</span>  INFO <span class="number">23952</span> --- [.<span class="number">0</span>-<span class="number">28888</span>-exec-<span class="number">7</span>] i.seata.tm.api.DefaultGlobalTransaction  : Begin <span class="keyword">new</span> global transaction [<span class="number">192.168</span><span class="number">.14</span><span class="number">.67</span>:<span class="number">8092</span>:<span class="number">2030765910</span>]</span><br><span class="line"><span class="number">2019</span>-<span class="number">12</span>-<span class="number">23</span> <span class="number">11</span>:<span class="number">57</span>:<span class="number">55.489</span>  INFO <span class="number">23952</span> --- [.<span class="number">0</span>-<span class="number">28888</span>-exec-<span class="number">7</span>] org.test.controller.TestController       : 创建分布式事务完毕<span class="number">192.168</span><span class="number">.14</span><span class="number">.67</span>:<span class="number">8092</span>:<span class="number">2030765910</span></span><br><span class="line"><span class="number">2019</span>-<span class="number">12</span>-<span class="number">23</span> <span class="number">11</span>:<span class="number">57</span>:<span class="number">55.709</span>  INFO <span class="number">23952</span> --- [.<span class="number">0</span>-<span class="number">28888</span>-exec-<span class="number">7</span>] org.test.controller.TestController       : 方法执行异常:<span class="keyword">null</span></span><br><span class="line"><span class="number">2019</span>-<span class="number">12</span>-<span class="number">23</span> <span class="number">11</span>:<span class="number">57</span>:<span class="number">55.885</span>  INFO <span class="number">23952</span> --- [.<span class="number">0</span>-<span class="number">28888</span>-exec-<span class="number">7</span>] i.seata.tm.api.DefaultGlobalTransaction  : [<span class="number">192.168</span><span class="number">.14</span><span class="number">.67</span>:<span class="number">8092</span>:<span class="number">2030765910</span>] rollback status: Rollbacked</span><br><span class="line"><span class="number">2019</span>-<span class="number">12</span>-<span class="number">23</span> <span class="number">11</span>:<span class="number">57</span>:<span class="number">55.888</span> ERROR <span class="number">23952</span> --- [.<span class="number">0</span>-<span class="number">28888</span>-exec-<span class="number">7</span>] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() <span class="keyword">for</span> servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.RuntimeException] with root cause</span><br></pre></td></tr></table></figure>
-
-<p>​    可以看到已被拦截也触发了rollback了.</p>
-<p>​    2.恢复代码调试正常情况:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">seataCommit</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    testService.Commit();</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>​    查看日志:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">2019-12-23 12:00:20.876  INFO 23952 --- [.0-28888-exec-2] org.test.controller.TestController       : 拦截到需要分布式事务的方法,seataCommit</span><br><span class="line">2019-12-23 12:00:20.919  INFO 23952 --- [.0-28888-exec-2] i.seata.tm.api.DefaultGlobalTransaction  : Begin new global transaction [192.168.14.67:8092:2030765926]</span><br><span class="line">2019-12-23 12:00:20.920  INFO 23952 --- [.0-28888-exec-2] org.test.controller.TestController       : 创建分布式事务完毕192.168.14.67:8092:2030765926</span><br><span class="line">2019-12-23 12:00:21.078  INFO 23952 --- [.0-28888-exec-2] org.test.controller.TestController       : 方法执行结束:true</span><br><span class="line">2019-12-23 12:00:21.078  INFO 23952 --- [.0-28888-exec-2] org.test.controller.TestController       : 分布式事务Id:192.168.14.67:8092:2030765926</span><br><span class="line">2019-12-23 12:00:21.213  INFO 23952 --- [.0-28888-exec-2] i.seata.tm.api.DefaultGlobalTransaction  : [192.168.14.67:8092:2030765926] commit status: Committed</span><br></pre></td></tr></table></figure>
-
-<p>​    可以看到事务已经被提交了.</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>更详细的内容希望希望大家访问以下地址阅读详细文档</p>
-<p><a href="https://nacos.io/zh-cn/index.html" target="_blank" rel="noopener">nacos官网</a></p>
-<p><a href="http://dubbo.apache.org/en-us/" target="_blank" rel="noopener">dubbo官网</a></p>
-<p><a href="http://seata.io/zh-cn/" target="_blank" rel="noopener">seata官网</a></p>
-<p><a href="https://www.docker.com/" target="_blank" rel="noopener">docker官网</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/23/seata-spring-boot-aop-aspectj/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-seata-mybatisplus-analysis" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/30/seata-mybatisplus-analysis/">透过源码解决SeataAT模式整合Mybatis-Plus失去MP特性的问题</a>
+    <h1 class="article-title" itemprop="name">
+      透过源码解决SeataAT模式整合Mybatis-Plus失去MP特性的问题
     </h1>
   
 
@@ -306,6 +218,27 @@
       
 
       
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
     </div>
     <div class="article-info article-info-index">
       
@@ -313,16 +246,84 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/30/seata-mybatisplus-analysis/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/11/30/seata-mybatisplus-analysis/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2019/12/23/seata-spring-boot-aop-aspectj/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          通过AOP动态创建/关闭Seata分布式事务
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/01/01/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Hello World</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -342,83 +343,14 @@
 
 
 
-
   
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/01/hello-world/">Hello World</a>
-    </h1>
   
 
-        
-        <a href="/2019/01/01/hello-world/" class="archive-article-date">
-  	<time datetime="2018-12-31T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/01/01/hello-world/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
+  
 
   
+
   
 
 
@@ -441,8 +373,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
