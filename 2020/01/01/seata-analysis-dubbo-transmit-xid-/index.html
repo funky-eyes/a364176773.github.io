@@ -11,21 +11,21 @@
   <meta name="description" content="本文讲述通过源码解析Seata-Dubbo传递XID">
 <meta property="og:type" content="article">
 <meta property="og:title" content="源码解析Seata-Dubbo传递XID">
-<meta property="og:url" content="http://yoursite.com/2020/01/01/download/index.html">
+<meta property="og:url" content="http://yoursite.com/2020/01/01/seata-analysis-dubbo-transmit-xid-/index.html">
 <meta property="og:site_name" content="funkye">
 <meta property="og:description" content="本文讲述通过源码解析Seata-Dubbo传递XID">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="d:%5Ccjb.io%5Csource%5Cimg%5Cblog%5C20200101203229.png">
+<meta property="og:image" content="http://yoursite.com/img/blog/20200101203229.png">
 <meta property="og:image" content="http://yoursite.com/img/blog/20200101213336.png">
 <meta property="article:published_time" content="2019-12-31T16:00:00.000Z">
-<meta property="article:modified_time" content="2020-01-01T13:49:49.543Z">
+<meta property="article:modified_time" content="2020-01-01T13:54:01.011Z">
 <meta property="article:author" content="FUNKYE">
 <meta property="article:tag" content="Seata">
 <meta property="article:tag" content="Dubbo">
 <meta property="article:tag" content="分布式事务">
 <meta property="article:tag" content="spring">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="d:%5Ccjb.io%5Csource%5Cimg%5Cblog%5C20200101203229.png">
+<meta name="twitter:image" content="http://yoursite.com/img/blog/20200101203229.png">
   
     <link rel="alternative" href="/atom.xml" title="funkye" type="application/atom+xml">
   
@@ -165,7 +165,7 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-download" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-seata-analysis-dubbo-transmit-xid-" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -177,7 +177,7 @@
   
 
         
-        <a href="/2020/01/01/download/" class="archive-article-date">
+        <a href="/2020/01/01/seata-analysis-dubbo-transmit-xid-/" class="archive-article-date">
   	<time datetime="2019-12-31T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-01</time>
 </a>
         
@@ -187,9 +187,9 @@
       
         <h1 id="源码解析Seata如何通过Dubbo传递XID"><a href="#源码解析Seata如何通过Dubbo传递XID" class="headerlink" title="源码解析Seata如何通过Dubbo传递XID"></a>源码解析Seata如何通过Dubbo传递XID</h1><p>本文作者：FUNKYE(陈健斌),杭州某互联网公司主程。</p>
 <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>​    1.首先来看下包结构,在seata-dubbo合seata-dubbo-alibaba下有统一由TransactionPropagationFilter这个类.</p>
-<p><img src="D:%5Ccjb.io%5Csource%5Cimg%5Cblog%5C20200101203229.png" alt="20200101203229"></p>
  <a id="more"></a> 
 
+<p><img src="/img/blog/20200101203229.png" alt="20200101203229"></p>
 <h2 id="分析源码"><a href="#分析源码" class="headerlink" title="分析源码"></a>分析源码</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> io.seata.integration.dubbo;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> io.seata.core.context.RootContext;</span><br><span class="line"><span class="keyword">import</span> org.apache.dubbo.common.Constants;</span><br><span class="line"><span class="keyword">import</span> org.apache.dubbo.common.extension.Activate;</span><br><span class="line"><span class="keyword">import</span> org.apache.dubbo.rpc.Filter;</span><br><span class="line"><span class="keyword">import</span> org.apache.dubbo.rpc.Invocation;</span><br><span class="line"><span class="keyword">import</span> org.apache.dubbo.rpc.Invoker;</span><br><span class="line"><span class="keyword">import</span> org.apache.dubbo.rpc.Result;</span><br><span class="line"><span class="keyword">import</span> org.apache.dubbo.rpc.RpcContext;</span><br><span class="line"><span class="keyword">import</span> org.apache.dubbo.rpc.RpcException;</span><br><span class="line"><span class="keyword">import</span> org.slf4j.Logger;</span><br><span class="line"><span class="keyword">import</span> org.slf4j.LoggerFactory;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Activate</span>(group = &#123;Constants.PROVIDER, Constants.CONSUMER&#125;, order = <span class="number">100</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TransactionPropagationFilter</span> <span class="keyword">implements</span> <span class="title">Filter</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Logger LOGGER = LoggerFactory.getLogger(TransactionPropagationFilter<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Result <span class="title">invoke</span><span class="params">(Invoker&lt;?&gt; invoker, Invocation invocation)</span> <span class="keyword">throws</span> RpcException </span>&#123;</span><br><span class="line">        String xid = RootContext.getXID();</span><br><span class="line">        String xidInterceptorType = RootContext.getXIDInterceptorType();</span><br><span class="line"></span><br><span class="line">        String rpcXid = getRpcXid();</span><br><span class="line">        String rpcXidInterceptorType = RpcContext.getContext().getAttachment(RootContext.KEY_XID_INTERCEPTOR_TYPE);</span><br><span class="line">        <span class="keyword">if</span> (LOGGER.isDebugEnabled()) &#123;</span><br><span class="line">            LOGGER.debug(<span class="string">"xid in RootContext[&#123;&#125;] xid in RpcContext[&#123;&#125;]"</span>, xid, rpcXid);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">boolean</span> bind = <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">if</span> (xid != <span class="keyword">null</span>) &#123;</span><br><span class="line">            RpcContext.getContext().setAttachment(RootContext.KEY_XID, xid);</span><br><span class="line">            RpcContext.getContext().setAttachment(RootContext.KEY_XID_INTERCEPTOR_TYPE, xidInterceptorType);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (rpcXid != <span class="keyword">null</span>) &#123;</span><br><span class="line">                RootContext.bind(rpcXid);</span><br><span class="line">                RootContext.bindInterceptorType(rpcXidInterceptorType);</span><br><span class="line">                bind = <span class="keyword">true</span>;</span><br><span class="line">                <span class="keyword">if</span> (LOGGER.isDebugEnabled()) &#123;</span><br><span class="line">                    LOGGER.debug(<span class="string">"bind[&#123;&#125;] interceptorType[&#123;&#125;] to RootContext"</span>, rpcXid, rpcXidInterceptorType);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> invoker.invoke(invocation);</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (bind) &#123;</span><br><span class="line">                String unbindInterceptorType = RootContext.unbindInterceptorType();</span><br><span class="line">                String unbindXid = RootContext.unbind();</span><br><span class="line">                <span class="keyword">if</span> (LOGGER.isDebugEnabled()) &#123;</span><br><span class="line">                    LOGGER.debug(<span class="string">"unbind[&#123;&#125;] interceptorType[&#123;&#125;] from RootContext"</span>, unbindXid, unbindInterceptorType);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> (!rpcXid.equalsIgnoreCase(unbindXid)) &#123;</span><br><span class="line">                    LOGGER.warn(<span class="string">"xid in change during RPC from &#123;&#125; to &#123;&#125;, xidInterceptorType from &#123;&#125; to &#123;&#125; "</span>, rpcXid, unbindXid, rpcXidInterceptorType, unbindInterceptorType);</span><br><span class="line">                    <span class="keyword">if</span> (unbindXid != <span class="keyword">null</span>) &#123;</span><br><span class="line">                        RootContext.bind(unbindXid);</span><br><span class="line">                        RootContext.bindInterceptorType(unbindInterceptorType);</span><br><span class="line">                        LOGGER.warn(<span class="string">"bind [&#123;&#125;] interceptorType[&#123;&#125;] back to RootContext"</span>, unbindXid, unbindInterceptorType);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * get rpc xid</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> String <span class="title">getRpcXid</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        String rpcXid = RpcContext.getContext().getAttachment(RootContext.KEY_XID);</span><br><span class="line">        <span class="keyword">if</span> (rpcXid == <span class="keyword">null</span>) &#123;</span><br><span class="line">            rpcXid = RpcContext.getContext().getAttachment(RootContext.KEY_XID.toLowerCase());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> rpcXid;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>​    1.根据源码,我们可以推出相应的逻辑处理</p>
@@ -201,6 +201,7 @@
 <p>​    2.Dubbo隐式传参可以通过 <code>RpcContext</code> 上的 <code>setAttachment</code> 和 <code>getAttachment</code> 在服务消费方和提供方之间进行参数的隐式传递。</p>
 <p>获取:RpcContext.getContext().getAttachment(RootContext.KEY_XID);</p>
 <p>传递:RpcContext.getContext().setAttachment(RootContext.KEY_XID, xid);</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>更多源码阅读请访问<a href="http://seata.io/zh-cn/index.html" target="_blank" rel="noopener">Seata官网</a></p>
 
       
 
@@ -312,7 +313,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/01/01/download/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/01/01/seata-analysis-dubbo-transmit-xid-/" alt="微信分享二维码">
     </div>
 </div>
 
