@@ -172,6 +172,100 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-seata-quick" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/19/seata-quick/">仅四步教你快速接入Seata分布式事务</a>
+    </h1>
+  
+
+        
+        
+<a href="/2020/02/19/seata-quick/" class="archive-article-date">
+  	<time datetime="2020-02-18T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="仅四步教你快速接入Seata分布式事务"><a href="#仅四步教你快速接入Seata分布式事务" class="headerlink" title="仅四步教你快速接入Seata分布式事务"></a>仅四步教你快速接入Seata分布式事务</h1><p>本文作者：FUNKYE(陈健斌),杭州某互联网公司主程。</p>
+<p><strong>简介:</strong></p>
+<p>Seata 是一款开源的分布式事务解决方案，致力于提供高性能和简单易用的分布式事务服务。Seata 将为用户提供了 AT、TCC、SAGA 和 XA 事务模式，为用户打造一站式的分布式解决方案。</p>
+<p>本篇文章将以视频与文字介绍的形式,指引你如何整合Seata</p>
+<p>本文使用的测试用例是springboot+dubbo整合seata1.1版本,如果您使用的是springcloud请把文中与视频所说的seata-spring-boot-starter版本切换为spring-cloud-alibaba-seata 2.2.0(目前仅支持1.0的seata)版本即可.</p>
+<p>注:本篇内容使用的是file配置中心,最简单的入门.如果您想深入了解请访问官网.starter使用file配置中心时默认开启数据源自动代理,数据库使用的是mysql,如若是其它数据库,请访问seata-samples的示例项目,如若没有请加钉钉/qq/微信群交流沟通,springboot支持版本为2.x</p>
+<hr>
+        
+          <a class="article-more-a" href="/2020/02/19/seata-quick/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">seata</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/java//" class="article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/02/19/seata-quick/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-java-jvm-record" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1026,98 +1120,9 @@
 
 
   
-    <article id="post-seata-analysis-dubbo-transmit-xid" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/01/01/seata-analysis-dubbo-transmit-xid/">源码解析Seata-Dubbo传递XID</a>
-    </h1>
-  
-
-        
-        
-<a href="/2020/01/01/seata-analysis-dubbo-transmit-xid/" class="archive-article-date">
-  	<time datetime="2019-12-31T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="源码解析Seata如何通过Dubbo传递XID"><a href="#源码解析Seata如何通过Dubbo传递XID" class="headerlink" title="源码解析Seata如何通过Dubbo传递XID"></a>源码解析Seata如何通过Dubbo传递XID</h1><p>本文作者：FUNKYE(陈健斌),杭州某互联网公司主程。</p>
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>​    1.首先来看下包结构,在seata-dubbo和seata-dubbo-alibaba下有统一由TransactionPropagationFilter这个类,分别对应apache-dubbo跟alibaba-dubbo.</p>
-        
-          <a class="article-more-a" href="/2020/01/01/seata-analysis-dubbo-transmit-xid/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">seata</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/java//" class="article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/01/01/seata-analysis-dubbo-transmit-xid/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next »</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next »</a>
     </nav>
   
 
