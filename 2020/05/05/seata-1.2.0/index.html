@@ -6,30 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2020 | funkye技术分享小站</title>
+  <title>七步带你集成Seata 1.2 高可用搭建 | funkye技术分享小站</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="好记性不如烂笔头,记录敲代码中的点点滴滴.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="funkye技术分享小站">
-<meta property="og:url" content="http://yoursite.com/archives/2020/index.html">
+  <meta name="description" content="本篇将介绍,如何通过官网的新人文档,参数说明,博客区等,进行Seata 1.2 的整合,以及使用nacos作为我们的配置中心跟注册中心,mysql作为server高可用db模式的数据库.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="七步带你集成Seata 1.2 高可用搭建">
+<meta property="og:url" content="http://yoursite.com/2020/05/05/seata-1.2.0/index.html">
 <meta property="og:site_name" content="funkye技术分享小站">
-<meta property="og:description" content="好记性不如烂笔头,记录敲代码中的点点滴滴.">
+<meta property="og:description" content="本篇将介绍,如何通过官网的新人文档,参数说明,博客区等,进行Seata 1.2 的整合,以及使用nacos作为我们的配置中心跟注册中心,mysql作为server高可用db模式的数据库.">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-05-04T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-05-09T14:44:30.457Z">
 <meta property="article:author" content="FUNKYE">
-<meta property="article:tag" content="博客">
-<meta property="article:tag" content="开发者">
-<meta property="article:tag" content="程序猿">
-<meta property="article:tag" content="程序媛">
-<meta property="article:tag" content="极客">
-<meta property="article:tag" content="编程">
-<meta property="article:tag" content="代码">
-<meta property="article:tag" content="开源">
-<meta property="article:tag" content="IT网站">
-<meta property="article:tag" content="陈健斌">
 <meta property="article:tag" content="funkye">
-<meta property="article:tag" content="java">
-<meta property="article:tag" content="java后端">
-<meta property="article:tag" content="java开发">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="funkye技术分享小站" type="application/atom+xml">
@@ -170,87 +159,160 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-seata-1.2.0" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2020/05/09/funkye-java/" class="archive-article-date">
-  	<time datetime="2020-05-08T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-09</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/05/09/funkye-java/">funkye的个人简历</a>
+    <h1 class="article-title" itemprop="name">
+      七步带你集成Seata 1.2 高可用搭建
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">job</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        
+        
+        <!-- 不蒜子统计 -->
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
 
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/job//" class="article-tag-list-link color4">job</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
 <a href="/2020/05/05/seata-1.2.0/" class="archive-article-date">
   	<time datetime="2020-05-04T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-05</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/05/05/seata-1.2.0/">七步带你集成Seata 1.2 高可用搭建</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本篇作者:陈健斌(funkye)</p>
+<p>github: <a href="https://github.com/a364176773" target="_blank" rel="noopener">https://github.com/a364176773</a> </p>
+<p>gitee: <a href="https://gitee.com/itCjb" target="_blank" rel="noopener">https://gitee.com/itCjb</a></p>
+<p><a href="https://mp.weixin.qq.com/s?__biz=Mzg2MTI2NDk2OQ==&mid=2247483719&idx=1&sn=5a2c55c944d57d253d5aae2c290f2ad0&scene=21#wechat_redirect" target="_blank" rel="noopener">初级入门地址</a></p>
+<p>本篇视频教程:<a href="https://www.bilibili.com/video/BV1tz411z7BX" target="_blank" rel="noopener">https://www.bilibili.com/video/BV1tz411z7BX</a></p>
+<a id="more"></a>
 
-        <div class="article-info info-on-right">
-          
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>本篇将介绍,如何通过官网的新人文档,参数说明,博客区等,进行Seata 1.2 的整合,以及使用nacos作为我们的配置中心跟注册中心,mysql作为server高可用db模式的数据库.</p>
+<p>以及常见的入门5大难题解析:</p>
+<p>1.xid未传递</p>
+<p>2.数据源未代理</p>
+<p>3.事务分组配置出错导致无法找到tc</p>
+<p>4.Global lock acquire failed</p>
+<p>5.Could not found global transaction xid</p>
+<p><strong>环境配置</strong></p>
+<hr>
+<p>mysql: 5.7</p>
+<p>nacos: 1.2.1</p>
+<p>spring-cloud-alibaba: 2.2.0</p>
+<p>seata: 1.2.0</p>
+<p>os: windows 10</p>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p><strong>第一步下载seata服务:</strong></p>
+<p>首先访问:<a href="https://seata.io/zh-cn/blog/download.html" target="_blank" rel="noopener">https://seata.io/zh-cn/blog/download.html</a></p>
+<p>下载我们需要使用的seata1.2服务</p>
+<p><strong>第二步创建Seata高可用的db,以及AT模式所需的undo_log表:</strong></p>
+<p>1.在你的参与全局事务的数据库中加入undo_log这张表</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">-- for AT mode you must to init this sql for you business database. the seata server not need it.</span><br><span class="line">CREATE TABLE IF NOT EXISTS &#96;undo_log&#96;</span><br><span class="line">(</span><br><span class="line">   &#96;id&#96;            BIGINT(20)   NOT NULL AUTO_INCREMENT COMMENT &#39;increment id&#39;,</span><br><span class="line">   &#96;branch_id&#96;     BIGINT(20)   NOT NULL COMMENT &#39;branch transaction id&#39;,</span><br><span class="line">   &#96;xid&#96;           VARCHAR(100) NOT NULL COMMENT &#39;global transaction id&#39;,</span><br><span class="line">   &#96;context&#96;       VARCHAR(128) NOT NULL COMMENT &#39;undo_log context,such as serialization&#39;,</span><br><span class="line">   &#96;rollback_info&#96; LONGBLOB     NOT NULL COMMENT &#39;rollback info&#39;,</span><br><span class="line">   &#96;log_status&#96;    INT(11)      NOT NULL COMMENT &#39;0:normal status,1:defense status&#39;,</span><br><span class="line">   &#96;log_created&#96;   DATETIME     NOT NULL COMMENT &#39;create datetime&#39;,</span><br><span class="line">   &#96;log_modified&#96;  DATETIME     NOT NULL COMMENT &#39;modify datetime&#39;,</span><br><span class="line">   PRIMARY KEY (&#96;id&#96;),</span><br><span class="line">   UNIQUE KEY &#96;ux_undo_log&#96; (&#96;xid&#96;, &#96;branch_id&#96;)</span><br><span class="line">) ENGINE &#x3D; InnoDB</span><br><span class="line"> AUTO_INCREMENT &#x3D; 1</span><br><span class="line"> DEFAULT CHARSET &#x3D; utf8 COMMENT &#x3D;&#39;AT transaction mode undo table&#39;;</span><br></pre></td></tr></table></figure>
+
+<p>2.在你的mysql数据库中创建名为seata的库,并使用以下下sql</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">-- -------------------------------- The script used when storeMode is &#39;db&#39; --------------------------------</span><br><span class="line">-- the table to store GlobalSession data</span><br><span class="line">CREATE TABLE IF NOT EXISTS &#96;global_table&#96;</span><br><span class="line">(</span><br><span class="line">   &#96;xid&#96;                       VARCHAR(128) NOT NULL,</span><br><span class="line">   &#96;transaction_id&#96;            BIGINT,</span><br><span class="line">   &#96;status&#96;                    TINYINT      NOT NULL,</span><br><span class="line">   &#96;application_id&#96;            VARCHAR(32),</span><br><span class="line">   &#96;transaction_service_group&#96; VARCHAR(32),</span><br><span class="line">   &#96;transaction_name&#96;          VARCHAR(128),</span><br><span class="line">   &#96;timeout&#96;                   INT,</span><br><span class="line">   &#96;begin_time&#96;                BIGINT,</span><br><span class="line">   &#96;application_data&#96;          VARCHAR(2000),</span><br><span class="line">   &#96;gmt_create&#96;                DATETIME,</span><br><span class="line">   &#96;gmt_modified&#96;              DATETIME,</span><br><span class="line">   PRIMARY KEY (&#96;xid&#96;),</span><br><span class="line">   KEY &#96;idx_gmt_modified_status&#96; (&#96;gmt_modified&#96;, &#96;status&#96;),</span><br><span class="line">   KEY &#96;idx_transaction_id&#96; (&#96;transaction_id&#96;)</span><br><span class="line">) ENGINE &#x3D; InnoDB</span><br><span class="line"> DEFAULT CHARSET &#x3D; utf8;</span><br><span class="line"></span><br><span class="line">-- the table to store BranchSession data</span><br><span class="line">CREATE TABLE IF NOT EXISTS &#96;branch_table&#96;</span><br><span class="line">(</span><br><span class="line">   &#96;branch_id&#96;         BIGINT       NOT NULL,</span><br><span class="line">   &#96;xid&#96;               VARCHAR(128) NOT NULL,</span><br><span class="line">   &#96;transaction_id&#96;    BIGINT,</span><br><span class="line">   &#96;resource_group_id&#96; VARCHAR(32),</span><br><span class="line">   &#96;resource_id&#96;       VARCHAR(256),</span><br><span class="line">   &#96;branch_type&#96;       VARCHAR(8),</span><br><span class="line">   &#96;status&#96;            TINYINT,</span><br><span class="line">   &#96;client_id&#96;         VARCHAR(64),</span><br><span class="line">   &#96;application_data&#96;  VARCHAR(2000),</span><br><span class="line">   &#96;gmt_create&#96;        DATETIME(6),</span><br><span class="line">   &#96;gmt_modified&#96;      DATETIME(6),</span><br><span class="line">   PRIMARY KEY (&#96;branch_id&#96;),</span><br><span class="line">   KEY &#96;idx_xid&#96; (&#96;xid&#96;)</span><br><span class="line">) ENGINE &#x3D; InnoDB</span><br><span class="line"> DEFAULT CHARSET &#x3D; utf8;</span><br><span class="line"></span><br><span class="line">-- the table to store lock data</span><br><span class="line">CREATE TABLE IF NOT EXISTS &#96;lock_table&#96;</span><br><span class="line">(</span><br><span class="line">   &#96;row_key&#96;        VARCHAR(128) NOT NULL,</span><br><span class="line">   &#96;xid&#96;            VARCHAR(96),</span><br><span class="line">   &#96;transaction_id&#96; BIGINT,</span><br><span class="line">   &#96;branch_id&#96;      BIGINT       NOT NULL,</span><br><span class="line">   &#96;resource_id&#96;    VARCHAR(256),</span><br><span class="line">   &#96;table_name&#96;     VARCHAR(32),</span><br><span class="line">   &#96;pk&#96;             VARCHAR(36),</span><br><span class="line">   &#96;gmt_create&#96;     DATETIME,</span><br><span class="line">   &#96;gmt_modified&#96;   DATETIME,</span><br><span class="line">   PRIMARY KEY (&#96;row_key&#96;),</span><br><span class="line">   KEY &#96;idx_branch_id&#96; (&#96;branch_id&#96;)</span><br><span class="line">) ENGINE &#x3D; InnoDB</span><br><span class="line"> DEFAULT CHARSET &#x3D; utf8;</span><br></pre></td></tr></table></figure>
+
+<p><strong>第三步加入seata依赖:</strong></p>
+<p>在你的项目中引入seata依赖</p>
+<p>如果你的微服务是dubbo:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;io.seata&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;seata-spring-boot-starter&lt;&#x2F;artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.2.0&lt;&#x2F;version&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<p>如果你是springcloud:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.alibaba.cloud&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-cloud-alibaba-seata&lt;&#x2F;artifactId&gt;</span><br><span class="line">    &lt;version&gt;2.2.0.RELEASE&lt;&#x2F;version&gt;</span><br><span class="line">    &lt;exclusions&gt;</span><br><span class="line">        &lt;exclusion&gt;</span><br><span class="line">            &lt;groupId&gt;io.seata&lt;&#x2F;groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;seata-spring-boot-starter&lt;&#x2F;artifactId&gt;</span><br><span class="line">        &lt;&#x2F;exclusion&gt;</span><br><span class="line">    &lt;&#x2F;exclusions&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;io.seata&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;seata-spring-boot-starter&lt;&#x2F;artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.2.0&lt;&#x2F;version&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>第四步加入seata所需的参数配置:</strong></p>
+<p>从官方github仓库拿到参考配置做修改:<a href="https://github.com/seata/seata/tree/develop/script/client" target="_blank" rel="noopener">https://github.com/seata/seata/tree/develop/script/client</a></p>
+<p>加到你项目的application.yml中.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">seata:</span><br><span class="line">enabled: true</span><br><span class="line">application-id: applicationName</span><br><span class="line">tx-service-group: my_test_tx_group</span><br><span class="line">enable-auto-data-source-proxy: true</span><br><span class="line">config:</span><br><span class="line">  type: nacos</span><br><span class="line">  nacos:</span><br><span class="line">    namespace:</span><br><span class="line">    serverAddr: 127.0.0.1:8848</span><br><span class="line">    group: SEATA_GROUP</span><br><span class="line">    userName: &quot;nacos&quot;</span><br><span class="line">    password: &quot;nacos&quot;</span><br><span class="line">registry:</span><br><span class="line">  type: nacos</span><br><span class="line">  nacos:</span><br><span class="line">    application: seata-server</span><br><span class="line">    server-addr: 127.0.0.1:8848</span><br><span class="line">    namespace:</span><br><span class="line">    userName: &quot;nacos&quot;</span><br><span class="line">    password: &quot;nacos&quot;</span><br></pre></td></tr></table></figure>
+
+<p><strong>第五步配置为高可用db模式参数并提交至配置中心:</strong></p>
+<p>运行你下载的nacos,并参考<a href="https://github.com/seata/seata/tree/develop/script/config-center" target="_blank" rel="noopener">https://github.com/seata/seata/tree/develop/script/config-center</a> 的config.txt并修改</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">service.vgroupMapping.my_test_tx_group&#x3D;default</span><br><span class="line">store.mode&#x3D;db</span><br><span class="line">store.db.datasource&#x3D;druid</span><br><span class="line">store.db.dbType&#x3D;mysql</span><br><span class="line">store.db.driverClassName&#x3D;com.mysql.jdbc.Driver</span><br><span class="line">store.db.url&#x3D;jdbc:mysql:&#x2F;&#x2F;127.0.0.1:3306&#x2F;seata?useUnicode&#x3D;true</span><br><span class="line">store.db.user&#x3D;username</span><br><span class="line">store.db.password&#x3D;password</span><br><span class="line">store.db.minConn&#x3D;5</span><br><span class="line">store.db.maxConn&#x3D;30</span><br><span class="line">store.db.globalTable&#x3D;global_table</span><br><span class="line">store.db.branchTable&#x3D;branch_table</span><br><span class="line">store.db.queryLimit&#x3D;100</span><br><span class="line">store.db.lockTable&#x3D;lock_table</span><br><span class="line">store.db.maxWait&#x3D;5000</span><br></pre></td></tr></table></figure>
+
+<p>运行仓库中提供的nacos脚本,将以上信息提交到nacos控制台,如果有需要更改,可直接通过控制台更改</p>
+<p><strong>第六步更改服务端的注册&amp;配置中心为nacos</strong>:</p>
+<p>更改server中的registry.conf</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">registry &#123;</span><br><span class="line"> # file 、nacos 、eureka、redis、zk、consul、etcd3、sofa</span><br><span class="line"> type &#x3D; &quot;nacos&quot;</span><br><span class="line"> nacos &#123;</span><br><span class="line">   application &#x3D; &quot;seata-server&quot;</span><br><span class="line">   serverAddr &#x3D; &quot;localhost&quot;</span><br><span class="line">   namespace &#x3D; &quot;&quot;</span><br><span class="line">   cluster &#x3D; &quot;default&quot;</span><br><span class="line">   username &#x3D; &quot;nacos&quot;</span><br><span class="line">   password &#x3D; &quot;nacos&quot;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">config &#123;</span><br><span class="line"> # file、nacos 、apollo、zk、consul、etcd3</span><br><span class="line"> type &#x3D; &quot;nacos&quot;</span><br><span class="line"></span><br><span class="line"> nacos &#123;</span><br><span class="line">   serverAddr &#x3D; &quot;localhost&quot;</span><br><span class="line">   namespace &#x3D; &quot;&quot;</span><br><span class="line">   group &#x3D; &quot;SEATA_GROUP&quot;</span><br><span class="line">   username &#x3D; &quot;nacos&quot;</span><br><span class="line">   password &#x3D; &quot;nacos&quot;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>第七步加入全局事务注解并启动Seata-server进行调试:</strong></p>
+<p>运行seata-server.sh -h ip -p 端口,成功后,运行自己的服务提供者,服务参与者.</p>
+<p>在全局事务调用者(发起全局事务的服务)的接口上加入@GlobalTransactional</p>
+<p>进行测试即可.</p>
+<p>自此,整合seata1.2及nacos的配置与注册中心全部整合完毕.如果你需要高可用搭建请看第八步</p>
+<p><strong>第八步高可用Seata-server搭建</strong></p>
+<p>确保你已经完成了以上七步操作后,按照以上的第1,6两步即可把你的seata新节点接入到同一个nacos集群,配置&amp;注册中心中,由于是同一个配置中心,所以db也是采用的共同配置.至此高可用搭建已经顺利完结,如果你想测试,仅需关掉其中一个server节点,验证服务是否可用即可.</p>
+<h2 id="常见问题解析"><a href="#常见问题解析" class="headerlink" title="常见问题解析"></a>常见问题解析</h2><p><strong>1.xid未传递</strong> </p>
+<p>一般常见于springcloud的用户,请注意是否只引入了seata-all或者seata-spring-boot-starter.如果是,请换为本文介绍给springcloud的依赖即可.</p>
+<p>如果是自己实现了WebMvcConfigurer,那么请参考com.alibaba.cloud.seata.web.SeataHandlerInterceptorConfiguration#addInterceptors把xid传递拦截器加入到你的拦截链路中</p>
+<p><strong>2.数据源未代理</strong></p>
+<p>一般分为2种情况</p>
+<p>数据源自己创建后,代理数据源的beanname为DataSourceProxy而不是dataSource,导致sqlsessionfactory注入的并不是被代理后的.</p>
+<p>如果是已经开启了自动代理的用户,请确认是否手写了sqlsessionfactory此时注入的DataSource并未显示是DataSourceproxy代理的情况,请进行调整,保证注入是代理的数据源.</p>
+<p><strong>3.事务分组配置出错导致无法找到tc</strong></p>
+<p>一般由于对事务分组的理解出现偏差导致的,请仔细阅读官网的参数配置中的介绍.</p>
+<p>TM端: seata.tx-service-group=自定分组名 seata.service.vgroup-mapping(配置中心中是叫:service.vgroupMapping).自定分组名=服务端注册中心配置的cluster/application的值</p>
+<p>拿nacos举例子</p>
+<p>比如我server中nacos的cluster</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">nacos &#123;</span><br><span class="line">  application &#x3D; &quot;seata-server&quot;</span><br><span class="line">  serverAddr &#x3D; &quot;localhost&quot;</span><br><span class="line">  namespace &#x3D; &quot;&quot;</span><br><span class="line">  cluster &#x3D; &quot;testCluster&quot;</span><br><span class="line">  username &#x3D; &quot;nacos&quot;</span><br><span class="line">  password &#x3D; &quot;nacos&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我的事务分组为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">seata:</span><br><span class="line">tx-service-group: test</span><br></pre></td></tr></table></figure>
+
+<p>那么nacos中需要配置test事务分组</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service.vgroupMapping.test&#x3D;testCluster</span><br></pre></td></tr></table></figure>
+
+<p><strong>4.Global lock acquire failed</strong></p>
+<p>一般这种情况也是分为两种</p>
+<p>常见的就是并没有对select语句进行forupdate,如果你不开启forupdate,seata默认是遇到并发性竞争锁并不会去尝试重试,导致拿不到lock当前事务进行回滚.不影响一致性,如果你想没forupdate也开启竞争锁client.rm.lock.retryPolicyBranchRollbackOnConflict设置为false(有死锁风险)</p>
+<p>还有一种就是由于大并发下对同一个数据并发操作时,前一个事务还未提交,后续的事务一直在等待,而seata默认的超时周期为300ms,此时超时后就会抛出Global lock acquire failed,当前事务进行回滚,如果你想保住竞争锁的周期足够长,请更改client.rm.lock.retryTimes和client.rm.lock.retryInterval来保证周期的合理性.</p>
+<p><strong>5.Could not found global transaction xid</strong></p>
+<p>一般出现这个提示与服务重试及超时有关,比如A-&gt;B此时A调B超时,A默认是重试的,B等于被调了2遍,第二次被调用的B进行了响应,A发起者接收到结果后进行了提交/回滚,这次超时的B因为网络问题现在才被调用,他也收到了一样的全局事务id,进行业务处理,直到注册分支,此时全局事务已经被提交/回滚,导致当前超时的分支事务B无法注册上.</p>
+<p>这种问题一般保证你的业务不会去超时重试,如果你需要,请确认全局事务状态,做好幂等,防止已经做过的处理重复操作.</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>官网文档并不简陋,学会思考变通,整合Seata就是这么简单.</p>
+<p><strong>点击左下角阅读原文可访问视频教程地址.</strong></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/qrcode/20191231131430.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/qrcode/20191231131453.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -262,7 +324,7 @@
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -275,420 +337,133 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/05/05/seata-1.2.0/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2020/02/19/seata-quick/" class="archive-article-date">
-  	<time datetime="2020-02-18T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-19</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2020/05/09/funkye-java/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          funkye的个人简历
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/02/19/seata-quick/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">仅四步教你快速接入Seata分布式事务</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/02/19/seata-quick/">仅四步教你快速接入Seata分布式事务</a>
-    </h1>
-  
+    <div id="gitalk-container" style="padding: 0px 30px 0px 30px;"></div> 
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">seata</a>
-        		</li>
-      		
-		</ul>
-	</div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script type="text/javascript">
 
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/java//" class="article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
+if(true){
+	var gitalk = new Gitalk({
+  	clientID: 'c3362d2b5c502bf539a8',
+  	clientSecret: 'f3d06d35f7b7d0535a33f611a64a91717cbdc751',
+  	repo: 'a364176773.github.io',
+  	owner: 'a364176773',
+  	admin: ['a364176773'],
+  	id: 'Tue May 05 2020 00:00:00 GMT+0800',
+  	distractionFreeMode: 'true'
+})
+gitalk.render('gitalk-container') 
+}
+</script>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2020/01/20/java-jvm-record/" class="archive-article-date">
-  	<time datetime="2020-01-19T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-20</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/01/20/java-jvm-record/">了解JVM优化</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">jvm</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/java//" class="article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2020/01/18/redis-lock-spring-boot-starter/" class="archive-article-date">
-  	<time datetime="2020-01-17T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-18</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/01/18/redis-lock-spring-boot-starter/">以spring boot starter搭建redis分布式锁项目</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">redis</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/java//" class="article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2020/01/13/spring-bean-condition-build/" class="archive-article-date">
-  	<time datetime="2020-01-12T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-13</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/01/13/spring-bean-condition-build/">根据注解条件动态创建bean</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">spring</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/java//" class="article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2020/01/13/test-queue/" class="archive-article-date">
-  	<time datetime="2020-01-12T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-13</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/01/13/test-queue/">手写一个简单的消息队列实现</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">thread</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/java//" class="article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2020/01/13/xml-verification-mode/" class="archive-article-date">
-  	<time datetime="2020-01-12T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-13</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/01/13/xml-verification-mode/">Spirng获取xml的验证模式</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">spring</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/java//" class="article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2020/01/07/mysql-pool/" class="archive-article-date">
-  	<time datetime="2020-01-06T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-07</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/01/07/mysql-pool/">手把手搭一个简单数据库连接池</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">mysql</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/java//" class="article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2020/01/04/synchronized-lock/" class="archive-article-date">
-  	<time datetime="2020-01-03T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-04</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/01/04/synchronized-lock/">synchronized和lock的区别</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">thread</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/java//" class="article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
   
-    </div></section>
   
 
-    
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/2020/page/2/">2</a><a class="extend next" rel="next" href="/archives/2020/page/2/">Next »</a>
-    </nav>
+  
+
+  
+
   
 
 
@@ -723,8 +498,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
