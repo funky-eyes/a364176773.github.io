@@ -172,6 +172,96 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-springboot-dubbo-mybatisplus-seata" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/29/springboot-dubbo-mybatisplus-seata/">SpringBoot+Dubbo+MybatisPlus整合seata分布式事务</a>
+    </h1>
+  
+
+        
+        
+<a href="/2019/11/29/springboot-dubbo-mybatisplus-seata/" class="archive-article-date">
+  	<time datetime="2019-11-28T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="SpringBoot-Dubbo-MybatisPlus整合Seata分布式事务"><a href="#SpringBoot-Dubbo-MybatisPlus整合Seata分布式事务" class="headerlink" title="SpringBoot+Dubbo+MybatisPlus整合Seata分布式事务"></a>SpringBoot+Dubbo+MybatisPlus整合Seata分布式事务</h1><p><a href="https://gitee.com/itCjb/springboot-dubbo-mybatisplus-seata" target="_blank" rel="noopener">项目地址</a></p>
+<p>本文作者：FUNKYE(陈健斌),杭州某互联网公司主程。</p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>​    <strong>事务</strong>：事务是由一组操作构成的可靠的独立的工作单元，事务具备ACID的特性，即原子性、一致性、隔离性和持久性。<br>​    <strong>分布式事务</strong>:当一个操作牵涉到多个服务,多台数据库协力完成时(比如分表分库后,业务拆分),多个服务中，本地的Transaction已经无法应对这个情况了,为了保证数据一致性，就需要用到分布式事务。<br>​    <strong>Seata</strong> ：是一款开源的分布式事务解决方案，致力于在微服务架构下提供高性能和简单易用的分布式事务服务。<br>​    <strong>本文目的</strong>：现如今微服务越来越流行，而市面上的分布式事务的方案可谓不少，参差不齐，比较流行的以MQ代表的保证的是消息最终一致性的解决方案（消费确认，消息回查，消息补偿机制等），以及TX-LCN的LCN模式协调本地事务来保证事务统一提交或回滚（已经停止更新，对Dubbo2.7不兼容）。而MQ的分布式事务太过复杂，TX-LCN断更，这时候需要一个高效可靠及易上手的分布式事务解决方案，Seata脱颖而出，本文要介绍的就是如何快速搭建一个整合Seata的Demo项目，一起来吧！</p>
+        
+          <a class="article-more-a" href="/2019/11/29/springboot-dubbo-mybatisplus-seata/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">seata</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/java//" class="article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/11/29/springboot-dubbo-mybatisplus-seata/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-tx-lcn-rollback" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -685,6 +775,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">offer</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">io</a>
               </li>
             
             <div class="clearfix"></div>

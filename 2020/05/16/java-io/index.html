@@ -6,30 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives | funkye技术分享小站</title>
+  <title>Io常见概念性问题总结 | funkye技术分享小站</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="好记性不如烂笔头,记录敲代码中的点点滴滴.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="funkye技术分享小站">
-<meta property="og:url" content="http://yoursite.com/archives/index.html">
+  <meta name="description" content="本文介绍Io常见概念性问题总结">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Io常见概念性问题总结">
+<meta property="og:url" content="http://yoursite.com/2020/05/16/java-io/index.html">
 <meta property="og:site_name" content="funkye技术分享小站">
-<meta property="og:description" content="好记性不如烂笔头,记录敲代码中的点点滴滴.">
+<meta property="og:description" content="本文介绍Io常见概念性问题总结">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-05-15T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-05-16T05:48:35.357Z">
 <meta property="article:author" content="FUNKYE">
-<meta property="article:tag" content="博客">
-<meta property="article:tag" content="开发者">
-<meta property="article:tag" content="程序猿">
-<meta property="article:tag" content="程序媛">
-<meta property="article:tag" content="极客">
-<meta property="article:tag" content="编程">
-<meta property="article:tag" content="代码">
-<meta property="article:tag" content="开源">
-<meta property="article:tag" content="IT网站">
-<meta property="article:tag" content="陈健斌">
-<meta property="article:tag" content="funkye">
+<meta property="article:tag" content="bio">
 <meta property="article:tag" content="java">
-<meta property="article:tag" content="java后端">
-<meta property="article:tag" content="java开发">
+<meta property="article:tag" content="nio">
+<meta property="article:tag" content="aio">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="funkye技术分享小站" type="application/atom+xml">
@@ -170,37 +162,109 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-java-io" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2020/05/16/java-io/" class="archive-article-date">
-  	<time datetime="2020-05-15T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-16</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/05/16/java-io/">Io常见概念性问题总结</a>
+    <h1 class="article-title" itemprop="name">
+      Io常见概念性问题总结
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        
+        <!-- 不蒜子统计 -->
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+
+<a href="/2020/05/16/java-io/" class="archive-article-date">
+  	<time datetime="2020-05-15T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本文作者：FUNKYE(陈健斌),杭州求职程序员,<a href="mailto:364176773@qq.com">364176773@qq.com</a>,即是邮箱也是qq,也是微信.欢迎各路大佬内推引荐.(仅限杭州地区谢谢)</p>
+<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><p>首先,我们一起来简单的了解下,什么是io流?</p>
+ <a id="more"></a> 
+
+<p>1.可以把io流想象成汽车,船,水流.问题来了,想象成这样的特点是什么?顾名思义,水流肯定是从源头,流向一个目的地,汽车,轮船也可以从特定的出发点,到目的地.他们的开始目的跟结束目的是一致的.</p>
+<p>再来伸展下问题1,io流的一些特征.结合我们上面所讲,比如说是水流,汽车,有什么特性,他要遵守交通规则,水流也一样,所以它是一个有顺序,有起点跟终点的一个字节集合.</p>
+<p>2.再来说下io流的输入输出流的作用,也是顾名思义,我希望大家在遇到面试官提问的时候,能先记牢他说的一个问题标题,很可能这个标题就蕴藏着答案.输入流,很明显把一个外部(你可以理解成计算机中的文件)的东西,读取后输入到我们的进程中.而输出流很简单了,比如我们在做开发最常见的常见应该是保存某些文件,比如图片,text?所以我们要保存文件的时候该干嘛?就是进程中的数据写入到我们计算机的一个文件中.</p>
+<p>3.javaio中的超类有哪些?</p>
+<ul>
+<li>java.io.InputStream 字节输入流</li>
+<li>java.io.OutputStream 字节输出流</li>
+<li>java.io.Reader 字符输入流</li>
+<li>java.io.Writer 字符输出流</li>
+</ul>
+<p>关于问题3,就不做过多的延展,因为我相信现在没有多少人还会去用io,而不是nio,以我个人的性格,我可能了解到这,就好了.</p>
+<p>4.NIO是什么?</p>
+<ul>
+<li>nio是一个同步非阻塞io</li>
+<li>为什么要有NIO?同步非阻塞io,这个我们也顾名思义一下,我看到过有上厕所的例子,也有烧开水的例子.我觉得烧开水的例子能更形象生动,所以我用烧开水来举例.首先同步对吧,我们烧了一排的开水壶,这时候如果用bio来做处理会怎么样呢?我先去水壶一号,水壶一号水烧好了,我再去水壶二号.而我们的nio,同步非阻塞怎么理解?我先去看一下水壶1号,没烧好,我再去看二号,直到N号.而且我不需要一直等待的去看水烧好了没,我去轮询的去查看即可,比傻傻的站那等水烧开是不是好多了?</li>
+<li>NIO的三大核心部分:channel(通道),buffer(缓冲区),selector(选择区,这块就是个多路复用,一个selector可以监听多个通道.)</li>
+<li>javanio与io的区别是?其实我们上面总结下来,可以发现io的特点就是他有一个流的存在,比如一个快递送到你家了,好了这就结束了.这意味这你要一直等待快递员一路的派送直到你家.而NIO是面向缓冲区,怎么说呢,拿最近很火的蜂巢收件箱来说吧,多个快递员(client),对应对个接收者(channel),而蜂巢的应用就属于selector,因为他会知道你的快递到了.而缓冲区对应的就是收件箱.所以对于快递员跟接收者最终还是到了一个地方去操作,那就是缓存区,我们的收件箱去.</li>
+</ul>
+<p>5.什么叫多路复用?</p>
+<ul>
+<li>举一个非常简单的例子,比如一个小区有N栋楼,保安如果是一对一栋楼,那么你觉得物业会这么傻的去请那么大量的保安队伍吗?所以我们N栋楼的安全保障,由一个保安队直接承包,无论是哪栋楼有安全问题,都是由同一个队伍的保安负责,这样就避免了比如A栋经常有问题需要保安去巡查,而B栋完全没这个困扰,然后也由一个保安去巡查的资源浪费问题.</li>
+</ul>
+<p>6.BIO,NIO,AIO的特点介绍:</p>
+<p>就由我们刚才的快递员问题来举例吧</p>
+<ul>
+<li>同步阻塞BIO:你下单买了个东西,然后你就一直等快递员派件送达,期间你及时有N个快递你也只能先等待第一个派件,而且期间你连睡觉,喝水,吃饭都做不了.</li>
+<li>同步非阻塞NIO:你下单买了N个东西,然后你隔三差五的看看这个快递到了没,那个快递到了没,但是你还是吃不了饭喝不了水,只能再等一堆的快递送达.</li>
+<li>异步阻塞io:我在家里,等快递员打电话给我,我再去拿快递.</li>
+<li>异步非阻塞AIO:我在家里,想干嘛就干嘛,快递员打电话说送到了,我再去拿.</li>
+</ul>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>本文简单的去口语化io的概念,并没有做过多的深入,希望对概念不是很清楚的同学可以起到一个帮助.</p>
+<p>接下来是一些题外话:</p>
+<p>写本篇博客初衷:最近面试被问到了io相关问题,发现面试官特别喜欢故意绕一下,让你一下搞不清什么是bio,什么是nio,什么是aio,首先我个人缺点很明显,对喜欢的技术栈,我会着迷,去深入研究它(我不敢说我任何的一个技术知识是完全掌握的),而不是非常感兴趣的技术,我会处于一个刚好够用,不容易出错的一个状态即可.(毕竟我是个谨慎的人,经常即使自己了解了,我还会做进一步的验证.)</p>
+<p>写这篇博客的时候,不禁想到一个问题?基础差?怎么样才能算基础差?怎么样才能算基础好?还是说这只是为了压制面试者的一个策略而已?难道拿起锄头跟锤子该干嘛心里没数吗?可能也是个人资历尚浅的一个疑问吧.</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/qrcode/20191231131430.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/qrcode/20191231131453.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -212,7 +276,7 @@
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -225,470 +289,124 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/05/16/java-io/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2020/05/09/funkye-java/" class="archive-article-date">
-  	<time datetime="2020-05-08T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-09</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2020/05/09/funkye-java/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">个人简历</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/05/09/funkye-java/">个人简历</a>
-    </h1>
-  
+    <div id="gitalk-container" style="padding: 0px 30px 0px 30px;"></div> 
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">job</a>
-        		</li>
-      		
-		</ul>
-	</div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script type="text/javascript">
 
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/job//" class="article-tag-list-link color4">job</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
+if(true){
+	var gitalk = new Gitalk({
+  	clientID: 'c3362d2b5c502bf539a8',
+  	clientSecret: 'f3d06d35f7b7d0535a33f611a64a91717cbdc751',
+  	repo: 'a364176773.github.io',
+  	owner: 'a364176773',
+  	admin: ['a364176773'],
+  	id: 'Sat May 16 2020 00:00:00 GMT+0800',
+  	distractionFreeMode: 'true'
+})
+gitalk.render('gitalk-container') 
+}
+</script>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2020/05/07/offer/" class="archive-article-date">
-  	<time datetime="2020-05-06T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-07</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/05/07/offer/">大厂面试题解析(持久更新)</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">offer</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/java//" class="article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2020/05/05/seata-1.2.0/" class="archive-article-date">
-  	<time datetime="2020-05-04T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/05/05/seata-1.2.0/">七步带你集成Seata 1.2 高可用搭建</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">seata</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/java//" class="article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2020/02/19/seata-quick/" class="archive-article-date">
-  	<time datetime="2020-02-18T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-19</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/02/19/seata-quick/">仅四步教你快速接入Seata分布式事务</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">seata</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/java//" class="article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2020/01/20/java-jvm-record/" class="archive-article-date">
-  	<time datetime="2020-01-19T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-20</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/01/20/java-jvm-record/">了解JVM优化</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">jvm</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/java//" class="article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2020/01/18/redis-lock-spring-boot-starter/" class="archive-article-date">
-  	<time datetime="2020-01-17T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-18</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/01/18/redis-lock-spring-boot-starter/">以spring boot starter搭建redis分布式锁项目</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">redis</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/java//" class="article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2020/01/13/spring-bean-condition-build/" class="archive-article-date">
-  	<time datetime="2020-01-12T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-13</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/01/13/spring-bean-condition-build/">根据注解条件动态创建bean</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">spring</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/java//" class="article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2020/01/13/test-queue/" class="archive-article-date">
-  	<time datetime="2020-01-12T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-13</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/01/13/test-queue/">手写一个简单的消息队列实现</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">thread</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/java//" class="article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2020/01/13/xml-verification-mode/" class="archive-article-date">
-  	<time datetime="2020-01-12T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-13</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/01/13/xml-verification-mode/">Spirng获取xml的验证模式</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">spring</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/java//" class="article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
   
-    </div></section>
   
 
-    
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="page-number" href="/archives/page/3/">3</a><a class="extend next" rel="next" href="/archives/page/2/">Next »</a>
-    </nav>
+  
+
+  
+
   
 
 
@@ -723,8 +441,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
