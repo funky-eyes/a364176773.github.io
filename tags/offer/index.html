@@ -6,20 +6,30 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>根据注解条件动态创建bean | funkye技术分享小站</title>
+  <title>Tag: offer | funkye技术分享小站</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="本文介绍根据注解条件动态创建bean">
-<meta property="og:type" content="article">
-<meta property="og:title" content="根据注解条件动态创建bean">
-<meta property="og:url" content="http://yoursite.com/2020/01/13/spring-bean-condition-build/index.html">
+  <meta name="description" content="好记性不如烂笔头,记录敲代码中的点点滴滴.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="funkye技术分享小站">
+<meta property="og:url" content="http://yoursite.com/tags/offer/index.html">
 <meta property="og:site_name" content="funkye技术分享小站">
-<meta property="og:description" content="本文介绍根据注解条件动态创建bean">
+<meta property="og:description" content="好记性不如烂笔头,记录敲代码中的点点滴滴.">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-01-12T16:00:00.000Z">
-<meta property="article:modified_time" content="2020-02-10T08:12:38.451Z">
 <meta property="article:author" content="FUNKYE">
+<meta property="article:tag" content="博客">
+<meta property="article:tag" content="开发者">
+<meta property="article:tag" content="程序猿">
+<meta property="article:tag" content="程序媛">
+<meta property="article:tag" content="极客">
+<meta property="article:tag" content="编程">
+<meta property="article:tag" content="代码">
+<meta property="article:tag" content="开源">
+<meta property="article:tag" content="IT网站">
+<meta property="article:tag" content="陈健斌">
+<meta property="article:tag" content="funkye">
 <meta property="article:tag" content="java">
-<meta property="article:tag" content="spring">
+<meta property="article:tag" content="java后端">
+<meta property="article:tag" content="java开发">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="funkye技术分享小站" type="application/atom+xml">
@@ -160,90 +170,49 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-spring-bean-condition-build" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      根据注解条件动态创建bean
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2020" class="archive-year">2020</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	
+<a href="/2020/05/07/offer/" class="archive-article-date">
+  	<time datetime="2020-05-06T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-07</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2020/05/07/offer/">大厂面试题解析(持久更新)</a>
     </h1>
   
 
-        
-        
-        <!-- 不蒜子统计 -->
-        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
-              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
-        </span>
-
-<a href="/2020/01/13/spring-bean-condition-build/" class="archive-article-date">
-  	<time datetime="2020-01-12T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>本文作者：FUNKYE(陈健斌),杭州某互联网公司主程。</p>
-<h1 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h1><p> 有时候在编程中,我们会烦恼一个问题,初始化了一个bean后,业务中用不到了,有时候又需要了,反反复复非常麻烦,所以以下介绍spring提供的条件创建对应bean的方式:</p>
-<a id="more"></a>
-
-<h2 id="DEMO"><a href="#DEMO" class="headerlink" title="DEMO"></a>DEMO</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Config</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Conditional</span>(MyCondition<span class="class">.<span class="keyword">class</span>)</span></span><br><span class="line"><span class="class">    @<span class="title">Bean</span></span></span><br><span class="line"><span class="class">    <span class="title">public</span> <span class="title">String</span> <span class="title">condition</span>() </span>&#123;</span><br><span class="line">        System.err.println(<span class="string">"自定义的condition的match方法返回值为true时，才会进入该方法创建bean"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 该Abc class位于类路径上时</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@ConditionalOnClass</span>(Abc<span class="class">.<span class="keyword">class</span>)</span></span><br><span class="line"><span class="class">    @<span class="title">Bean</span></span></span><br><span class="line"><span class="class">    <span class="title">public</span> <span class="title">String</span> <span class="title">abc</span>() </span>&#123;</span><br><span class="line">        System.err.println(<span class="string">"ConditionalOnClass true"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 存在Abc类的实例时</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@ConditionalOnBean</span>(Abc<span class="class">.<span class="keyword">class</span>)</span></span><br><span class="line"><span class="class">    @<span class="title">Bean</span></span></span><br><span class="line"><span class="class">    <span class="title">public</span> <span class="title">String</span> <span class="title">bean</span>() </span>&#123;</span><br><span class="line">        System.err.println(<span class="string">"ConditionalOnBean is exist"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * abc bean不存在时初始化</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">    <span class="meta">@ConditionalOnMissingBean</span>(Abc<span class="class">.<span class="keyword">class</span>)</span></span><br><span class="line"><span class="class">    @<span class="title">Bean</span></span></span><br><span class="line"><span class="class">    <span class="title">public</span> <span class="title">String</span> <span class="title">missBean</span>() </span>&#123;</span><br><span class="line">        System.err.println(<span class="string">"ConditionalOnBean is missing"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 表达式为true时</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@ConditionalOnExpression</span>(value = <span class="string">"true"</span>)</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">expresssion</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.err.println(<span class="string">"expresssion is true"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 配置文件属性是否为true</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@ConditionalOnProperty</span>(</span><br><span class="line">            value = &#123;<span class="string">"abc.property"</span>&#125;,</span><br><span class="line">            matchIfMissing = <span class="keyword">false</span>)</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">property</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.err.println(<span class="string">"property is true"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>@Conditional(MyCondition.class)<br>这句代码可以标注在类上面，表示该类下面的所有@Bean都会启用配置,也可以标注在方法上面，只是对该方法启用配置<br>@ConditionalOnBean（仅仅在当前上下文中存在某个对象时，才会实例化一个Bean）<br>@ConditionalOnClass（某个class位于类路径上，才会实例化一个Bean）<br>@ConditionalOnExpression（当表达式为true的时候，才会实例化一个Bean）<br>@ConditionalOnMissingBean（仅仅在当前上下文中不存在某个对象时，才会实例化一个Bean）<br>@ConditionalOnMissingClass（某个class类路径上不存在的时候，才会实例化一个Bean）<br>@ConditionalOnNotWebApplication（不是web应用）</p>
-
-      
-
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="/img/qrcode/20191231131430.png">
-                      <span class="reward-type">支付宝</span>
-                    </div>
-                    
-                    
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="/img/qrcode/20191231131453.png">
-                      <span class="reward-type">微信</span>
-                    </div>
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">spring</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">offer</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -256,134 +225,17 @@
 	</div>
 
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/01/13/spring-bean-condition-build/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2020/01/18/redis-lock-spring-boot-starter/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          以spring boot starter搭建redis分布式锁项目
-        
-      </div>
-    </a>
   
   
-    <a href="/2020/01/13/test-queue/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">手写一个简单的消息队列实现</div>
-      <i class="icon-circle-right"></i>
-    </a>
+    </div></section>
   
-</nav>
 
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-    <div id="gitalk-container" style="padding: 0px 30px 0px 30px;"></div> 
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-<script type="text/javascript">
-
-if(true){
-	var gitalk = new Gitalk({
-  	clientID: 'c3362d2b5c502bf539a8',
-  	clientSecret: 'f3d06d35f7b7d0535a33f611a64a91717cbdc751',
-  	repo: 'a364176773.github.io',
-  	owner: 'a364176773',
-  	admin: ['a364176773'],
-  	id: 'Mon Jan 13 2020 00:00:00 GMT+0800',
-  	distractionFreeMode: 'true'
-})
-gitalk.render('gitalk-container') 
-}
-</script>
     
-  
-  
-  
-
-  
-
-  
-
-  
 
 
           </div>
@@ -417,9 +269,9 @@ gitalk.render('gitalk-container')
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,

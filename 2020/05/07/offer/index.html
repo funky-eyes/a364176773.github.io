@@ -6,18 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>根据注解条件动态创建bean | funkye技术分享小站</title>
+  <title>大厂面试题解析(持久更新) | funkye技术分享小站</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="本文介绍根据注解条件动态创建bean">
+  <meta name="description" content="本文讲述大厂面试题解析(持久更新)">
 <meta property="og:type" content="article">
-<meta property="og:title" content="根据注解条件动态创建bean">
-<meta property="og:url" content="http://yoursite.com/2020/01/13/spring-bean-condition-build/index.html">
+<meta property="og:title" content="大厂面试题解析(持久更新)">
+<meta property="og:url" content="http://yoursite.com/2020/05/07/offer/index.html">
 <meta property="og:site_name" content="funkye技术分享小站">
-<meta property="og:description" content="本文介绍根据注解条件动态创建bean">
+<meta property="og:description" content="本文讲述大厂面试题解析(持久更新)">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-01-12T16:00:00.000Z">
-<meta property="article:modified_time" content="2020-02-10T08:12:38.451Z">
+<meta property="article:published_time" content="2020-05-06T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-05-16T03:24:00.047Z">
 <meta property="article:author" content="FUNKYE">
+<meta property="article:tag" content="多线程">
 <meta property="article:tag" content="java">
 <meta property="article:tag" content="spring">
 <meta name="twitter:card" content="summary">
@@ -160,14 +161,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-spring-bean-condition-build" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-offer" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      根据注解条件动态创建bean
+      大厂面试题解析(持久更新)
     </h1>
   
 
@@ -178,21 +179,122 @@
               <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
         </span>
 
-<a href="/2020/01/13/spring-bean-condition-build/" class="archive-article-date">
-  	<time datetime="2020-01-12T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-13</time>
+<a href="/2020/05/07/offer/" class="archive-article-date">
+  	<time datetime="2020-05-06T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-07</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>本文作者：FUNKYE(陈健斌),杭州某互联网公司主程。</p>
-<h1 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h1><p> 有时候在编程中,我们会烦恼一个问题,初始化了一个bean后,业务中用不到了,有时候又需要了,反反复复非常麻烦,所以以下介绍spring提供的条件创建对应bean的方式:</p>
-<a id="more"></a>
+        <h1 id="大厂面试题解析-持久更新"><a href="#大厂面试题解析-持久更新" class="headerlink" title="大厂面试题解析(持久更新)"></a>大厂面试题解析(持久更新)</h1><p>本文作者：FUNKYE(陈健斌),杭州求职程序员,<a href="mailto:364176773@qq.com">364176773@qq.com</a>,即是邮箱也是qq,也是微信.欢迎各路大佬内推引荐.(仅限杭州地区谢谢)</p>
+<h2 id="美团-到店营销"><a href="#美团-到店营销" class="headerlink" title="美团(到店营销)"></a>美团(到店营销)</h2><h4 id="JVM-结构"><a href="#JVM-结构" class="headerlink" title="JVM 结构:"></a>JVM 结构:</h4><a id="more"></a>
 
-<h2 id="DEMO"><a href="#DEMO" class="headerlink" title="DEMO"></a>DEMO</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Config</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Conditional</span>(MyCondition<span class="class">.<span class="keyword">class</span>)</span></span><br><span class="line"><span class="class">    @<span class="title">Bean</span></span></span><br><span class="line"><span class="class">    <span class="title">public</span> <span class="title">String</span> <span class="title">condition</span>() </span>&#123;</span><br><span class="line">        System.err.println(<span class="string">"自定义的condition的match方法返回值为true时，才会进入该方法创建bean"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 该Abc class位于类路径上时</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@ConditionalOnClass</span>(Abc<span class="class">.<span class="keyword">class</span>)</span></span><br><span class="line"><span class="class">    @<span class="title">Bean</span></span></span><br><span class="line"><span class="class">    <span class="title">public</span> <span class="title">String</span> <span class="title">abc</span>() </span>&#123;</span><br><span class="line">        System.err.println(<span class="string">"ConditionalOnClass true"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 存在Abc类的实例时</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@ConditionalOnBean</span>(Abc<span class="class">.<span class="keyword">class</span>)</span></span><br><span class="line"><span class="class">    @<span class="title">Bean</span></span></span><br><span class="line"><span class="class">    <span class="title">public</span> <span class="title">String</span> <span class="title">bean</span>() </span>&#123;</span><br><span class="line">        System.err.println(<span class="string">"ConditionalOnBean is exist"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * abc bean不存在时初始化</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">    <span class="meta">@ConditionalOnMissingBean</span>(Abc<span class="class">.<span class="keyword">class</span>)</span></span><br><span class="line"><span class="class">    @<span class="title">Bean</span></span></span><br><span class="line"><span class="class">    <span class="title">public</span> <span class="title">String</span> <span class="title">missBean</span>() </span>&#123;</span><br><span class="line">        System.err.println(<span class="string">"ConditionalOnBean is missing"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 表达式为true时</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@ConditionalOnExpression</span>(value = <span class="string">"true"</span>)</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">expresssion</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.err.println(<span class="string">"expresssion is true"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 配置文件属性是否为true</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@ConditionalOnProperty</span>(</span><br><span class="line">            value = &#123;<span class="string">"abc.property"</span>&#125;,</span><br><span class="line">            matchIfMissing = <span class="keyword">false</span>)</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">property</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.err.println(<span class="string">"property is true"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>本地方法栈，虚拟机栈，程序计数器，堆(Young(eden,s0,s1),Old)),元数据区</p>
+<h4 id="垃圾回收算法"><a href="#垃圾回收算法" class="headerlink" title="垃圾回收算法:"></a>垃圾回收算法:</h4><p>1.复制回收(新生代)，标记清除|标记整理(老年代)，</p>
+<p>2.GC 时间标准(Minor GC(新生代)&lt;50ms,10S/1,Full GC(老年代)&lt;1s,10m/1)</p>
+<p>3.如何调优(不断地分析和调整GC类型和内存分配)</p>
+<h4 id="Guava-限流器实现"><a href="#Guava-限流器实现" class="headerlink" title="Guava 限流器实现"></a>Guava 限流器实现</h4><p>令牌桶算法是一个存放固定容量令牌（token）的桶，按照固定速率往桶里添加令牌,每隔1/用户配置的发送速率添加一个令牌到桶中,桶中达到最大令牌数量后丢弃/拒绝多余,N个字节大小就删除N个令牌,N&gt;现有令牌将被等待或丢弃</p>
+<h4 id="线程池execute执行流程"><a href="#线程池execute执行流程" class="headerlink" title="线程池execute执行流程"></a>线程池execute执行流程</h4><ol>
+<li>工作线程数小于核心线程数时，直接新建为核心线程执行；</li>
+<li>大于核心线程数时，将任务添加进等待队列；</li>
+<li>队列满时，创建为非核心线程执行；</li>
+<li>工作线程数大于最大线程数时，拒绝任务</li>
+</ol>
+<h4 id="分布式锁"><a href="#分布式锁" class="headerlink" title="分布式锁"></a>分布式锁</h4><p>redis实现setnx设置过期时间防止死锁,失败，重试机制</p>
+<p><a href="https://github.com/a364176773/redis-lock-spring-boot-starter" target="_blank" rel="noopener">参考实现demo</a></p>
+<h4 id="限流算法"><a href="#限流算法" class="headerlink" title="限流算法"></a>限流算法</h4><h5 id="计数器算法"><a href="#计数器算法" class="headerlink" title="计数器算法:"></a>计数器算法:</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CounterTest</span> </span>&#123;</span><br><span class="line">    `<span class="keyword">public</span> <span class="keyword">long</span> timeStamp = getNowTime();`</span><br><span class="line">    `<span class="keyword">public</span> <span class="keyword">int</span> reqCount = <span class="number">0</span>;`</span><br><span class="line">    `<span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">int</span> limit = <span class="number">100</span>; <span class="comment">// 时间窗口内最大请求数`</span></span><br><span class="line">    `<span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">long</span> interval = <span class="number">1000</span>; <span class="comment">// 时间窗口ms`</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">grant</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">long</span> now = getNowTime();</span><br><span class="line">        <span class="keyword">if</span> (now &lt; timeStamp + interval) &#123;</span><br><span class="line">            <span class="comment">// 在时间窗口内</span></span><br><span class="line">            reqCount++;</span><br><span class="line">            <span class="comment">// 判断当前时间窗口内是否超过最大请求控制数</span></span><br><span class="line">            <span class="keyword">return</span> reqCount &lt;= limit;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            timeStamp = now;</span><br><span class="line">            <span class="comment">// 超时后重置</span></span><br><span class="line">            reqCount = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">long</span> <span class="title">getNowTime</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> System.currentTimeMillis();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>@Conditional(MyCondition.class)<br>这句代码可以标注在类上面，表示该类下面的所有@Bean都会启用配置,也可以标注在方法上面，只是对该方法启用配置<br>@ConditionalOnBean（仅仅在当前上下文中存在某个对象时，才会实例化一个Bean）<br>@ConditionalOnClass（某个class位于类路径上，才会实例化一个Bean）<br>@ConditionalOnExpression（当表达式为true的时候，才会实例化一个Bean）<br>@ConditionalOnMissingBean（仅仅在当前上下文中不存在某个对象时，才会实例化一个Bean）<br>@ConditionalOnMissingClass（某个class类路径上不存在的时候，才会实例化一个Bean）<br>@ConditionalOnNotWebApplication（不是web应用）</p>
+<p>以上的代码有缺陷,会有临界值判断漏洞,优化方法就是把窗口时间跟最大请求数分为无数个小窗口组成,每一个窗口都有计数器来计算.窗口越多的话限流越精确,越平滑.</p>
+<h5 id="令牌算法"><a href="#令牌算法" class="headerlink" title="令牌算法:"></a>令牌算法:</h5><p>原理:</p>
+<p>所有的请求在处理之前都需要拿到一个可用的令牌才会被处理；</p>
+<p>根据限流大小，设置按照一定的速率往桶里添加令牌；</p>
+<p>桶设置最大的放置令牌限制，当桶满时、新添加的令牌就被丢弃或者拒绝；</p>
+<p>请求达到后首先要获取令牌桶中的令牌，拿着令牌才可以进行其他的业务逻辑，处理完业务逻辑之后，将令牌直接删除；</p>
+<p>令牌桶有最低限额，当桶中的令牌达到最低限额的时候，请求处理完之后将不会删除令牌，以此保证足够的限流；</p>
+<h5 id="漏桶算法"><a href="#漏桶算法" class="headerlink" title="漏桶算法:"></a>漏桶算法:</h5><p>原理非常简单,直接以一个水桶被一定的速率去注入相应的水量,这时候水满了,肯定就溢出了(丢弃),而水由请求里,可以说有人不断的去倒水,消耗桶中的水量.</p>
+<h4 id="Dubbo-协议区别"><a href="#Dubbo-协议区别" class="headerlink" title="Dubbo 协议区别:"></a>Dubbo 协议区别:</h4><table>
+<thead>
+<tr>
+<th>特性\协议</th>
+<th>dubbo默认</th>
+<th>rmi</th>
+<th>hessian</th>
+<th>http</th>
+<th>webservice</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>连接个数</td>
+<td>单</td>
+<td>多</td>
+<td>多</td>
+<td>多</td>
+<td>多</td>
+</tr>
+<tr>
+<td>连接方式</td>
+<td>长连接</td>
+<td>短</td>
+<td>短</td>
+<td>短</td>
+<td>短</td>
+</tr>
+<tr>
+<td>传输协议</td>
+<td>TCP</td>
+<td>tcp</td>
+<td>http</td>
+<td>http</td>
+<td>http</td>
+</tr>
+<tr>
+<td>传输方式</td>
+<td>NIO 异步传输</td>
+<td>同步传输</td>
+<td>同步传输</td>
+<td>同步</td>
+<td>同步</td>
+</tr>
+<tr>
+<td>序列化</td>
+<td>Hessian 序列化</td>
+<td>java标准序列化</td>
+<td>hessian序列化</td>
+<td>表单序列化</td>
+<td>soap文本序列化</td>
+</tr>
+<tr>
+<td>适用范围</td>
+<td>参数数据包较小</td>
+<td>大小皆可可传文件</td>
+<td>同上</td>
+<td>大小皆可,不可传文件</td>
+<td>无</td>
+</tr>
+<tr>
+<td>适用场景</td>
+<td>常规远程服务方法调用</td>
+<td>同上,另外可与rmi原生服务互操作</td>
+<td>同上,可与hession原生服务互操作</td>
+<td>需同时给程序以及浏览器使用的服务</td>
+<td>系统集成，跨语言调用</td>
+</tr>
+</tbody></table>
+<h4 id="Dubbo-实现原理"><a href="#Dubbo-实现原理" class="headerlink" title="Dubbo 实现原理:"></a>Dubbo 实现原理:</h4><p>解析服务-&gt;暴露服务-&gt;引用服务-&gt;拦截服务</p>
+<p>远程调用过程:</p>
+<p>从serviceConfig-&gt;ref(对外提供服务的实际类)-&gt;proxyfactory(代理工厂)-&gt;invoker(调用器)-&gt;protocol(对应协议)-&gt;exporter(输出)</p>
+<p>消费服务过程:</p>
+<p>指定关键字前后 10 行的日志查看(grep -A 10 -B 10 ‘keywords’ file.log)<br>堆栈怎么导出(jps -&gt; jheap,jstack -&gt; MAT)<br>Int 多大字节(4)<br>单例模式 (最优,双重检查,volatile关键字+静态方法内同步锁,静态内部类,利用类的初始化保证线程安全.枚举)<br>一个主线程，三个子线程，其中一个 OOM，其他线程状态(不论是堆oom(共享) 还是栈(私有) OverStackError 都不会影响到其他线程，当前线程会停掉，占用的内存会释放，如果不能回收，其他的线程也有可能 oom，主线程 oom 了如果子线程不是 daemon 则不会有影响，是 daemon 则会随主线程一起退出)<br>如何分析堆里的未回收的对象，线程死锁<br>如何加载远程机器的类(一般动态加载类都是直接用Class.forName()这个方法,URLClassLoader提供了从文件目录,jar包,http的加载.) </p>
+<p>美团(基础架构)<br>TCP 如何保证可靠<br>线程池模型<br>YGC 流程<br>NIO 和 IO 区别，IO 多路复用<br>锁类型，乐观锁缺点<br>输出字符串最长连续子串<br>线程池模型，实现原理，shutdown 策略<br>死锁条件，如何避免<br>JVM 内存模型，哪些是线程私有<br>美团(广告)<br>Redis 分布式锁，加锁，释放如何保证原子性，主从切换如何保证成功(多台机器加锁，一半成功即可)<br>幻读和可重复读区别<br>事务隔离级别<br>HashMap，ConcurrentHashMap 底层结构，树化值<br>有序链表合并<br>链表相交检查<br>Java 锁，锁升级<br>Synchronized 实现原理<br>索引失效<br>索引原理</p>
+<p>腾讯(深圳微视)<br>秒杀设计<br>分库分表<br>java8 特性<br>接口、抽象类区别<br>JUC 底层数据结构<br>Pod连接过多问题处理<br>请求耗时问题排查<br>GC 监控、判断、发现、优化<br>TopK<br>堆栈导出命令<br>类加载器<br>TiDB 了解<br>分布式 ID算法<br>合并有序链表<br>生成有效的括号组合<br>白鼠毒药问题</p>
+<p>爱奇艺(会员业务)<br>MySQL 高可用实现，容灾<br>JDK 版本特性<br>消息队列使用场景<br>锁的使用<br>服务发现机制</p>
+<p>高德(高精地图)<br>HashMap 为什么不安全(1. 并发值覆盖 2. Resize 死循环)<br>volatile 和 AtomicInteger 区别(volatile 保证内存可见性，原子性仅限于变量的读和写，无法涵盖变量的操作，如 count++；Atomic 底层依赖 unsafe,通过 CAS 乐观锁操作内存地址，保证原子性)<br>CAS(Compare And Swap 实现原理)(使用 Unsafe 操作内存地址，利用给定的值比较，保证原子性)<br>自旋锁会不会失败(会，值改变了)<br>MySQL索引原理<br>幂等实现方式(唯一索引、TOKEN、悲观锁、乐观锁、分布式锁、状态机)<br>SpringMVC 请求执行的流程(DispatcherServlet -&gt; 处理映射器 -&gt; 拦截器、过滤器-&gt; 处理适配器 -&gt; 处理器 -&gt; 视图解析器 -&gt; 视图 -&gt; DispatcherServlet -&gt; 响应)<br>快排<br>链表翻转<br>A、B 服务，A 可以访问外网，B 通过 A 访问外网，有哪些设计模式可以实现<br>mq怎么做到消息可靠(重试，落盘，ACK，幂等)<br>mq架构<br>表join算法(MySQL 34 讲)<br>调用Notify唤醒，先唤醒线程还是先执行后续代码(notify 不释放锁，执行完后续代码后才会释放)</p>
+<p>高德(大数据)<br>服务架构<br>Qps，服务器配置<br>分布式锁<br>分布式事务<br>两个较大的数求和(转 Stirng 再求和再转数值)<br>兔子繁殖问题(递归思想，保存已求和的值)<br>链表翻转思路(遍历翻转，原地递归方式翻转)<br>JVM 内存结构(本地方法栈，虚拟机栈，程序计数器，元数据区，堆)<br>限流算法<br>ThreadPoolExecutor#execute执行流程(1. 核心线程池是否已满，未满创建核心线程，2. 已满则检查队列是否满，未满加入队列 3.队列已满则检查是否达到最大线程，未达到，创建新的线程，已达到，执行拒绝策略)<br>个人亮点</p>
+<p>快手(客服平台)<br>Redis zset 底层结构(跳表)<br>GC 调优<br>Old 区回收原因，解决方案<br>MySQL 隔离级别，索引结构，B+树优点<br>TCP 三次握手，中间状态<br>Java 的锁<br>Socket 状态查询<br>数字交换一次位置，获取最大值(变成字符串，找到最后一个最大值，挪到最前面)<br>项目中的难点，解决方案<br>数据库双一设置(innodb_flush_log_at_trx_commit和sync_binlog两个参数设置，这两个是是控制MySQL 磁盘写入策略以及数据安全性的关键参数)<br>Redis String 底层结构(SDS 简单动态字符串)<br>用栈实现队列(s1,s2 两个栈,offer 到s1, pop的时候从s2 取，没有了把s1的弹出到s2)<br>线程池线程创建流程()<br>ES 结构，副本，角色<br>为什么要用线程池(1.提高 CPU 的使用率，2.异步执行提高响应)<br>MySQL执行流程，索引的作用<br>从日志统计用户的访问次数</p>
+<p>小米(有品电商)<br>线程池线程模型<br>Hashtable 和 HashMap<br>二叉树的按层打印与ZigZag打印<br>派对的最大快乐值<br>自定义 String 如何加载，会不会冲突(类加载机制)<br>为什么要用双亲委派<br>Executors 创建的线程池类型</p>
+<p>头条<br>TCP 三次握手，四次挥手<br>HTTP 方法，区别(GET,POST,PUT,DELETE,OPTION)<br>Redis 底层结构<br>GET 和 POST 的区别<br>InnoDB 索引，结构，覆盖索引，索引优点<br>Redis ZSET 底层实现，为什么不用红黑树<br>HTTP 状态码 301 302 区别<br>数字全排列，1234 的全排列<br>栈实现队列<br>外卖订单分库分表策略、方案<br>DFS 深度优先遍历<br>进程和线程的区别<br>进程状态</p>
+<p>Boss 直聘<br>红黑树时间复杂度<br>二叉树最大深度<br>HashMap 结构<br>MySQL 索引<br>主线程和子线程协调(CountDownLatch)<br>Redis 分布式锁续期<br>Redis 线程，是否有多个</p>
 
       
 
@@ -237,7 +339,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">spring</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">offer</a>
         		</li>
       		
 		</ul>
@@ -304,7 +406,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/01/13/spring-bean-condition-build/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/05/07/offer/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -318,18 +420,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/01/18/redis-lock-spring-boot-starter/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2020/05/09/funkye-java/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          以spring boot starter搭建redis分布式锁项目
+          个人简历
         
       </div>
     </a>
   
   
-    <a href="/2020/01/13/test-queue/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">手写一个简单的消息队列实现</div>
+    <a href="/2020/05/05/seata-1.2.0/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">七步带你集成Seata 1.2 高可用搭建</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -368,7 +470,7 @@ if(true){
   	repo: 'a364176773.github.io',
   	owner: 'a364176773',
   	admin: ['a364176773'],
-  	id: 'Mon Jan 13 2020 00:00:00 GMT+0800',
+  	id: 'Thu May 07 2020 00:00:00 GMT+0800',
   	distractionFreeMode: 'true'
 })
 gitalk.render('gitalk-container') 

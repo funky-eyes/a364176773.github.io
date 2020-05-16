@@ -172,6 +172,99 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-tx-lcn-rollback" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/10/29/tx-lcn-rollback/">分布式事务tx-lcn下lcn模式时spring手动事务回滚失效的解决方案</a>
+    </h1>
+  
+
+        
+        
+<a href="/2019/10/29/tx-lcn-rollback/" class="archive-article-date">
+  	<time datetime="2019-10-28T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="分布式事务tx-lcn下lcn模式时spring手动事务回滚失效的解决方案"><a href="#分布式事务tx-lcn下lcn模式时spring手动事务回滚失效的解决方案" class="headerlink" title="分布式事务tx-lcn下lcn模式时spring手动事务回滚失效的解决方案"></a>分布式事务tx-lcn下lcn模式时spring手动事务回滚失效的解决方案</h1><p>本文作者：FUNKYE(陈健斌),杭州某互联网公司主程。</p>
+<h1 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h1><p>先上错误demo</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@LcnTransaction</span></span><br><span class="line"><span class="meta">@Transactional</span>(rollbackFor = &#123;Exception<span class="class">.<span class="keyword">class</span>&#125;)</span></span><br><span class="line"><span class="class"><span class="title">public</span> <span class="title">boolean</span> <span class="title">test</span>() </span>&#123;</span><br><span class="line">    B_file b = <span class="keyword">new</span> B_file();</span><br><span class="line">    b.setUrl(<span class="string">"515645646"</span>);</span><br><span class="line">    b.setCategory(<span class="string">"0"</span>);</span><br><span class="line">    <span class="comment">// 发出sql</span></span><br><span class="line">    save(b);</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">1</span> / <span class="number">0</span>;<span class="comment">// 异常</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        <span class="comment">// 事务回滚</span></span><br><span class="line">        System.out.println(<span class="string">"事务回滚"</span>);</span><br><span class="line">        <span class="comment">// 其实这个模式下,下面这句会失效,导致数据库被正常插入</span></span><br><span class="line">        TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();<span class="comment">// 关键</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以运行类似代码,会发现这时候并没有事务回滚,上面的save对象会被插入到数据库.</p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>解决方法有2种:</p>
+<p>1.改用 @TccTransaction来替换lcn模式</p>
+<p>2.使用DTXUserControls.rollbackCurrentGroup();来替换TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">lcn</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/java//" class="article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/10/29/tx-lcn-rollback/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-redis-queue" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -588,6 +681,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">job</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">offer</a>
               </li>
             
             <div class="clearfix"></div>

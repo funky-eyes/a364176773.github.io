@@ -260,6 +260,95 @@
 
 
   
+    <article id="post-offer" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/07/offer/">大厂面试题解析(持久更新)</a>
+    </h1>
+  
+
+        
+        
+<a href="/2020/05/07/offer/" class="archive-article-date">
+  	<time datetime="2020-05-06T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="大厂面试题解析-持久更新"><a href="#大厂面试题解析-持久更新" class="headerlink" title="大厂面试题解析(持久更新)"></a>大厂面试题解析(持久更新)</h1><p>本文作者：FUNKYE(陈健斌),杭州求职程序员,<a href="mailto:364176773@qq.com">364176773@qq.com</a>,即是邮箱也是qq,也是微信.欢迎各路大佬内推引荐.(仅限杭州地区谢谢)</p>
+<h2 id="美团-到店营销"><a href="#美团-到店营销" class="headerlink" title="美团(到店营销)"></a>美团(到店营销)</h2><h4 id="JVM-结构"><a href="#JVM-结构" class="headerlink" title="JVM 结构:"></a>JVM 结构:</h4>
+        
+          <a class="article-more-a" href="/2020/05/07/offer/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">offer</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/java//" class="article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/07/offer/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-seata-1.2.0" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -989,138 +1078,6 @@
 
 
   
-    <article id="post-synchronized-lock" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/01/04/synchronized-lock/">synchronized和lock的区别</a>
-    </h1>
-  
-
-        
-        
-<a href="/2020/01/04/synchronized-lock/" class="archive-article-date">
-  	<time datetime="2020-01-03T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-04</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="synchronized和lock的区别"><a href="#synchronized和lock的区别" class="headerlink" title="synchronized和lock的区别"></a>synchronized和lock的区别</h1><p>本文作者：FUNKYE(陈健斌),杭州某互联网公司主程。</p>
-<h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><table>
-<thead>
-<tr>
-<th align="center">类别</th>
-<th align="center">synchronized</th>
-<th align="center">lock</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">实现方式</td>
-<td align="center">jvm底层队列监控实现</td>
-<td align="center">一个类,由jdk代码实现</td>
-</tr>
-<tr>
-<td align="center">释放锁</td>
-<td align="center">1.锁方法块代码执行完,系统自动释放锁 2.出现异常释放</td>
-<td align="center">1.必须在finally中释放锁 2.利用代码中lockInterruptibly来中断锁.</td>
-</tr>
-<tr>
-<td align="center">锁状态</td>
-<td align="center">无法获取</td>
-<td align="center">可以trylock来判断锁目前的状态</td>
-</tr>
-<tr>
-<td align="center">获取锁方式</td>
-<td align="center">A线程如果一直占用,B就只能等待</td>
-<td align="center">可以尝试获取锁,线程也可以不需要一直等待下去</td>
-</tr>
-<tr>
-<td align="center">类型</td>
-<td align="center">非公平锁</td>
-<td align="center">默认非公平锁,可设置公平锁</td>
-</tr>
-<tr>
-<td align="center">使用方式</td>
-<td align="center">方法上,代码块,编程简单</td>
-<td align="center">代码块,配合try finally使用,灵活度高</td>
-</tr>
-<tr>
-<td align="center">性能</td>
-<td align="center">竞争小情况下,性能更好,而且会更具竞争情况自动从偏向锁–&gt;轻量级锁–&gt;重量级锁升级</td>
-<td align="center">竞争激烈情况下,lock性能更加出众</td>
-</tr>
-</tbody></table>
-        
-          <a class="article-more-a" href="/2020/01/04/synchronized-lock/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">thread</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/java//" class="article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/01/04/synchronized-lock/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next »</a>
@@ -1270,6 +1227,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">job</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">offer</a>
               </li>
             
             <div class="clearfix"></div>
