@@ -6,13 +6,13 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>funkye技术分享小站</title>
+  <title>funkye</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="好记性不如烂笔头,记录敲代码中的点点滴滴.">
 <meta property="og:type" content="website">
-<meta property="og:title" content="funkye技术分享小站">
+<meta property="og:title" content="funkye">
 <meta property="og:url" content="http://yoursite.com/page/3/index.html">
-<meta property="og:site_name" content="funkye技术分享小站">
+<meta property="og:site_name" content="funkye">
 <meta property="og:description" content="好记性不如烂笔头,记录敲代码中的点点滴滴.">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:author" content="FUNKYE">
@@ -32,7 +32,7 @@
 <meta property="article:tag" content="java开发">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternative" href="/atom.xml" title="funkye技术分享小站" type="application/atom+xml">
+    <link rel="alternative" href="/atom.xml" title="funkye" type="application/atom+xml">
   
   
     <link rel="icon" href="/img/favicon.png">
@@ -171,6 +171,109 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-seata-mybatisplus-analysis" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/30/seata-mybatisplus-analysis/">透过源码解决SeataAT模式整合Mybatis-Plus失去MP特性的问题</a>
+    </h1>
+  
+
+        
+        
+<a href="/2019/11/30/seata-mybatisplus-analysis/" class="archive-article-date">
+  	<time datetime="2019-11-29T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-30</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="透过源码解决SeataAT模式整合Mybatis-Plus失去MP特性的问题"><a href="#透过源码解决SeataAT模式整合Mybatis-Plus失去MP特性的问题" class="headerlink" title="透过源码解决SeataAT模式整合Mybatis-Plus失去MP特性的问题"></a>透过源码解决SeataAT模式整合Mybatis-Plus失去MP特性的问题</h1><p>项目地址：<a href="https://gitee.com/itCjb/springboot-dubbo-mybatisplus-seata" target="_blank" rel="noopener">https://gitee.com/itCjb/springboot-dubbo-mybatisplus-seata</a> </p>
+<p>本文作者：FUNKYE(陈健斌),杭州某互联网公司主程。</p>
+<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>Mybatis-Plus：<a href="https://github.com/baomidou/mybatis-plus" target="_blank" rel="noopener">MyBatis-Plus</a>（简称 MP）是一个 <a href="http://www.mybatis.org/mybatis-3/" target="_blank" rel="noopener">MyBatis</a> 的增强工具，在 MyBatis 的基础上只做增强不做改变，为简化开发、提高效率而生。</p>
+<p>MP配置：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"sqlSessionFactory"</span> <span class="attr">class</span>=<span class="string">"com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"dataSource"</span> <span class="attr">ref</span>=<span class="string">"dataSource"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>Seata：Seata 是一款开源的分布式事务解决方案，致力于提供高性能和简单易用的分布式事务服务。Seata 将为用户提供了 AT、TCC、SAGA 和 XA 事务模式，为用户打造一站式的分布式解决方案。</p>
+<p>AT模式机制：</p>
+<ul>
+<li><p>一阶段：业务数据和回滚日志记录在同一个本地事务中提交，释放本地锁和连接资源。</p>
+</li>
+<li><p>二阶段：</p>
+<ul>
+<li>提交异步化，非常快速地完成。</li>
+<li>回滚通过一阶段的回滚日志进行反向补偿。</li>
+</ul>
+        
+          <a class="article-more-a" href="/2019/11/30/seata-mybatisplus-analysis/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">seata</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/java//" class="article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/11/30/seata-mybatisplus-analysis/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-springboot-dubbo-mybatisplus-seata" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -779,6 +882,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">io</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Seata</a>
               </li>
             
             <div class="clearfix"></div>
