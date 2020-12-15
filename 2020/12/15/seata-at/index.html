@@ -6,31 +6,35 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>funkye</title>
+  <title>Seata-AT如何保证分布式事务一致性 | funkye</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="好记性不如烂笔头,记录敲代码中的点点滴滴.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="funkye">
-<meta property="og:url" content="http://yoursite.com/page/3/index.html">
+  <meta name="description" content="本文介绍Seata-AT如何保证分布式事务一致性">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Seata-AT如何保证分布式事务一致性">
+<meta property="og:url" content="http://yoursite.com/2020/12/15/seata-at/index.html">
 <meta property="og:site_name" content="funkye">
-<meta property="og:description" content="好记性不如烂笔头,记录敲代码中的点点滴滴.">
+<meta property="og:description" content="本文介绍Seata-AT如何保证分布式事务一致性">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img.alicdn.com/tfs/TB19qmhOrY1gK0jSZTEXXXDQVXa-1330-924.png">
+<meta property="og:image" content="https://img.alicdn.com/tfs/TB1m59pOEY1gK0jSZFCXXcwqXXa-1330-924.png">
+<meta property="og:image" content="https://img.alicdn.com/tfs/TB1hSpccIVl614jSZKPXXaGjpXa-1330-924.png">
+<meta property="og:image" content="http://seata.io/img/saga/sofameetup3_img/10.png">
+<meta property="og:image" content="https://tiebapic.baidu.com/forum/pic/item/c8177f3e6709c93de8c534b2883df8dcd10054bb.jpg">
+<meta property="og:image" content="https://img.alicdn.com/tfs/TB1zaknwVY7gK0jSZKzXXaikpXa-702-521.png">
+<meta property="og:image" content="https://img.alicdn.com/tfs/TB1xW0UwubviK0jSZFNXXaApXXa-718-521.png">
+<meta property="og:image" content="https://tiebapic.baidu.com/forum/pic/item/48540923dd54564eeffcde7ca4de9c82d0584fdd.jpg">
+<meta property="og:image" content="https://tiebapic.baidu.com/forum/pic/item/f11f3a292df5e0feebf2b3444b6034a85fdf7288.jpg">
+<meta property="og:image" content="https://img.alicdn.com/tfs/TB1NTuzOBr0gK0jSZFnXXbRRXXa-1330-924.png">
+<meta property="og:image" content="https://tiebapic.baidu.com/forum/pic/item/b8014a90f603738d76322967a41bb051f819ec7f.jpg">
+<meta property="og:image" content="https://img.alicdn.com/tfs/TB1lTSoOqL7gK0jSZFBXXXZZpXa-1028-528.png">
+<meta property="article:published_time" content="2020-12-14T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-12-15T12:03:59.433Z">
 <meta property="article:author" content="FUNKYE">
-<meta property="article:tag" content="博客">
-<meta property="article:tag" content="开发者">
-<meta property="article:tag" content="程序猿">
-<meta property="article:tag" content="程序媛">
-<meta property="article:tag" content="极客">
-<meta property="article:tag" content="编程">
-<meta property="article:tag" content="代码">
-<meta property="article:tag" content="开源">
-<meta property="article:tag" content="IT网站">
-<meta property="article:tag" content="陈健斌">
-<meta property="article:tag" content="funkye">
 <meta property="article:tag" content="java">
-<meta property="article:tag" content="java后端">
-<meta property="article:tag" content="java开发">
+<meta property="article:tag" content="Seata">
+<meta property="article:tag" content="分布式事务">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img.alicdn.com/tfs/TB19qmhOrY1gK0jSZTEXXXDQVXa-1330-924.png">
   
     <link rel="alternative" href="/atom.xml" title="funkye" type="application/atom+xml">
   
@@ -170,142 +174,182 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-seata-nacos-docker" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-seata-at" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/03/seata-nacos-docker/">Docker部署Seata与Nacos整合</a>
+    <h1 class="article-title" itemprop="name">
+      Seata-AT如何保证分布式事务一致性
     </h1>
   
 
         
         
-<a href="/2019/12/03/seata-nacos-docker/" class="archive-article-date">
-  	<time datetime="2019-12-02T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-03</time>
+        <!-- 不蒜子统计 -->
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+
+<a href="/2020/12/15/seata-at/" class="archive-article-date">
+  	<time datetime="2020-12-14T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-15</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Docker部署Seata与Nacos整合"><a href="#Docker部署Seata与Nacos整合" class="headerlink" title="Docker部署Seata与Nacos整合"></a>Docker部署Seata与Nacos整合</h1><p>运行所使用的demo<a href="https://gitee.com/itCjb/springboot-dubbo-mybatisplus-seata" target="_blank" rel="noopener">项目地址</a></p>
-<p>本文作者：FUNKYE(陈健斌),杭州某互联网公司主程。</p>
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>直连方式的Seata配置<a href="http://seata.io/zh-cn/blog/springboot-dubbo-mybatisplus-seata.html" target="_blank" rel="noopener">博客</a></p>
-<p>Seata整合Nacos配置<a href="http://seata.io/zh-cn/blog/seata-nacos-analysis.html" target="_blank" rel="noopener">博客</a></p>
-<p>我们接着前几篇篇的基础上去配置nacos做配置中心跟dubbo注册中心.</p>
-        
-          <a class="article-more-a" href="/2019/12/03/seata-nacos-docker/#more">more >></a>
-        
-      
+        <h1 id="Seata-AT如何保证分布式事务一致性"><a href="#Seata-AT如何保证分布式事务一致性" class="headerlink" title="Seata-AT如何保证分布式事务一致性"></a>Seata-AT如何保证分布式事务一致性</h1><p>Seata 是一款开源的分布式事务解决方案，star高达18100+，社区活跃度极高，致力于在微服务架构下提供高性能和简单易用的分布式事务服务,本文将剖析Seata-AT的实现原理,让用户对AT模式有更深入的认识.<br>作者：陈健斌（funkye） github id: <a href="https://github.com/a364176773" target="_blank" rel="noopener">a364176773</a></p>
+ <a id="more"></a> 
 
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">seata,nacos</a>
-        		</li>
-      		
-		</ul>
-	</div>
+<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ol>
+<li>Seata 事务模式是什么？</li>
+<li>AT模式是什么？</li>
+<li>AT如何保证分布式事务一致性？</li>
+<li>Seata近期规划；</li>
+<li>总结；</li>
+</ol>
+<h2 id="Seata事务模式是什么"><a href="#Seata事务模式是什么" class="headerlink" title="Seata事务模式是什么?"></a>Seata事务模式是什么?</h2><h3 id="1-1Seata对事务的定义"><a href="#1-1Seata对事务的定义" class="headerlink" title="1.1Seata对事务的定义"></a>1.1Seata对事务的定义</h3><blockquote>
+<p>Seata 定义了全局事务的框架。<br>全局事务 定义为若干 分支事务 的整体协调：<br>1.TM 向 TC 请求发起（Begin）、提交（Commit）、回滚（Rollback）全局事务。<br>2.TM 把代表全局事务的 XID 绑定到分支事务上。<br>3.RM 向 TC 注册，把分支事务关联到 XID 代表的全局事务中。<br>4.RM 把分支事务的执行结果上报给 TC。（可选）<br>5.TC 发送分支提交（Branch Commit）或分支回滚（Branch Rollback）命令给 RM。</p>
+</blockquote>
+<img src="https://img.alicdn.com/tfs/TB19qmhOrY1gK0jSZTEXXXDQVXa-1330-924.png" alt="img" style="zoom: 67%;" />
 
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/docker//" class="article-tag-list-link color2">docker</a>
-        		</li>
-      		
-		</ul>
-	</div>
+<blockquote>
+<p>Seata 的 全局事务 处理过程，分为两个阶段：<br>执行阶段 ：执行 分支事务，并 保证 执行结果满足是 可回滚的（Rollbackable） 和 持久化的（Durable）。<br>完成阶段： 根据 执行阶段 结果形成的决议，应用通过 TM 发出的全局提交或回滚的请求给 TC，<br>TC 命令 RM 驱动 分支事务 进行 Commit 或 Rollback。<br>Seata 的所谓 事务模式 是指：运行在 Seata 全局事务框架下的 分支事务 的行为模式。<br>准确地讲，应该叫作 分支事务模式。<br>不同的 事务模式 区别在于 分支事务 使用不同的方式达到全局事务两个阶段的目标。<br>即，回答以下两个问题：<br>执行阶段 ：如何执行并 保证 执行结果满足是 可回滚的（Rollbackable） 和 持久化的（Durable）。<br>完成阶段： 收到 TC 的命令后，做到事务的回滚/提交</p>
+</blockquote>
+<h3 id="1-2-其它二阶段事务如何在Seata事务框架下运转"><a href="#1-2-其它二阶段事务如何在Seata事务框架下运转" class="headerlink" title="1.2 其它二阶段事务如何在Seata事务框架下运转"></a>1.2 其它二阶段事务如何在Seata事务框架下运转</h3><h4 id="1-2-1-TCC事务模式"><a href="#1-2-1-TCC事务模式" class="headerlink" title="1.2.1 TCC事务模式"></a>1.2.1 TCC事务模式</h4><p>首先,我们先来看下TCC事务是如何融合在Seata事务框架中:</p>
+<img src="https://img.alicdn.com/tfs/TB1m59pOEY1gK0jSZFCXXcwqXXa-1330-924.png" alt="img" style="zoom:67%;" />
 
+<p>可以发现,其实跟Seata的事务框架图长得非常的像,而区别呢就是我们的RM负责管理的就是我们的一阶段的try执行和二阶段的confirm/cancel,一样是由TM进行事务的Begin(发起),RM被TM调用后执行一阶段的Try方法,等待调用链路走完的时候,TM向TC告知二阶段决议,此时TC对RM驱动二阶段执行(下发通知,RM执行confirm/cancel).</p>
+<h4 id="1-2-1-XA事务模式"><a href="#1-2-1-XA事务模式" class="headerlink" title="1.2.1 XA事务模式"></a>1.2.1 XA事务模式</h4><img src="https://img.alicdn.com/tfs/TB1hSpccIVl614jSZKPXXaGjpXa-1330-924.png" alt="img" style="zoom:67%;" />
 
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/03/seata-nacos-docker/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-seata-mybatisplus-analysis" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/30/seata-mybatisplus-analysis/">透过源码解决SeataAT模式整合Mybatis-Plus失去MP特性的问题</a>
-    </h1>
-  
-
-        
-        
-<a href="/2019/11/30/seata-mybatisplus-analysis/" class="archive-article-date">
-  	<time datetime="2019-11-29T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-30</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="透过源码解决SeataAT模式整合Mybatis-Plus失去MP特性的问题"><a href="#透过源码解决SeataAT模式整合Mybatis-Plus失去MP特性的问题" class="headerlink" title="透过源码解决SeataAT模式整合Mybatis-Plus失去MP特性的问题"></a>透过源码解决SeataAT模式整合Mybatis-Plus失去MP特性的问题</h1><p>项目地址：<a href="https://gitee.com/itCjb/springboot-dubbo-mybatisplus-seata" target="_blank" rel="noopener">https://gitee.com/itCjb/springboot-dubbo-mybatisplus-seata</a> </p>
-<p>本文作者：FUNKYE(陈健斌),杭州某互联网公司主程。</p>
-<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>Mybatis-Plus：<a href="https://github.com/baomidou/mybatis-plus" target="_blank" rel="noopener">MyBatis-Plus</a>（简称 MP）是一个 <a href="http://www.mybatis.org/mybatis-3/" target="_blank" rel="noopener">MyBatis</a> 的增强工具，在 MyBatis 的基础上只做增强不做改变，为简化开发、提高效率而生。</p>
-<p>MP配置：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"sqlSessionFactory"</span> <span class="attr">class</span>=<span class="string">"com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"dataSource"</span> <span class="attr">ref</span>=<span class="string">"dataSource"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>Seata：Seata 是一款开源的分布式事务解决方案，致力于提供高性能和简单易用的分布式事务服务。Seata 将为用户提供了 AT、TCC、SAGA 和 XA 事务模式，为用户打造一站式的分布式解决方案。</p>
-<p>AT模式机制：</p>
-<ul>
-<li><p>一阶段：业务数据和回滚日志记录在同一个本地事务中提交，释放本地锁和连接资源。</p>
-</li>
-<li><p>二阶段：</p>
-<ul>
-<li>提交异步化，非常快速地完成。</li>
-<li>回滚通过一阶段的回滚日志进行反向补偿。</li>
+<p>如图所示,XA模式其实就是Seata底层利用了XA接口,在一阶段二阶段时自动处理.如一阶段时,XA的RM通过代理用户数据源,创建XAConnection,进行开启XA事务和XAprepare(此时XA的任何操作都会被持久化,即便宕机也能恢复),在二阶段时,TC通知RM进行XA分支的Commit/Rollback操作.</p>
+<h2 id="AT模式是什么"><a href="#AT模式是什么" class="headerlink" title="AT模式是什么?"></a>AT模式是什么?</h2><p>首先我们来看一个例子:</p>
+<p>一阶段： 业务sql：update product set name = ‘GTS’ where name = ‘TXC’;  </p>
+<p>可以看到一阶段的时候对用户是无感知的,业务sql是什么,还是什么.此时我们来简单说下AT这个时候会做那些事?</p>
+<p>解析sql并查询得到前镜像： select id, name, since from product where name = ‘TXC’;</p>
+<p>执行业务sql后，再查询执行后的数据作为后镜像： select id, name, since from product where id = 1;</p>
+<p>二阶段： </p>
+<p>提交:    仅需把事务相关信息删除即可.(理论上不删除也没问题)</p>
+<p>回滚： 取出前镜像进行回滚</p>
+<p>通过上述简单的例子,其实可以发现,AT模式就是自动补偿式事务,那AT具体都做了哪些呢?我们接下来看.</p>
+<h2 id="AT如何保证分布式事务一致性？"><a href="#AT如何保证分布式事务一致性？" class="headerlink" title="AT如何保证分布式事务一致性？"></a>AT如何保证分布式事务一致性？</h2><p>我们来看这个图:</p>
+<p><img src="http://seata.io/img/saga/sofameetup3_img/10.png" alt="img"></p>
+<p>可能刚看到会有疑问对吧?其实这个就是无侵入式,AT模式的做法示意图,首先用户还是从接口进入,到达了事务发起方,此时对业务开发者来说,这个发起方入口其实就是一个业务接口罢了,一样的执行业务sql,一样的return响应信息给客户端并没有什么改变.而背后就是用户的sql被Seata代理所托管,Seata-AT模式能感知到用户的所有sql,并对之进行操作,来保证一致性.</p>
+<p>但是Seata-AT是怎么做到无侵入的呢?我们接着看</p>
+<p><img src="https://tiebapic.baidu.com/forum/pic/item/c8177f3e6709c93de8c534b2883df8dcd10054bb.jpg" alt="img"></p>
+<p>首先我们可以看到如图所示,应用启动时,Seata会自动把用户的DataSource代理,还对JDBC操作熟悉的用户其实对DataSource还是比较熟悉的,拿到了DataSource,就等于掌握了数据源连接,也就能在背后做些”小动作”,此时该对用户也是无感知无入侵.</p>
+<p>之后业务有请求进来,执行业务sql时,Seata会解析用户的sql,提取出表元数据,生成前镜像,再通过执行业务sql,保存执行sql后的后镜像(至于后镜像的用户之后会说到),再生成行锁,再注册分支是携带到Seata-Server 也就是TC端.</p>
+<p>此时在Client端的一阶段操作就已经完成了,无感知,无入侵.此时如果我们思考下,会发现这里其实有一个行锁,那么这个行锁是干嘛的呢?这就是要接着讲到Seata-AT是如何保证分布式下的事务隔离性,这里我们直接拿官网的示例来说.</p>
+<h3 id="2-1写隔离"><a href="#2-1写隔离" class="headerlink" title="2.1写隔离"></a>2.1写隔离</h3><ul>
+<li>一阶段本地事务提交前，需要确保先拿到 <strong>全局锁</strong> 。</li>
+<li>拿不到 <strong>全局锁</strong> ，不能提交本地事务。</li>
+<li>拿 <strong>全局锁</strong> 的尝试被限制在一定范围内，超出范围将放弃，并回滚本地事务，释放本地锁。</li>
 </ul>
-        
-          <a class="article-more-a" href="/2019/11/30/seata-mybatisplus-analysis/#more">more >></a>
-        
+<p>以一个示例来说明：</p>
+<p>两个全局事务 tx1 和 tx2，分别对 a 表的 m 字段进行更新操作，m 的初始值 1000。</p>
+<p>tx1 先开始，开启本地事务，拿到本地锁，更新操作 m = 1000 - 100 = 900。本地事务提交前，先拿到该记录的 <strong>全局锁</strong> ，本地提交释放本地锁。 tx2 后开始，开启本地事务，拿到本地锁，更新操作 m = 900 - 100 = 800。本地事务提交前，尝试拿该记录的 <strong>全局锁</strong> ，tx1 全局提交前，该记录的全局锁被 tx1 持有，tx2 需要重试等待 <strong>全局锁</strong> 。</p>
+<p><img src="https://img.alicdn.com/tfs/TB1zaknwVY7gK0jSZKzXXaikpXa-702-521.png" alt="img"></p>
+<p>tx1 二阶段全局提交，释放 <strong>全局锁</strong> 。tx2 拿到 <strong>全局锁</strong> 提交本地事务。</p>
+<p><img src="https://img.alicdn.com/tfs/TB1xW0UwubviK0jSZFNXXaApXXa-718-521.png" alt="Write-Isolation: Rollback"></p>
+<p>如果 tx1 的二阶段全局回滚，则 tx1 需要重新获取该数据的本地锁，进行反向补偿的更新操作，实现分支的回滚。</p>
+<p>此时，如果 tx2 仍在等待该数据的 <strong>全局锁</strong>，同时持有本地锁，则 tx1 的分支回滚会失败。分支的回滚会一直重试，直到 tx2 的 <strong>全局锁</strong> 等锁超时，放弃 <strong>全局锁</strong> 并回滚本地事务释放本地锁，tx1 的分支回滚最终成功。</p>
+<p>因为整个过程 <strong>全局锁</strong> 在 tx1 结束前一直是被 tx1 持有的，所以不会发生 <strong>脏写</strong> 的问题。</p>
+<p>这个时候隔离性相比大家已经比较明白了,此时一阶段的大部分操作相信大家也比较明白了,此时我们应该继续往下一阶段继续解析.</p>
+<h3 id="2-2-AT-模式二阶段处理"><a href="#2-2-AT-模式二阶段处理" class="headerlink" title="2.2 AT 模式二阶段处理"></a>2.2 AT 模式二阶段处理</h3><img src="https://tiebapic.baidu.com/forum/pic/item/48540923dd54564eeffcde7ca4de9c82d0584fdd.jpg" style="zoom:67%;" />
+
+<p>我们由上图可见在二阶段提交时,其实TC仅是下发一个把之前一阶段做记录的undoLog删除,并把相关事务信息,如行锁删除,让之后因为在竞争锁被阻塞的事务顺利进行.</p>
+<p>而二阶段是回滚时,则要多做一些处理.</p>
+<img src="https://tiebapic.baidu.com/forum/pic/item/f11f3a292df5e0feebf2b3444b6034a85fdf7288.jpg" alt="img" style="zoom:67%;" />
+
+<p>首先在Client端收到TC告知的二阶段是回滚时,会去查到对应的事务的undolog,取出后镜像,对比当前数据的数据(因为SeataAT是从业务应用层面进行保护分布式事务,如果此时在数据库层面直接修改了库内信息,这个时候SeataAT的行锁是不起到隔离性),如果出现了在全局事务以外的数据修改,此时判定为脏写,而Seata因为无法感知这个脏写如何发生,此时只能打印日志和触发异常通知,告知用户需要人工介入(规范修改数据入口可避免脏写).</p>
+<p>而如果没有发生脏写就比较简单了,拿出前镜像,因为我们都知道事务是需要有原子性了,要么一起发生,要么都不发生,此时前镜像记录了发生之前的数据,进行回滚后,就达到了类似本地事务那样的原子性效果.回滚后,再把事务相关信息,如undolog,行锁进行删除.二阶段回滚算是告一段落了.</p>
+<p>既然介绍完了AT模式的一阶段及二阶段的原理思想方式,那么AT在Seata的分布式事务框架下是怎么样的呢?</p>
+<img src="https://img.alicdn.com/tfs/TB1NTuzOBr0gK0jSZFnXXbRRXXa-1330-924.png" alt="img" style="zoom:67%;" />
+
+<p>我们可以看到,AT与其它事务模式在Seata事务框架中,会多出一个undolog的依赖(相对其它模式的入侵点),但是除此之外,对业务来说,几乎是零入侵性,这也就是为什么AT模式在Seata中受众广泛.</p>
+<h3 id="2-3-AT-模式与Seata支持的其它二阶段模式区别"><a href="#2-3-AT-模式与Seata支持的其它二阶段模式区别" class="headerlink" title="2.3 AT 模式与Seata支持的其它二阶段模式区别"></a>2.3 AT 模式与Seata支持的其它二阶段模式区别</h3><p>首先我们应该明白，目前为止，不存在有任何一种分布式事务的可以满足所有场景.</p>
+<p>无论 AT 模式、TCC 模式还是 Saga 模式，这些模式的提出，本质上都源自 XA 规范对某些场景需求的无法满足.</p>
+<p>我们分为3点来做出对比:</p>
+<ul>
+<li>数据锁定</li>
+</ul>
+<p>AT 模式使用 <em>全局锁</em> 保障基本的 <em>写隔离</em>，实际上也是锁定数据的，只不过锁在 TC 侧集中管理,解锁效率高且没有阻塞的问题.</p>
+<p>TCC模式 无锁,利用本地事务排他锁特性,可预留资源,在全局事务决议后执行相应操作.</p>
+<p>XA 模式 在整个事务处理过程结束前，涉及数据都被锁定，读写都按隔离级别的定义约束起来.</p>
+<ul>
+<li>死锁（协议阻塞）</li>
+</ul>
+<p>XA 模式 prepare 后(老版本的数据库中,需要XA END后,再下发prepare(三阶段由来)),分支事务进入阻塞阶段，收到 XA commit 或 XA rollback 前必须阻塞等待。</p>
+<p>AT 可支持降级,因为锁存储再TC侧,如果Seata 出现bug或者其它问题,可直接降级,对后续业务调用链无任何影响.</p>
+<p>TCC 无此问题.</p>
+<ul>
+<li><strong>性能</strong></li>
+</ul>
+<p>性能的损耗主要来自两个方面: 一方面，事务相关处理和协调过程，增加单个事务的 RT;另一方面,并发事务数据的锁冲突,降低吞吐.其实主要原因就是上面的协议阻塞跟数据锁定造成.</p>
+<p>XA 模式它的一阶段不提交，在大并发场景由于锁存储再多个资源方(数据库等),加剧了性能耗损</p>
+<p>AT 模式 锁粒度细至行级(需要主键),且所有事务锁存储再TC侧,解锁高效迅速.</p>
+<p>TCC 模式 性能最优,仅需些许RPC开销,及2次本地事务的性能开销,但是需要符合资源预留场景,且是对业务侵入性较大(需要业务开发者每个接口分为3个,一个try,2个二阶段使用的confirm和cancel).</p>
+<p>可能很多同学对XA和AT的锁&amp;协议阻塞不是特别理解,那么我们直接来看下图</p>
+<img src="https://tiebapic.baidu.com/forum/pic/item/b8014a90f603738d76322967a41bb051f819ec7f.jpg" alt="img" style="zoom: 80%;" />
+
+<p>可以试着猜一下是哪个是XA?其实下图的是XA,因为它带来的锁粒度更大,且锁定时间更久,导致了并发性能相对AT事务模型来说,差的比较多,所以至今,XA模式的普及度都不很太高.</p>
+<h2 id="Seata近期规划"><a href="#Seata近期规划" class="headerlink" title="Seata近期规划"></a>Seata近期规划</h2><ul>
+<li><strong>控制台</strong></li>
+</ul>
+<p>首先控制台是我们Seata用户暴露已久的一个问题,没有一个可视化界面,使得用户对Seata的可靠性出现了怀疑,更由于没有控制台也局限了很多在Seata上可人工介入分布式事务的可能性等问题,所以未来在1.5.0的版本我们会带来控制台的加入,也欢迎更多的同学加入进来一起共建!</p>
+<ul>
+<li><strong>Raft集成</strong> </li>
+</ul>
+<p>Raft集成的原因,可能大部分用户不是特别知晓,首先我们要知道目前TC端的事务信息都是存储再外部存储器,比如数据库,redis,mongodb(PR阶段),这就造成了如果外部存储宕机,会造成Seata-Server集群的完全不可用,即便Server是集群部署,有10个甚至更多节点,都会因此而不可用.这是不可接受的.</p>
+<p>所以引入Raft来让每个Seata-Server的事务信息达到一致,即便某个节点宕机,也不会破坏事务信息准确性,从而也让分布式事务的一致性得到了更好的保证.(关于Seata-Server raft的实现之后会以新篇章来分享)</p>
+<ul>
+<li><strong>undoLog压缩</strong></li>
+</ul>
+<p>这个是我们1.5.0 AT模式比较大的性能优化,由于一阶段操作的数据多且大,因为Seata在背后为用户插入了undolog信息,由此可能也会变得大,有造成了入库缓慢的可能,所以我们要把undolog进行压缩,使undolog的插入不再成为AT事务在分支数据量大的时候成为一个大的心梗开销.</p>
+<p>以下是我们Seata的交流群欢迎大家加入</p>
+<p>钉钉: 32033786</p>
+<p>QQ: 216012363</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>AT 说到底就是实现对资源操作的代理,并记录原先&amp;变更后的状态,并用锁保证该数据的隔离性.在调用链中出现异常时,还原所有分支数据,达到分布式事务下的’原子性’</p>
+<p>未来呢? redis,mongodb,mq? 尽情期待.</p>
+<p>Seata项目的最核心的价值在于：</p>
+<p>构建一个全面解决分布式事务问题的 标准化 平台。</p>
+<p>基于 Seata，上层应用架构可以根据实际场景的需求，灵活选择合适的分布式事务解决方案,非常欢迎大家参与到项目的建设中，共同打造一个标准化的分布式事务平台。</p>
+<img src="https://img.alicdn.com/tfs/TB1lTSoOqL7gK0jSZFBXXXZZpXa-1028-528.png" alt="img" style="zoom:67%;" />
       
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/qrcode/20191231131430.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/qrcode/20191231131453.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -316,7 +360,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">seata</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Seata</a>
         		</li>
       		
 		</ul>
@@ -328,7 +372,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/java//" class="article-tag-list-link color5">java</a>
+        			<a href="/categories/分布式事务//" class="article-tag-list-link color1">分布式事务</a>
         		</li>
       		
 		</ul>
@@ -336,16 +380,75 @@
 
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/30/seata-mybatisplus-analysis/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/12/15/seata-at/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2020/10/09/seata-at-xa/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Seata分布式事务XA与AT全面解析</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -365,462 +468,35 @@
 
 
 
-
   
-    <article id="post-springboot-dubbo-mybatisplus-seata" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
+    <div id="gitalk-container" style="padding: 0px 30px 0px 30px;"></div> 
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+
+if(true){
+	var gitalk = new Gitalk({
+  	clientID: 'c3362d2b5c502bf539a8',
+  	clientSecret: 'f3d06d35f7b7d0535a33f611a64a91717cbdc751',
+  	repo: 'a364176773.github.io',
+  	owner: 'a364176773',
+  	admin: ['a364176773'],
+  	id: 'Tue Dec 15 2020 00:00:00 GMT+0800',
+  	distractionFreeMode: 'true'
+})
+gitalk.render('gitalk-container') 
+}
+</script>
     
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/29/springboot-dubbo-mybatisplus-seata/">SpringBoot+Dubbo+MybatisPlus整合seata分布式事务</a>
-    </h1>
-  
-
-        
-        
-<a href="/2019/11/29/springboot-dubbo-mybatisplus-seata/" class="archive-article-date">
-  	<time datetime="2019-11-28T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="SpringBoot-Dubbo-MybatisPlus整合Seata分布式事务"><a href="#SpringBoot-Dubbo-MybatisPlus整合Seata分布式事务" class="headerlink" title="SpringBoot+Dubbo+MybatisPlus整合Seata分布式事务"></a>SpringBoot+Dubbo+MybatisPlus整合Seata分布式事务</h1><p><a href="https://gitee.com/itCjb/springboot-dubbo-mybatisplus-seata" target="_blank" rel="noopener">项目地址</a></p>
-<p>本文作者：FUNKYE(陈健斌),杭州某互联网公司主程。</p>
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>​    <strong>事务</strong>：事务是由一组操作构成的可靠的独立的工作单元，事务具备ACID的特性，即原子性、一致性、隔离性和持久性。<br>​    <strong>分布式事务</strong>:当一个操作牵涉到多个服务,多台数据库协力完成时(比如分表分库后,业务拆分),多个服务中，本地的Transaction已经无法应对这个情况了,为了保证数据一致性，就需要用到分布式事务。<br>​    <strong>Seata</strong> ：是一款开源的分布式事务解决方案，致力于在微服务架构下提供高性能和简单易用的分布式事务服务。<br>​    <strong>本文目的</strong>：现如今微服务越来越流行，而市面上的分布式事务的方案可谓不少，参差不齐，比较流行的以MQ代表的保证的是消息最终一致性的解决方案（消费确认，消息回查，消息补偿机制等），以及TX-LCN的LCN模式协调本地事务来保证事务统一提交或回滚（已经停止更新，对Dubbo2.7不兼容）。而MQ的分布式事务太过复杂，TX-LCN断更，这时候需要一个高效可靠及易上手的分布式事务解决方案，Seata脱颖而出，本文要介绍的就是如何快速搭建一个整合Seata的Demo项目，一起来吧！</p>
-        
-          <a class="article-more-a" href="/2019/11/29/springboot-dubbo-mybatisplus-seata/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">seata</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/java//" class="article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/29/springboot-dubbo-mybatisplus-seata/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-tx-lcn-rollback" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/29/tx-lcn-rollback/">分布式事务tx-lcn下lcn模式时spring手动事务回滚失效的解决方案</a>
-    </h1>
-  
-
-        
-        
-<a href="/2019/10/29/tx-lcn-rollback/" class="archive-article-date">
-  	<time datetime="2019-10-28T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="分布式事务tx-lcn下lcn模式时spring手动事务回滚失效的解决方案"><a href="#分布式事务tx-lcn下lcn模式时spring手动事务回滚失效的解决方案" class="headerlink" title="分布式事务tx-lcn下lcn模式时spring手动事务回滚失效的解决方案"></a>分布式事务tx-lcn下lcn模式时spring手动事务回滚失效的解决方案</h1><p>本文作者：FUNKYE(陈健斌),杭州某互联网公司主程。</p>
-<h1 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h1><p>先上错误demo</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@LcnTransaction</span></span><br><span class="line"><span class="meta">@Transactional</span>(rollbackFor = &#123;Exception<span class="class">.<span class="keyword">class</span>&#125;)</span></span><br><span class="line"><span class="class"><span class="title">public</span> <span class="title">boolean</span> <span class="title">test</span>() </span>&#123;</span><br><span class="line">    B_file b = <span class="keyword">new</span> B_file();</span><br><span class="line">    b.setUrl(<span class="string">"515645646"</span>);</span><br><span class="line">    b.setCategory(<span class="string">"0"</span>);</span><br><span class="line">    <span class="comment">// 发出sql</span></span><br><span class="line">    save(b);</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">1</span> / <span class="number">0</span>;<span class="comment">// 异常</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        <span class="comment">// 事务回滚</span></span><br><span class="line">        System.out.println(<span class="string">"事务回滚"</span>);</span><br><span class="line">        <span class="comment">// 其实这个模式下,下面这句会失效,导致数据库被正常插入</span></span><br><span class="line">        TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();<span class="comment">// 关键</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>可以运行类似代码,会发现这时候并没有事务回滚,上面的save对象会被插入到数据库.</p>
-<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>解决方法有2种:</p>
-<p>1.改用 @TccTransaction来替换lcn模式</p>
-<p>2.使用DTXUserControls.rollbackCurrentGroup();来替换TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">lcn</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/java//" class="article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/10/29/tx-lcn-rollback/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-redis-queue" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/17/redis-queue/">Java实现redis消息订阅/发布（PubSub）</a>
-    </h1>
-  
-
-        
-        
-<a href="/2019/10/17/redis-queue/" class="archive-article-date">
-  	<time datetime="2019-10-16T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="引入依赖"><a href="#引入依赖" class="headerlink" title="引入依赖"></a>引入依赖</h1><p>首先在你的java项目中引入</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">	&lt;groupId&gt;redis.clients&lt;/groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;jedis&lt;/artifactId&gt;</span><br><span class="line">	&lt;version&gt;2.9.2&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2019/10/17/redis-queue/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">redis</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/java//" class="article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/10/17/redis-queue/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-multithreading" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/12/multithreading/">java多线程理解总结</a>
-    </h1>
-  
-
-        
-        
-<a href="/2019/10/12/multithreading/" class="archive-article-date">
-  	<time datetime="2019-10-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="java多线程理解总结："><a href="#java多线程理解总结：" class="headerlink" title="java多线程理解总结："></a>java多线程理解总结：</h1><p>进程等于在运行的java程序<br>而线程是进程下的一个子任务，与进程共享内存空间，文件句柄等<br>线程是进程的组件，是java代码的最小单位<br>线程分为守护线程与用户线程 </p>
-        
-          <a class="article-more-a" href="/2019/10/12/multithreading/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">thread</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/java//" class="article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/10/12/multithreading/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-mysql-read-write-isolate" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/26/mysql-read-write-isolate/">Docker部署mysql5.6读写分离</a>
-    </h1>
-  
-
-        
-        
-<a href="/2019/04/26/mysql-read-write-isolate/" class="archive-article-date">
-  	<time datetime="2019-04-25T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-26</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Docker部署mysql5-6读写分离"><a href="#Docker部署mysql5-6读写分离" class="headerlink" title="Docker部署mysql5.6读写分离"></a>Docker部署mysql5.6读写分离</h1><p>本文作者：FUNKYE(陈健斌),杭州某互联网公司主程。</p>
-<p>首先说下为什么要使用docker,因为在你没有资金买更多的服务器的时候,docker就可以让你实现一台机子进行装无数相同的程序.所以就可以在一台服务器上轻松装2个mysql,然后进行主从配置.</p>
-<p>docker安装文章可以直接百度,<a href="https://www.cnblogs.com/rookie404/p/5965518.html" target="_blank" rel="noopener">https://www.cnblogs.com/rookie404/p/5965518.html</a></p>
-        
-          <a class="article-more-a" href="/2019/04/26/mysql-read-write-isolate/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">docker</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/java//" class="article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/04/26/mysql-read-write-isolate/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
   
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/2/">« Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
-    </nav>
+  
+
+  
+
+  
+
   
 
 
@@ -854,8 +530,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
