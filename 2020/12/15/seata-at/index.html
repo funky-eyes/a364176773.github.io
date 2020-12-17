@@ -18,17 +18,17 @@
 <meta property="og:image" content="https://img.alicdn.com/tfs/TB19qmhOrY1gK0jSZTEXXXDQVXa-1330-924.png">
 <meta property="og:image" content="https://img.alicdn.com/tfs/TB1m59pOEY1gK0jSZFCXXcwqXXa-1330-924.png">
 <meta property="og:image" content="https://img.alicdn.com/tfs/TB1hSpccIVl614jSZKPXXaGjpXa-1330-924.png">
-<meta property="og:image" content="http://seata.io/img/saga/sofameetup3_img/10.png">
-<meta property="og:image" content="https://tiebapic.baidu.com/forum/pic/item/c8177f3e6709c93de8c534b2883df8dcd10054bb.jpg">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2020121620150591.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1NzIxMjg3,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/3e0c8d2bd265819314eeccf6dcab614f.png">
 <meta property="og:image" content="https://img.alicdn.com/tfs/TB1zaknwVY7gK0jSZKzXXaikpXa-702-521.png">
 <meta property="og:image" content="https://img.alicdn.com/tfs/TB1xW0UwubviK0jSZFNXXaApXXa-718-521.png">
-<meta property="og:image" content="https://tiebapic.baidu.com/forum/pic/item/48540923dd54564eeffcde7ca4de9c82d0584fdd.jpg">
-<meta property="og:image" content="https://tiebapic.baidu.com/forum/pic/item/f11f3a292df5e0feebf2b3444b6034a85fdf7288.jpg">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201216201223614.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1NzIxMjg3,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201216201206201.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1NzIxMjg3,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img.alicdn.com/tfs/TB1NTuzOBr0gK0jSZFnXXbRRXXa-1330-924.png">
 <meta property="og:image" content="https://tiebapic.baidu.com/forum/pic/item/b8014a90f603738d76322967a41bb051f819ec7f.jpg">
 <meta property="og:image" content="https://img.alicdn.com/tfs/TB1lTSoOqL7gK0jSZFBXXXZZpXa-1028-528.png">
 <meta property="article:published_time" content="2020-12-14T16:00:00.000Z">
-<meta property="article:modified_time" content="2020-12-15T12:03:59.433Z">
+<meta property="article:modified_time" content="2020-12-16T12:16:51.821Z">
 <meta property="article:author" content="FUNKYE">
 <meta property="article:tag" content="java">
 <meta property="article:tag" content="Seata">
@@ -235,10 +235,10 @@
 <p>回滚： 取出前镜像进行回滚</p>
 <p>通过上述简单的例子,其实可以发现,AT模式就是自动补偿式事务,那AT具体都做了哪些呢?我们接下来看.</p>
 <h2 id="AT如何保证分布式事务一致性？"><a href="#AT如何保证分布式事务一致性？" class="headerlink" title="AT如何保证分布式事务一致性？"></a>AT如何保证分布式事务一致性？</h2><p>我们来看这个图:</p>
-<p><img src="http://seata.io/img/saga/sofameetup3_img/10.png" alt="img"></p>
+<p><img src="https://img-blog.csdnimg.cn/2020121620150591.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1NzIxMjg3,size_16,color_FFFFFF,t_70" alt="img"></p>
 <p>可能刚看到会有疑问对吧?其实这个就是无侵入式,AT模式的做法示意图,首先用户还是从接口进入,到达了事务发起方,此时对业务开发者来说,这个发起方入口其实就是一个业务接口罢了,一样的执行业务sql,一样的return响应信息给客户端并没有什么改变.而背后就是用户的sql被Seata代理所托管,Seata-AT模式能感知到用户的所有sql,并对之进行操作,来保证一致性.</p>
 <p>但是Seata-AT是怎么做到无侵入的呢?我们接着看</p>
-<p><img src="https://tiebapic.baidu.com/forum/pic/item/c8177f3e6709c93de8c534b2883df8dcd10054bb.jpg" alt="img"></p>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/3e0c8d2bd265819314eeccf6dcab614f.png" alt="img"></p>
 <p>首先我们可以看到如图所示,应用启动时,Seata会自动把用户的DataSource代理,还对JDBC操作熟悉的用户其实对DataSource还是比较熟悉的,拿到了DataSource,就等于掌握了数据源连接,也就能在背后做些”小动作”,此时该对用户也是无感知无入侵.</p>
 <p>之后业务有请求进来,执行业务sql时,Seata会解析用户的sql,提取出表元数据,生成前镜像,再通过执行业务sql,保存执行sql后的后镜像(至于后镜像的用户之后会说到),再生成行锁,再注册分支是携带到Seata-Server 也就是TC端.</p>
 <p>此时在Client端的一阶段操作就已经完成了,无感知,无入侵.此时如果我们思考下,会发现这里其实有一个行锁,那么这个行锁是干嘛的呢?这就是要接着讲到Seata-AT是如何保证分布式下的事务隔离性,这里我们直接拿官网的示例来说.</p>
@@ -257,11 +257,11 @@
 <p>此时，如果 tx2 仍在等待该数据的 <strong>全局锁</strong>，同时持有本地锁，则 tx1 的分支回滚会失败。分支的回滚会一直重试，直到 tx2 的 <strong>全局锁</strong> 等锁超时，放弃 <strong>全局锁</strong> 并回滚本地事务释放本地锁，tx1 的分支回滚最终成功。</p>
 <p>因为整个过程 <strong>全局锁</strong> 在 tx1 结束前一直是被 tx1 持有的，所以不会发生 <strong>脏写</strong> 的问题。</p>
 <p>这个时候隔离性相比大家已经比较明白了,此时一阶段的大部分操作相信大家也比较明白了,此时我们应该继续往下一阶段继续解析.</p>
-<h3 id="2-2-AT-模式二阶段处理"><a href="#2-2-AT-模式二阶段处理" class="headerlink" title="2.2 AT 模式二阶段处理"></a>2.2 AT 模式二阶段处理</h3><img src="https://tiebapic.baidu.com/forum/pic/item/48540923dd54564eeffcde7ca4de9c82d0584fdd.jpg" style="zoom:67%;" />
+<h3 id="2-2-AT-模式二阶段处理"><a href="#2-2-AT-模式二阶段处理" class="headerlink" title="2.2 AT 模式二阶段处理"></a>2.2 AT 模式二阶段处理</h3><img src="https://img-blog.csdnimg.cn/20201216201223614.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1NzIxMjg3,size_16,color_FFFFFF,t_70" style="zoom:67%;" />
 
 <p>我们由上图可见在二阶段提交时,其实TC仅是下发一个把之前一阶段做记录的undoLog删除,并把相关事务信息,如行锁删除,让之后因为在竞争锁被阻塞的事务顺利进行.</p>
 <p>而二阶段是回滚时,则要多做一些处理.</p>
-<img src="https://tiebapic.baidu.com/forum/pic/item/f11f3a292df5e0feebf2b3444b6034a85fdf7288.jpg" alt="img" style="zoom:67%;" />
+<img src="https://img-blog.csdnimg.cn/20201216201206201.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1NzIxMjg3,size_16,color_FFFFFF,t_70" alt="img" style="zoom:67%;" />
 
 <p>首先在Client端收到TC告知的二阶段是回滚时,会去查到对应的事务的undolog,取出后镜像,对比当前数据的数据(因为SeataAT是从业务应用层面进行保护分布式事务,如果此时在数据库层面直接修改了库内信息,这个时候SeataAT的行锁是不起到隔离性),如果出现了在全局事务以外的数据修改,此时判定为脏写,而Seata因为无法感知这个脏写如何发生,此时只能打印日志和触发异常通知,告知用户需要人工介入(规范修改数据入口可避免脏写).</p>
 <p>而如果没有发生脏写就比较简单了,拿出前镜像,因为我们都知道事务是需要有原子性了,要么一起发生,要么都不发生,此时前镜像记录了发生之前的数据,进行回滚后,就达到了类似本地事务那样的原子性效果.回滚后,再把事务相关信息,如undolog,行锁进行删除.二阶段回滚算是告一段落了.</p>
