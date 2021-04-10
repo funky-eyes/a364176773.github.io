@@ -15,15 +15,15 @@
 <meta property="og:site_name" content="funkye">
 <meta property="og:description" content="本文介绍Seata分布式事务与Sofa-JRaft集成解析">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://tiebapic.baidu.com/forum/pic/item/8694a4c27d1ed21b6c5b41abba6eddc450da3fe9.jpg">
+<meta property="og:image" content="http://yoursite.com/img/blog/8694a4c27d1ed21b6c5b41abba6eddc450da3fe9.jpg">
 <meta property="og:image" content="https://www.sofastack.tech/projects/sofa-jraft/overview/multi_raft.png">
 <meta property="article:published_time" content="2021-04-09T16:00:00.000Z">
-<meta property="article:modified_time" content="2021-04-10T07:41:59.052Z">
+<meta property="article:modified_time" content="2021-04-10T09:10:22.288Z">
 <meta property="article:author" content="FUNKYE">
 <meta property="article:tag" content="java">
 <meta property="article:tag" content="Seata">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://tiebapic.baidu.com/forum/pic/item/8694a4c27d1ed21b6c5b41abba6eddc450da3fe9.jpg">
+<meta name="twitter:image" content="http://yoursite.com/img/blog/8694a4c27d1ed21b6c5b41abba6eddc450da3fe9.jpg">
   
     <link rel="alternative" href="/atom.xml" title="funkye" type="application/atom+xml">
   
@@ -220,7 +220,7 @@
 <p>但是我们也提到了一个前提条件,也就是计算与存储分离下,那么计算与存储一体化设计下为什么不行呢?</p>
 <p>这就要说说我们的File实现了,file在一致性那块的描述已经说了,他只是讲数据存储在本地磁盘和TC内存中,这个数据写操作是没有任何同步,也就代表了目前的File模式无法高可用,仅支持单机部署,作为初级的快速入门的简单使用,这也让高性能的file(基于内存)基本被告别生产环境的使用.</p>
 <h2 id="3-seata-raft模式是如何设计的"><a href="#3-seata-raft模式是如何设计的" class="headerlink" title="3.seata-raft模式是如何设计的"></a>3.seata-raft模式是如何设计的</h2><h3 id="3-1-设计原理"><a href="#3-1-设计原理" class="headerlink" title="3.1.设计原理"></a>3.1.设计原理</h3><p>Seata-Raft模式的设计思路是来自于当前无法高可用的file模式的包装,将其的所有增删改操作利用raft算法进行同步,这也就保证了多个TC使用file模式时,数据是一致的,且摒弃了file模式的异步刷盘操作,改为定时刷盘(后面详解)</p>
-<h3 id="3-2-流程设计"><a href="#3-2-流程设计" class="headerlink" title="3.2.流程设计"></a>3.2.流程设计</h3><p><img src="https://tiebapic.baidu.com/forum/pic/item/8694a4c27d1ed21b6c5b41abba6eddc450da3fe9.jpg" alt="image-20210407235001762"></p>
+<h3 id="3-2-流程设计"><a href="#3-2-流程设计" class="headerlink" title="3.2.流程设计"></a>3.2.流程设计</h3><p><img src="/img/blog/8694a4c27d1ed21b6c5b41abba6eddc450da3fe9.jpg" alt="image-20210407235001762"></p>
 <p>简单涉及示意如上图,client端在启动时,会通过配置中心读取当前tc是否使用了raft模式,以及tc当前的集群列表(需要在启动时找到leader,后续集群的变动可直接通过注册中心,或者直接采用file为注册中心,通过service.集群名.grouplist配置写上tc列表),开始注册rm和tm信息到所有的tc(以防止重新选主后需要重建连接).</p>
 <h4 id="3-2-1-client初始化源码解析"><a href="#3-2-1-client初始化源码解析" class="headerlink" title="3.2.1.client初始化源码解析"></a>3.2.1.client初始化源码解析</h4><p>首先client端的代码比较简单,在远程调用处理的抽象类中,将raft模式进行替换掉现有的负载均衡方式具体代码和类如下:</p>
 <p>AbstractNettyRemotingClient</p>
