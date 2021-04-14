@@ -18,7 +18,7 @@
 <meta property="og:image" content="http://yoursite.com/img/blog/8694a4c27d1ed21b6c5b41abba6eddc450da3fe9.jpg">
 <meta property="og:image" content="https://www.sofastack.tech/projects/sofa-jraft/overview/multi_raft.png">
 <meta property="article:published_time" content="2021-04-09T16:00:00.000Z">
-<meta property="article:modified_time" content="2021-04-11T09:16:23.142Z">
+<meta property="article:modified_time" content="2021-04-14T14:38:45.383Z">
 <meta property="article:author" content="FUNKYE">
 <meta property="article:tag" content="java">
 <meta property="article:tag" content="Seata">
@@ -189,8 +189,11 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Seata分布式事务-Raft模式全面解析"><a href="#Seata分布式事务-Raft模式全面解析" class="headerlink" title="Seata分布式事务-Raft模式全面解析"></a>Seata分布式事务-Raft模式全面解析</h1><p>Seata 是一款开源的分布式事务解决方案，star高达19100+，社区活跃度极高，致力于在微服务架构下提供高性能和简单易用的分布式事务服务。<br>分享人：陈健斌（funkye） github id: <a href="https://github.com/a364176773" target="_blank" rel="noopener">a364176773</a><br>介绍：<br>同盾科技高级开发工程师 、Seata Committer、Spring cloud alibaba contributor,、Mybatis-Plus contributor(by dynamic-datasource)</p>
+        <h1 id="Seata分布式事务-Raft模式全面解析"><a href="#Seata分布式事务-Raft模式全面解析" class="headerlink" title="Seata分布式事务-Raft模式全面解析"></a>Seata分布式事务-Raft模式全面解析</h1><p>Seata 是一款开源的分布式事务解决方案，star高达19100+，社区活跃度极高，致力于在微服务架构下提供高性能和简单易用的分布式事务服务.</p>
+<p>本篇文章将解析Seata-Server Raft模式的源码,带你领略从调研对比,设计,到具体实现,再到知识沉淀的过程.</p>
+<p>分享人：陈健斌（funkye） github id: <a href="https://github.com/a364176773" target="_blank" rel="noopener">a364176773</a><br>介绍：<br>同盾科技高级开发工程师 、Seata Committer、Spring cloud alibaba contributor,、Mybatis-Plus contributor(by dynamic-datasource)</p>
 <p>Seata-Raft模式作者</p>
+<p>注: 特此感谢Seata社区所有参与code review,pr讨论的小伙伴及Sofa-JRaft社区的家纯兄指导.</p>
  <a id="more"></a> 
 
 <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ol>
