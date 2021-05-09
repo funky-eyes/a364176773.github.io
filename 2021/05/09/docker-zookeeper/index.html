@@ -6,31 +6,26 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2020/2 | funkye</title>
+  <title>docker搭建zookeeper高可用集群 | funkye</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="好记性不如烂笔头,记录敲代码中的点点滴滴.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="funkye">
-<meta property="og:url" content="http://yoursite.com/archives/2020/02/index.html">
+  <meta name="description" content="本文秒速了docker如何搭建zookeeper高可用集群">
+<meta property="og:type" content="article">
+<meta property="og:title" content="docker搭建zookeeper高可用集群">
+<meta property="og:url" content="http://yoursite.com/2021/05/09/docker-zookeeper/index.html">
 <meta property="og:site_name" content="funkye">
-<meta property="og:description" content="好记性不如烂笔头,记录敲代码中的点点滴滴.">
+<meta property="og:description" content="本文秒速了docker如何搭建zookeeper高可用集群">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210509114835745.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210509120421313.png">
+<meta property="article:published_time" content="2021-05-08T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-05-09T04:22:16.145Z">
 <meta property="article:author" content="FUNKYE">
-<meta property="article:tag" content="博客">
-<meta property="article:tag" content="开发者">
-<meta property="article:tag" content="程序猿">
-<meta property="article:tag" content="程序媛">
-<meta property="article:tag" content="极客">
-<meta property="article:tag" content="编程">
-<meta property="article:tag" content="代码">
-<meta property="article:tag" content="开源">
-<meta property="article:tag" content="IT网站">
-<meta property="article:tag" content="陈健斌">
-<meta property="article:tag" content="funkye">
+<meta property="article:tag" content="zookeeper">
 <meta property="article:tag" content="java">
-<meta property="article:tag" content="java后端">
-<meta property="article:tag" content="java开发">
+<meta property="article:tag" content="kafka">
+<meta property="article:tag" content="docker">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20210509114835745.png">
   
     <link rel="alternative" href="/atom.xml" title="funkye" type="application/atom+xml">
   
@@ -170,49 +165,111 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-docker-zookeeper" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2020/02/19/seata-quick/" class="archive-article-date">
-  	<time datetime="2020-02-18T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-19</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/02/19/seata-quick/">仅四步教你快速接入Seata分布式事务</a>
+    <h1 class="article-title" itemprop="name">
+      docker搭建zookeeper高可用集群
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        
+        <!-- 不蒜子统计 -->
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+
+<a href="/2021/05/09/docker-zookeeper/" class="archive-article-date">
+  	<time datetime="2021-05-08T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="docker搭建zookeeper高可用集群"><a href="#docker搭建zookeeper高可用集群" class="headerlink" title="docker搭建zookeeper高可用集群"></a>docker搭建zookeeper高可用集群</h1><p>作者：陈健斌（funkye） github id: <a href="https://github.com/a364176773" target="_blank" rel="noopener">a364176773</a></p>
+<h2 id="一-首先挑选合适的zookeeper版本"><a href="#一-首先挑选合适的zookeeper版本" class="headerlink" title="一.首先挑选合适的zookeeper版本"></a>一.首先挑选合适的zookeeper版本</h2><p>笔者挑选3.4.14 版本作为本篇教程</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull zookeeper:<span class="number">3.4</span>.<span class="number">14</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="二-做好磁盘的映射保证即便数据不丢失"><a href="#二-做好磁盘的映射保证即便数据不丢失" class="headerlink" title="二.做好磁盘的映射保证即便数据不丢失"></a>二.做好磁盘的映射保证即便数据不丢失</h2> <a id="more"></a> 
+
+<h3 id="2-1-首先创建相关的zk配置和映射目录"><a href="#2-1-首先创建相关的zk配置和映射目录" class="headerlink" title="2.1 首先创建相关的zk配置和映射目录"></a>2.1 首先创建相关的zk配置和映射目录</h3><p><img src="https://img-blog.csdnimg.cn/20210509114835745.png" alt="在这里插入图片描述"><br>在合适的目录下创建conf,主要放置公用的zoo.cfg,再依次创建每个节点的目录,这里我是采用3个节点进行搭建.<br>然后我们开始创建zoo.cfg</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd conf</span><br><span class="line">vim zoo.cfg</span><br></pre></td></tr></table></figure>
+<p>填入公用配置</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">clientPort=2181</span></span><br><span class="line"><span class="string">dataDir=/data</span></span><br><span class="line"><span class="string">dataLogDir=/data/log</span></span><br><span class="line"><span class="string">tickTime=2000</span></span><br><span class="line"><span class="string">initLimit=5</span></span><br><span class="line"><span class="string">syncLimit=2</span></span><br><span class="line"><span class="string">autopurge.snapRetainCount=3</span></span><br><span class="line"><span class="string">autopurge.purgeInterval=0</span></span><br><span class="line"><span class="string">maxClientCnxns=60</span></span><br><span class="line"><span class="string">server.1=172.18.0.11:2888:3888</span></span><br><span class="line"><span class="string">server.2=172.18.0.12:2888:3888</span></span><br><span class="line"><span class="string">server.3=172.18.0.13:2888:3888</span></span><br></pre></td></tr></table></figure>
+<p>我们预先把3台zk容器的ip先设置好,届时只要固定容器ip即可.<br>然后我们进入zk1 zk2 zk3 并为这三个文件夹中创建data文件夹</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cd zk1</span><br><span class="line">mkdir <span class="keyword">data</span></span><br><span class="line">cd <span class="keyword">data</span></span><br><span class="line">vim myid</span><br><span class="line"><span class="number">1</span></span><br><span class="line">esc</span><br><span class="line">:wq</span><br></pre></td></tr></table></figure>
+<p>以此类推,zk1的myid就是1,zk2就是2.</p>
+<h2 id="三-构建容器"><a href="#三-构建容器" class="headerlink" title="三.构建容器"></a>三.构建容器</h2><h3 id="3-1-执行构建容器的命令"><a href="#3-1-执行构建容器的命令" class="headerlink" title="3.1 执行构建容器的命令"></a>3.1 执行构建容器的命令</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker run  <span class="literal">-itd</span>  <span class="literal">-p</span> <span class="number">2182</span>:<span class="number">2181</span> -<span class="literal">-network</span> mynetwork -<span class="literal">-ip</span> <span class="number">172.18</span>.<span class="number">0.12</span> <span class="literal">-v</span> /home/funkye/zk/zk2/<span class="keyword">data</span>:/<span class="keyword">data</span> <span class="literal">-v</span> /home/funkye/zk/conf:/conf -<span class="literal">-privileged</span>=true -<span class="literal">-name</span> zk2 zookeeper:<span class="number">3.4</span>.<span class="number">14</span></span><br><span class="line">docker run  <span class="literal">-itd</span>  <span class="literal">-p</span> <span class="number">2181</span>:<span class="number">2181</span> -<span class="literal">-network</span> mynetwork -<span class="literal">-ip</span> <span class="number">172.18</span>.<span class="number">0.11</span> <span class="literal">-v</span> /home/funkye/zk/zk1/<span class="keyword">data</span>:/<span class="keyword">data</span> <span class="literal">-v</span> /home/funkye/zk/conf:/conf -<span class="literal">-privileged</span>=true -<span class="literal">-name</span> zk1 zookeeper:<span class="number">3.4</span>.<span class="number">14</span></span><br><span class="line">docker run  <span class="literal">-itd</span> <span class="literal">-p</span> <span class="number">2183</span>:<span class="number">2181</span> -<span class="literal">-network</span> mynetwork -<span class="literal">-ip</span> <span class="number">172.18</span>.<span class="number">0.13</span> <span class="literal">-v</span> /home/funkye/zk/zk3/<span class="keyword">data</span>:/<span class="keyword">data</span> <span class="literal">-v</span> /home/funkye/zk/conf:/conf -<span class="literal">-privileged</span>=true -<span class="literal">-name</span> zk3 zookeeper:<span class="number">3.4</span>.<span class="number">14</span></span><br></pre></td></tr></table></figure>
+<p>-v 是映射我们的conf到zk容器的conf中,未来模拟扩容的时候,我们只要改外部宿主机上的conf,再按照扩容做法,启动新的节点,再依次重启之前已存在的zk即可.</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps</span><br></pre></td></tr></table></figure>
+<p>查看我们是否容器已经在运行<br><img src="https://img-blog.csdnimg.cn/20210509120421313.png" alt="在这里插入图片描述"><br>看起来一切都正常了,我们去容器看下各自zk的状态</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker exec <span class="literal">-it</span> zk1 /bin/bash</span><br><span class="line">zkServer.sh status</span><br></pre></td></tr></table></figure>
+<p>如果你看到如下信息说明基本你已经搭建完毕了,仅需再去其它几台确认</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ZooKeeper JMX enabled by default</span><br><span class="line"><span class="keyword">Using</span> config: /conf/zoo.cfg</span><br><span class="line">Mode: follower</span><br></pre></td></tr></table></figure>
+<p>确认完毕后,恭喜你docker 安装zookeeper集群已经完毕了,接下来我们可以测试下写入一些节点信息,看看其它follower节点是否也能接受到,笔者这次首先挑选为follower的zk1节点进行写入,看看是否会转发到leader节点写入.</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker exec <span class="literal">-it</span> zk1 /bin/bash</span><br><span class="line">zkCli.sh</span><br><span class="line">ls /</span><br></pre></td></tr></table></figure>
+<p>可以看到目前只有zookeeper一个node节点,我们来写入一个test节点</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[<span class="type">zk</span>: <span class="type">localhost</span>:<span class="number">2181</span>(<span class="type">CONNECTED</span>) <span class="number">0</span>] ls /</span><br><span class="line">[<span class="type">zookeeper</span>]</span><br><span class="line">[<span class="type">zk</span>: <span class="type">localhost</span>:<span class="number">2181</span>(<span class="type">CONNECTED</span>) <span class="number">1</span>]</span><br><span class="line">[<span class="type">zk</span>: <span class="type">localhost</span>:<span class="number">2181</span>(<span class="type">CONNECTED</span>) <span class="number">4</span>] create /test test</span><br><span class="line">Created /test</span><br><span class="line">[<span class="type">zk</span>: <span class="type">localhost</span>:<span class="number">2181</span>(<span class="type">CONNECTED</span>) <span class="number">5</span>] ls /</span><br><span class="line">[<span class="type">zookeeper</span>, <span class="type">test</span>]</span><br></pre></td></tr></table></figure>
+<p>看起来在follower节点写入成功了,我们再去其它节点上验证一下</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">funkye@LAPTOP<span class="literal">-LKAGO3OF</span>:~<span class="variable">$</span> docker exec <span class="literal">-it</span> zk2 /bin/bash</span><br><span class="line">root@<span class="number">84</span>b60cc9d761:/zookeeper<span class="literal">-3</span>.<span class="number">4.14</span><span class="comment"># zkServer.sh status</span></span><br><span class="line">ZooKeeper JMX enabled by default</span><br><span class="line"><span class="keyword">Using</span> config: /conf/zoo.cfg</span><br><span class="line">Mode: follower</span><br><span class="line">root@<span class="number">84</span>b60cc9d761:/zookeeper<span class="literal">-3</span>.<span class="number">4.14</span><span class="comment"># zkCli.sh</span></span><br><span class="line">Connecting to localhost:<span class="number">2181</span></span><br><span class="line">log4j:WARN No appenders could be found <span class="keyword">for</span> logger (org.apache.zookeeper.ZooKeeper).</span><br><span class="line">log4j:WARN Please initialize the log4j system properly.</span><br><span class="line">log4j:WARN See http://logging.apache.org/log4j/<span class="number">1.2</span>/faq.html<span class="comment">#noconfig for more info.</span></span><br><span class="line">Welcome to ZooKeeper!</span><br><span class="line">JLine support is enabled</span><br><span class="line">[<span class="type">zk</span>: <span class="type">localhost</span>:<span class="number">2181</span>(<span class="type">CONNECTING</span>) <span class="number">0</span>]</span><br><span class="line">WATCHER::</span><br><span class="line"></span><br><span class="line">WatchedEvent state:SyncConnected type:None path:null</span><br><span class="line"></span><br><span class="line">[<span class="type">zk</span>: <span class="type">localhost</span>:<span class="number">2181</span>(<span class="type">CONNECTED</span>) <span class="number">0</span>] ls /</span><br><span class="line">[<span class="type">zookeeper</span>, <span class="type">test</span>]</span><br><span class="line">[<span class="type">zk</span>: <span class="type">localhost</span>:<span class="number">2181</span>(<span class="type">CONNECTED</span>) <span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+<p>看起来我们顺利的搭建完成了,在follower中的写入被转发到了leader上,再通过zab协议,同步到了follower上.</p>
+<h2 id="四-总结"><a href="#四-总结" class="headerlink" title="四.总结"></a>四.总结</h2><p>恭喜,看到这里你一定已经搭建完成了zookeeper集群,欢迎之后继续关注我的github和博客<br><a href="https://github.com/a364176773" target="_blank" rel="noopener">https://github.com/a364176773</a><br><a href="https://blog.funkye.icu/" target="_blank" rel="noopener">https://blog.funkye.icu/</a></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/qrcode/20191231131430.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/qrcode/20191231131453.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">seata</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">zookeeper</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -225,17 +282,125 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2021/05/09/docker-zookeeper/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2021/04/10/seata-raft/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Seata分布式事务-Raft模式全面解析</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+    <div id="gitalk-container" style="padding: 0px 30px 0px 30px;"></div> 
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+
+if(true){
+	var gitalk = new Gitalk({
+  	clientID: 'c3362d2b5c502bf539a8',
+  	clientSecret: 'f3d06d35f7b7d0535a33f611a64a91717cbdc751',
+  	repo: 'a364176773.github.io',
+  	owner: 'a364176773',
+  	admin: ['a364176773'],
+  	id: 'Sun May 09 2021 00:00:00 GMT+0800',
+  	distractionFreeMode: 'true'
+})
+gitalk.render('gitalk-container') 
+}
+</script>
+    
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -269,8 +434,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

@@ -172,6 +172,98 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-docker-zookeeper" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/05/09/docker-zookeeper/">docker搭建zookeeper高可用集群</a>
+    </h1>
+  
+
+        
+        
+<a href="/2021/05/09/docker-zookeeper/" class="archive-article-date">
+  	<time datetime="2021-05-08T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="docker搭建zookeeper高可用集群"><a href="#docker搭建zookeeper高可用集群" class="headerlink" title="docker搭建zookeeper高可用集群"></a>docker搭建zookeeper高可用集群</h1><p>作者：陈健斌（funkye） github id: <a href="https://github.com/a364176773" target="_blank" rel="noopener">a364176773</a></p>
+<h2 id="一-首先挑选合适的zookeeper版本"><a href="#一-首先挑选合适的zookeeper版本" class="headerlink" title="一.首先挑选合适的zookeeper版本"></a>一.首先挑选合适的zookeeper版本</h2><p>笔者挑选3.4.14 版本作为本篇教程</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull zookeeper:<span class="number">3.4</span>.<span class="number">14</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="二-做好磁盘的映射保证即便数据不丢失"><a href="#二-做好磁盘的映射保证即便数据不丢失" class="headerlink" title="二.做好磁盘的映射保证即便数据不丢失"></a>二.做好磁盘的映射保证即便数据不丢失</h2>
+        
+          <a class="article-more-a" href="/2021/05/09/docker-zookeeper/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">zookeeper</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/java//" class="article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/05/09/docker-zookeeper/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-seata-raft" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -193,7 +285,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Seata分布式事务-Raft模式全面解析"><a href="#Seata分布式事务-Raft模式全面解析" class="headerlink" title="Seata分布式事务-Raft模式全面解析"></a>Seata分布式事务-Raft模式全面解析</h1><p>Seata 是一款开源的分布式事务解决方案，star高达19100+，社区活跃度极高，致力于在微服务架构下提供高性能和简单易用的分布式事务服务.</p>
+        <h1 id="Seata分布式事务-Raft模式全面解析"><a href="#Seata分布式事务-Raft模式全面解析" class="headerlink" title="Seata分布式事务-Raft模式全面解析"></a>Seata分布式事务-Raft模式全面解析</h1><p>Seata 是一款开源的分布式事务解决方案，star高达19400+，社区活跃度极高，致力于在微服务架构下提供高性能和简单易用的分布式事务服务.</p>
 <p>本篇文章将解析Seata-Server Raft模式的源码,带你领略从调研对比,设计,到具体实现,再到知识沉淀的过程.</p>
 <p>分享人：陈健斌（funkye） github id: <a href="https://github.com/a364176773" target="_blank" rel="noopener">a364176773</a><br>介绍：<br>同盾科技高级开发工程师 、Seata Committer、Spring cloud alibaba contributor,、Mybatis-Plus contributor(by dynamic-datasource)</p>
 <p>Seata-Raft模式作者</p>
@@ -992,95 +1084,6 @@
 
 
   
-    <article id="post-spring-bean-condition-build" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/01/13/spring-bean-condition-build/">根据注解条件动态创建bean</a>
-    </h1>
-  
-
-        
-        
-<a href="/2020/01/13/spring-bean-condition-build/" class="archive-article-date">
-  	<time datetime="2020-01-12T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>本文作者：FUNKYE(陈健斌),杭州某互联网公司主程。</p>
-<h1 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h1><p> 有时候在编程中,我们会烦恼一个问题,初始化了一个bean后,业务中用不到了,有时候又需要了,反反复复非常麻烦,所以以下介绍spring提供的条件创建对应bean的方式:</p>
-        
-          <a class="article-more-a" href="/2020/01/13/spring-bean-condition-build/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">spring</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/java//" class="article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/01/13/spring-bean-condition-build/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next »</a>
@@ -1238,6 +1241,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Seata</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">zookeeper</a>
               </li>
             
             <div class="clearfix"></div>
