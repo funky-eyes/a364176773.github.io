@@ -172,6 +172,98 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-seata-raft-new" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/05/02/seata-raft-new/">Seata分布式事务-Raft模式(NEW)全面解析</a>
+    </h1>
+  
+
+        
+        
+<a href="/2022/05/02/seata-raft-new/" class="archive-article-date">
+  	<time datetime="2022-05-01T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-05-02</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Seata分布式事务-Raft模式-NEW-全面解析"><a href="#Seata分布式事务-Raft模式-NEW-全面解析" class="headerlink" title="Seata分布式事务-Raft模式(NEW)全面解析"></a>Seata分布式事务-Raft模式(NEW)全面解析</h1><p>Seata 是一款开源的分布式事务解决方案，star高达19400+，社区活跃度极高，致力于在微服务架构下提供高性能和简单易用的分布式事务服务.</p>
+<p>本篇文章将解析Seata-Server Raft模式的源码,带你领略从调研对比,设计,到具体实现,再到知识沉淀的过程.</p>
+<p>分享人：陈健斌（funkye） github id: <a href="https://github.com/a364176773" target="_blank" rel="noopener">a364176773</a><br>介绍：<br>同盾科技高级开发工程师 、Seata Committer、Sofa-Jraft &amp; Spring cloud alibaba &amp; Mybatis-Plus (by dynamic-datasource) &amp; Apache-Dubbo &amp; Druid Contributor</p>
+<p>Seata-Raft模式作者</p>
+<p>注: 特此感谢Seata社区所有参与code review,pr讨论的小伙伴及Sofa-JRaft社区的家纯兄指导.</p>
+        
+          <a class="article-more-a" href="/2022/05/02/seata-raft-new/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Seata</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/java//" class="article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/05/02/seata-raft-new/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-docker-zookeeper" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -991,99 +1083,6 @@
 
 
   
-    <article id="post-redis-lock-spring-boot-starter" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/01/18/redis-lock-spring-boot-starter/">以spring boot starter搭建redis分布式锁项目</a>
-    </h1>
-  
-
-        
-        
-<a href="/2020/01/18/redis-lock-spring-boot-starter/" class="archive-article-date">
-  	<time datetime="2020-01-17T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="spring-boot-starter搭建redis分布式锁项目及原理分析"><a href="#spring-boot-starter搭建redis分布式锁项目及原理分析" class="headerlink" title="spring boot starter搭建redis分布式锁项目及原理分析"></a>spring boot starter搭建redis分布式锁项目及原理分析</h1><p>本文作者：FUNKYE(陈健斌),杭州某互联网公司主程。</p>
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p><a href="https://gitee.com/itCjb/redis-lock-spring-boot-starter" target="_blank" rel="noopener">demo项目地址</a></p>
-<p>Redis 是完全开源免费的，遵守BSD协议，是一个高性能的key-value数据库。</p>
-<h2 id="Redis为什么这么快"><a href="#Redis为什么这么快" class="headerlink" title="Redis为什么这么快?"></a>Redis为什么这么快?</h2><p>(一)纯内存操作，避免大量访问数据库，减少直接读取磁盘数据，redis 将数据储存在内存里面，读写数据的时候都不会受到硬盘 I/O 速度的限制，所以速度快；</p>
-<p>(二)单线程操作，避免了不必要的上下文切换和竞争条件，也不存在多进程或者多线程导致的切换而消耗 CPU，不用去考虑各种锁的问题，不存在加锁释放锁操作，没有因为可能出现死锁而导致的性能消耗；</p>
-<p>(三)采用了非阻塞I/O多路复用机制</p>
-        
-          <a class="article-more-a" href="/2020/01/18/redis-lock-spring-boot-starter/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">redis</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/java//" class="article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/01/18/redis-lock-spring-boot-starter/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next »</a>
@@ -1098,7 +1097,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2021 FUNKYE
+    		&copy; 2022 FUNKYE
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten

@@ -6,24 +6,30 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>java多线程理解总结 | funkye</title>
+  <title>Archives: 2022 | funkye</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="本文讲述java多线程理解总结">
-<meta property="og:type" content="article">
-<meta property="og:title" content="java多线程理解总结">
-<meta property="og:url" content="http://yoursite.com/2019/10/12/multithreading/index.html">
+  <meta name="description" content="好记性不如烂笔头,记录敲代码中的点点滴滴.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="funkye">
+<meta property="og:url" content="http://yoursite.com/archives/2022/index.html">
 <meta property="og:site_name" content="funkye">
-<meta property="og:description" content="本文讲述java多线程理解总结">
+<meta property="og:description" content="好记性不如烂笔头,记录敲代码中的点点滴滴.">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2019-10-11T16:00:00.000Z">
-<meta property="article:modified_time" content="2019-12-31T07:22:49.148Z">
 <meta property="article:author" content="FUNKYE">
-<meta property="article:tag" content="tx-lcn">
-<meta property="article:tag" content="分布式事务">
-<meta property="article:tag" content="spring">
-<meta property="article:tag" content="mybatis">
-<meta property="article:tag" content="msql">
-<meta property="article:tag" content="多线程">
+<meta property="article:tag" content="博客">
+<meta property="article:tag" content="开发者">
+<meta property="article:tag" content="程序猿">
+<meta property="article:tag" content="程序媛">
+<meta property="article:tag" content="极客">
+<meta property="article:tag" content="编程">
+<meta property="article:tag" content="代码">
+<meta property="article:tag" content="开源">
+<meta property="article:tag" content="IT网站">
+<meta property="article:tag" content="陈健斌">
+<meta property="article:tag" content="funkye">
+<meta property="article:tag" content="java">
+<meta property="article:tag" content="java后端">
+<meta property="article:tag" content="java开发">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="funkye" type="application/atom+xml">
@@ -164,113 +170,49 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-multithreading" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      java多线程理解总结
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2022" class="archive-year">2022</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	
+<a href="/2022/05/02/seata-raft-new/" class="archive-article-date">
+  	<time datetime="2022-05-01T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-05-02</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2022/05/02/seata-raft-new/">Seata分布式事务-Raft模式(NEW)全面解析</a>
     </h1>
   
 
-        
-        
-        <!-- 不蒜子统计 -->
-        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
-              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
-        </span>
-
-<a href="/2019/10/12/multithreading/" class="archive-article-date">
-  	<time datetime="2019-10-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="java多线程理解总结："><a href="#java多线程理解总结：" class="headerlink" title="java多线程理解总结："></a>java多线程理解总结：</h1><p>进程等于在运行的java程序<br>而线程是进程下的一个子任务，与进程共享内存空间，文件句柄等<br>线程是进程的组件，是java代码的最小单位<br>线程分为守护线程与用户线程 </p>
- <a id="more"></a> 
-
-<h2 id="守护线程："><a href="#守护线程：" class="headerlink" title="守护线程："></a>守护线程：</h2><p>为其他小程序运行提供服务的线程比如gc线程，用户线程全部关闭后，没有服务对象，所以守护线程也没啥作用，随着jvm关闭了，比如我以前做的redis消息队列的守护线程，jvm关闭守护线程就一定会退出</p>
-<h2 id="用户线程"><a href="#用户线程" class="headerlink" title="用户线程:"></a>用户线程:</h2><p>如果停止jvm.用户线程需要全部关闭(如果没有关闭可导致jvm无法停止,进程依然留存)</p>
-<h3 id="状态"><a href="#状态" class="headerlink" title="状态 :"></a>状态 :</h3><p>new:线程刚创建时的状态，只会存在一次<br>runnable:复合状态包括ready跟Running，ready表示线程可以被jvm的调度器调度让他变为running状态<br>running表示进程正在运行，如果运行yield，该进程会让出cpu时间，让其他或者自己的线程继续执行，执行yield线程会进去ready状态<br>集合<br>blocked:发起阻塞式io操作后，常见的是被线程锁锁住，尝试去获取该锁时的状态，如果io操作完成，或者锁被释放，获取到式会转变为runnable<br>waiting:一个线程执行某些操作比如wait会释放当然得锁，使当前的线程进入等待状态，而当notify或者notifyall时才会唤醒一个或多个等待的线程，但是不代表当前就在运行，因为不会立即释放锁，要看代码是怎么写的<br>timewaiting:跟waiting.差不多但是是有等待时间的，时间过后就转换为runnable<br>terminated:结束状态，有且一次<br>上下文切换:除了只有一次的new跟terminated，其他的几个状态切换都属于上下文切换(只要切换就会有资源开销) ,借鉴其它大牛的说法,线程间的切换，状态变化需要对相应的上下文信息进行保存和恢复(会带来资源消耗)，这个过程就被称为上下文切换。</p>
-<h2 id="jvm监控工具"><a href="#jvm监控工具" class="headerlink" title="jvm监控工具"></a>jvm监控工具</h2><ul>
-<li>jvisualvm(本人在windows下开发常用)、jstack、JMC</li>
-</ul>
-<h1 id="synchronized和volatile"><a href="#synchronized和volatile" class="headerlink" title="synchronized和volatile"></a>synchronized和volatile</h1><p>推荐看一下csdn这个大佬的文章:<a href="https://blog.csdn.net/weixin_41209870/article/details/80954057" target="_blank" rel="noopener">https://blog.csdn.net/weixin_41209870/article/details/80954057</a></p>
-<h3 id="原子性"><a href="#原子性" class="headerlink" title="原子性:"></a>原子性:</h3><p>原子操作是指相应的操作是单一不可分割的操作。</p>
-<h3 id="内存可见性"><a href="#内存可见性" class="headerlink" title="内存可见性 :"></a>内存可见性 :</h3><p>比如多线程时,A线程读取count的值,cpu运行时会把count的值缓存到cpu的缓存区,此时值的修改可能只是在缓存区进行变动,而此时B线程读取count的值可能会不准确,也就是count修改后的值变为了不可见,这个情况就叫做内存可见性.</p>
-<h3 id="重排序"><a href="#重排序" class="headerlink" title="重排序:"></a>重排序:</h3><p>简而言之就是你预想的代码执行操作与实际出现偏差.比如多线程时,object obj=new object(),这个时候由于多线程,A在创建时,B就引用,而B线程访问obj时其实是一段内存地址,而obj可能还在初始化中,这时就会出现异常. </p>
-<h3 id="synchronized"><a href="#synchronized" class="headerlink" title="synchronized:"></a>synchronized:</h3><p>实现操作的原子性，其本质是通过该关键字所包括的临界区(Critical Section)的排他性从而保证在任何 一个时刻只有一个线程能够执行临界区中的代码，这样就使得临界区中的代码代表了一个原子操作.既然同一时刻只有一个线程能够执行相应代码,那么内存可见性也得到了保证.可以理解为,顾客去点菜,一个顾客,但是有N个大厨,哪个大厨先看到菜单,就由哪位大厨做菜,而且理论上效率也得到保障,因为大厨的数量是N个.</p>
-<h3 id="volatile"><a href="#volatile" class="headerlink" title="volatile:"></a>volatile:</h3><p>无法保证原子性,但是他可以禁止重排序,volatile背后就是在cpu把count写到cpu缓存时,让count的值也写到内存中,无论什么时候其它线程获取count的时候都是最新的,但是他无法保证该值被修改,所以他不支持原子性.</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结:"></a>总结:</h3><p>synchronized关键字技能保证操作的原子性，也能保证内存可见性，但是会导致上下文切换。volatile关键字仅能保证内存可见性。 </p>
-<h2 id="多线程优缺点"><a href="#多线程优缺点" class="headerlink" title="多线程优缺点"></a>多线程优缺点</h2><h3 id="优点"><a href="#优点" class="headerlink" title="优点:"></a>优点:</h3><p>资源利用率更好,程序设计在某些情况下更简单,程序响应更快(例如可以启多线程做异步操作,比如异步入库,异步调用短信接口之类的) ,还有一点就是充分利用了多核cpu的资源</p>
-<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点:"></a>缺点:</h3><p>某些业务下,设计多线程时会更加复杂,而且往往需要更加注意读取共享数据时的操作.业务处理上如果不够优化,在启用多线程时因为线程之间的切换,会带来额外的开销,在没必要时应该减少上下文切换的情况发生.</p>
-<h3 id="使用时应该解决的问题"><a href="#使用时应该解决的问题" class="headerlink" title="使用时应该解决的问题:"></a>使用时应该解决的问题:</h3><ul>
-<li>如何优雅的停止线程</li>
-<li>线程间协作</li>
-<li>业务上提高并发性</li>
-<li>业务上提高响应性</li>
-<li>减少资源消耗</li>
-</ul>
-<h2 id="JAVA启动线程的四种方式"><a href="#JAVA启动线程的四种方式" class="headerlink" title="JAVA启动线程的四种方式:"></a>JAVA启动线程的四种方式:</h2><p>1.extends Thread</p>
-<p>2.implements Runnable(使用说明:new Thread(放进去该线程))</p>
-<p>3.implements Callable(可以有返回值,new Thread(放进去该线程))</p>
-<p>4.线程池(四种)</p>
-<p> 关于线程池,之后有空会更新到另外的博文中,希望大神们多多指点.</p>
-
-      
-
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="/img/qrcode/20191231131430.png">
-                      <span class="reward-type">支付宝</span>
-                    </div>
-                    
-                    
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="/img/qrcode/20191231131453.png">
-                      <span class="reward-type">微信</span>
-                    </div>
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">thread</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Seata</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -283,134 +225,17 @@
 	</div>
 
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/10/12/multithreading/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2019/10/17/redis-queue/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Java实现redis消息订阅/发布（PubSub）
-        
-      </div>
-    </a>
   
   
-    <a href="/2019/04/26/mysql-read-write-isolate/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Docker部署mysql5.6读写分离</div>
-      <i class="icon-circle-right"></i>
-    </a>
+    </div></section>
   
-</nav>
 
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-    <div id="gitalk-container" style="padding: 0px 30px 0px 30px;"></div> 
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-<script type="text/javascript">
-
-if(true){
-	var gitalk = new Gitalk({
-  	clientID: 'c3362d2b5c502bf539a8',
-  	clientSecret: 'f3d06d35f7b7d0535a33f611a64a91717cbdc751',
-  	repo: 'a364176773.github.io',
-  	owner: 'a364176773',
-  	admin: ['a364176773'],
-  	id: 'Sat Oct 12 2019 00:00:00 GMT+0800',
-  	distractionFreeMode: 'true'
-})
-gitalk.render('gitalk-container') 
-}
-</script>
     
-  
-  
-  
-
-  
-
-  
-
-  
 
 
           </div>
@@ -444,8 +269,8 @@ gitalk.render('gitalk-container')
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
-		isArchive: false,
+		isPost: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
