@@ -172,6 +172,98 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-seata-raft-2023" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/01/05/seata-raft-2023/">Seata分布式事务-Raft模式(2023)全面解析</a>
+    </h1>
+  
+
+        
+        
+<a href="/2023/01/05/seata-raft-2023/" class="archive-article-date">
+  	<time datetime="2023-01-04T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-01-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Seata分布式事务-Raft模式-2023-全面解析"><a href="#Seata分布式事务-Raft模式-2023-全面解析" class="headerlink" title="Seata分布式事务-Raft模式(2023)全面解析"></a>Seata分布式事务-Raft模式(2023)全面解析</h1><p>Seata 是一款开源的分布式事务解决方案，star高达23000+，社区活跃度极高，致力于在微服务架构下提供高性能和简单易用的分布式事务服务.</p>
+<p>本篇文章将解析Seata-Server Raft模式的源码,带你领略从调研对比,设计,到具体实现,再到知识沉淀的过程.</p>
+<p>分享人：陈健斌（funkye） github id: <a href="https://github.com/a364176773" target="_blank" rel="noopener">a364176773</a><br>介绍：<br>同盾科技高级开发工程师 、Seata Committer、Sofa-Jraft &amp; Spring cloud alibaba &amp; Mybatis-Plus (by dynamic-datasource) &amp; Apache-Dubbo &amp; Apache-Kafka &amp; Byte- buddy &amp; Druid Contributor</p>
+<p>Seata 存储模式Raft&amp;Redis 作者</p>
+<p>注: 特此感谢Seata社区所有参与code review,pr讨论的小伙伴及Sofa-JRaft社区的家纯兄指导.</p>
+        
+          <a class="article-more-a" href="/2023/01/05/seata-raft-2023/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Seata</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/java//" class="article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/01/05/seata-raft-2023/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-seata-raft-new" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -988,101 +1080,6 @@
 
 
   
-    <article id="post-java-jvm-record" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/01/20/java-jvm-record/">了解JVM优化</a>
-    </h1>
-  
-
-        
-        
-<a href="/2020/01/20/java-jvm-record/" class="archive-article-date">
-  	<time datetime="2020-01-19T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="JVM优化及部分剥析"><a href="#JVM优化及部分剥析" class="headerlink" title="JVM优化及部分剥析"></a>JVM优化及部分剥析</h1><p>本文作者：FUNKYE(陈健斌),杭州某互联网公司主程。</p>
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><h4 id="JVM是什么"><a href="#JVM是什么" class="headerlink" title="JVM是什么?"></a>JVM是什么?</h4><p>JVM是Java Virtual Machine（Java<a href="https://baike.baidu.com/item/虚拟机" target="_blank" rel="noopener">虚拟机</a>）的缩写，JVM是一种用于计算设备的规范，它是一个虚构出来的计算机，是通过在实际的计算机上仿真模拟各种计算机功能来实现的。</p>
-<p>引入Java语言虚拟机后，Java语言在不同平台上运行时不需要重新编译。Java语言使用Java虚拟机屏蔽了与具体平台相关的信息，使得Java语言<a href="https://baike.baidu.com/item/编译程序/8290180" target="_blank" rel="noopener">编译程序</a>只需生成在Java虚拟机上运行的目标代码（<a href="https://baike.baidu.com/item/字节码/9953683" target="_blank" rel="noopener">字节码</a>），就可以在多种平台上不加修改地运行。</p>
-<p>以上的说明我们随意去百度,google都可以查到相关解释,但是我们要了解jvm的哪些东西呢?</p>
-<h1 id="JVM内存调优"><a href="#JVM内存调优" class="headerlink" title="JVM内存调优"></a>JVM内存调优</h1><p>jvm调优,想必大家都了解不少了?这边我们来回忆一下调优所需要知道的相关细节.</p>
-<h4 id="1-full-gc是什么"><a href="#1-full-gc是什么" class="headerlink" title="1.full gc是什么?"></a>1.full gc是什么?</h4><p>full gc会对整个堆进行回收,一般普通gc即可,但是如果你刻意的去写一个不断创建新对象,并且内存分配过低时,可以使用jinfo –flag UseSerialGC,或者-XX:+PrintGC等操作来打印,可以看到起初一般都是普通的gc回收,这里涉及到复制算法,标记算法等等回收策略.但是等到内存不断的被挤占后,会发现打印的全是fullgc了,因为普通的gc已经无法满足当前的内存资源回收的情况了.但是fullgc的效率因为要回收整个堆,导致慢的情况发生.所以我们要避免full gc的发生.</p>
-<p>我们可以详细看看导致的原因</p>
-<p>​    1).年老代(Tenured)被写满</p>
-        
-          <a class="article-more-a" href="/2020/01/20/java-jvm-record/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">jvm</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/java//" class="article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/01/20/java-jvm-record/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next »</a>
@@ -1097,7 +1094,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2022 FUNKYE
+    		&copy; 2023 FUNKYE
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
